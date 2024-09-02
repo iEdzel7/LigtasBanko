@@ -1,0 +1,99 @@
+.group-child1,
+.group-inner,
+.rectangle-div {
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 50px;
+  background-color: var(--color-white);
+  border: 1px solid var(--color-black);
+  box-sizing: border-box;
+  width: 302px;
+  height: 350px;
+}
+.group-child1,
+.rectangle-div {
+  left: 351px;
+}
+.group-child1 {
+  left: 702px;
+}
+.cutting-edge-technology {
+  position: absolute;
+  top: 35px;
+  left: 0;
+  letter-spacing: 0.06em;
+  line-height: 25px;
+  font-weight: 500;
+  display: inline-block;
+  width: 303px;
+  height: 40px;
+}
+.ligtasbanko-utilizes-state-of-,
+.we-understand-the {
+  position: absolute;
+  top: 94px;
+  left: 19px;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  line-height: 25px;
+  display: inline-block;
+  width: 263px;
+  height: 190px;
+}
+.we-understand-the {
+  left: 371px;
+}
+.at-ligtasbanko-your {
+  margin: 0;
+  color: black;
+}
+.at-ligtasbanko-your-container {
+  position: absolute;
+  top: 94px;
+  left: 721px;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  line-height: 25px;
+  display: inline-block;
+  width: 263px;
+  height: 190px;
+}
+
+.commitment-to-security,
+.localized-protection {
+  position: absolute;
+  top: 35px;
+  left: 384px;
+  letter-spacing: 0.06em;
+  line-height: 25px;
+  font-weight: 500;
+  display: inline-block;
+  width: 238px;
+  height: 40px;
+}
+.commitment-to-security {
+  top: 33px;
+  left: 724px;
+  width: 258px;
+  height: 37px;
+}
+.rectangle-group {
+  position: absolute;
+  top: 55px;
+  left: 55px;
+  width: 1004px;
+  height: 409px;
+}
+.why-us {
+  width: 100%;
+  position: relative;
+  background-color: var(--color-white);
+  height: 1080px;
+  overflow: hidden;
+  text-align: center;
+  margin-left: 30px;
+  font-size: var(--font-size-sm);
+  color: var(--color-darkslategray);
+  font-family: var(--font-poppins);
+}
