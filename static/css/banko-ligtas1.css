@@ -1,0 +1,355 @@
+.group-child {
+  position: absolute;
+  top: 0;
+  left: 265px;
+  border-radius: 50px;
+  background: linear-gradient(90deg, #0AB5E3 23%, #4452B8);
+  width: 205px;
+  height: 60px;
+  cursor: pointer;
+}
+.report-phishing {
+  position: absolute;
+  top: 18px;
+  left: 300px;
+  letter-spacing: 0.06em;
+  line-height: 25px;
+  font-weight: 500;
+  display: inline-block;
+  width: 141px;
+  height: 30px;
+  color: white;
+  cursor: pointer;
+}
+.group-item {
+  position: absolute;
+  top: 1px;
+  left: 0;
+  border-radius: 100px;
+  background: linear-gradient(90deg, #0AB5E3 23%, #4452B8);
+  width: 205px;
+  height: 60px;
+  cursor: pointer;
+}
+.detect-phishing {
+  position: absolute;
+  top: 19px;
+  left: 33px;
+  letter-spacing: 0.06em;
+  line-height: 25px;
+  font-weight: 500;
+  display: inline-block;
+  width: 143px;
+  height: 33px;
+  color: white;
+  cursor: pointer;
+}
+.rectangle-parent {
+  position: absolute;
+  top: 55px;
+  left: 176px;
+  width: 472.8px;
+  height: 63px;
+}
+.ligtasbanko4 {
+  width: 100%;
+  position: relative;
+  background-color: var(--color-white);
+  height: 1080px;
+  overflow: hidden;
+  text-align: center;
+  margin-left: 160px;
+  font-size: var(--font-size-sm);
+  color: var(--color-white);
+  font-family: var(--font-poppins);
+}
+
+/* Center the form on the page */
+.contact-us1 {
+  width: 100%;
+  position: relative;
+  background-color: var(--color-white);
+  height: 880px;
+  text-align: left;
+  font-size: var(--font-size-4xs-8);
+  color: var(--color-gray);
+  font-family: var(--font-poppins);
+  margin-left: -35px;
+  margin-bottom: 20px;
+}
+
+/* Form container styles */
+.rectangle-parent1 {
+  position: absolute;
+  top: 55px;
+  left: 330px;
+  width: 410px;
+  height: 450.4px;
+}
+
+/* Icon styles */
+.personcircle-icon,
+.envelopefill-icon,
+.patchquestionfill-icon,
+.chatlefttextfill-icon {
+  width: 26.1px;
+  height: 26.1px;
+  margin-left: 20px;
+}
+
+.chatlefttextfill-icon,
+.envelopefill-icon,
+.patchquestionfill-icon {
+  margin-left: 20px;
+}
+
+.chatlefttextfill-icon {
+  margin-left: 19px;
+  margin-top: -70px;
+  width: 28.1px;
+  height: 28.1px;
+}
+
+/* Individual form groups */
+.group-child4,
+.group-child5,
+.group-child6,
+.group-child7,
+.group-child8 {
+  position: absolute;
+  border-radius: 27.59px;
+  background-color: var(--color-white);
+  border: 0.6px solid var(--color-black);
+  box-sizing: border-box;
+  width: 600.6px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  z-index: 1; /* Add this line to adjust z-index */
+}
+
+.group-child4 {
+  top: 0;
+  z-index: 2; /* Add this line to adjust z-index */
+}
+
+.group-child5 {
+  top: 64.6px;
+  z-index: 2; /* Add this line to adjust z-index */
+}
+
+.group-child6 {
+  top: 129.2px;
+  z-index: 3; /* Add this line to adjust z-index */
+}
+
+.group-child7 {
+  top: 193.8px;
+  height: 121.6px;
+  z-index: 2; /* Add this line to adjust z-index */
+}
+
+.group-child8 {
+  cursor: pointer;
+  top: 350px;
+  left: 215px; /* Adjusted positioning */
+  background: linear-gradient(90deg, #20E4AC, #0AB5E3);
+  border: none; /* Override the border property to remove the border */
+  width: 160.6px;
+  height: 60.8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2; /* Add this line to adjust z-index */
+}
+
+/* Name Input */
+#nameInput {
+  flex: 1;
+  padding: 5px;
+  margin-left: 12px;
+  margin-right: 10px;
+  font-size: 12px;
+  font-family: 'Poppins';
+  outline: none;
+}
+
+
+/* Email Input */
+#emailInput {
+  flex: 1;
+  padding: 5px;
+  margin-left: 12px;
+  margin-right: 10px;
+  font-size: 12px;
+  font-family: 'Poppins';
+  border: none;
+  outline: none;
+}
+
+
+#messageInput {
+  /* Your existing styles */
+  flex: 1;
+  padding-right: 20px;
+  padding-bottom: 80px;
+  padding-top: -90px;
+  margin-left: 3.5px;
+  margin-top: -5px;
+  margin-right: 15px;
+  font-size: 12px;
+  font-family: 'Poppins';
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  width: calc(100% - 24px);
+  height: 25px;
+  position: relative;
+  /* Add word-wrap property */
+  word-wrap: break-word;
+}
+
+
+
+/* Input and textarea styles */
+.input-rectangle {
+  flex: 1;
+  padding: 10px;
+  margin-left: 10px;
+  font-size: 16px;
+  border: none;
+  outline: none;
+  width: 100px;
+}
+
+
+.submit {
+  font-size: 16px;
+  color: white;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+  border: none !important; /* Add !important to ensure it overrides other styles */
+  border-width: 0 !important; /* Ensure border width is set to 0 */
+  border-style: none !important; /* Ensure border style is set to none */
+  border-color: transparent !important; /* Ensure border color is transparent */
+  background: none;
+  letter-spacing: 0.06em;
+  line-height: 11.49px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+
+
+
+
+#subjectButton {
+  font-size: 12px;
+  color: rgb(85, 85, 85);
+  margin-left: 15px;
+  cursor: pointer;
+  border: none;
+  font-family: 'Poppins';
+  background-color: transparent;
+  border-radius: 5px;
+}
+
+#subjectButton:hover {
+  background-color: #f0f0f0;
+}
+
+.options-container {
+  position: absolute;
+  top: calc(100% + 5px);
+  left: 20px;
+  background-color: #ffffff;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  border-radius: 10px;
+  padding: 5px 0;
+  display: block;
+  z-index: 1001;
+  transition: all 0.3s ease;
+  min-width: 580px; /* Set your desired minimum width here */
+  max-width: 900px; /* Set your desired maximum width here */
+  width: auto; /* Adjust width to fit content */
+}
+
+
+.option-label {
+  padding: 10px 20px;
+  cursor: pointer;
+  font-family: 'Poppins';
+  color: #333;
+  z-index: 1002;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  position: relative;
+  white-space: nowrap; /* Prevent text from wrapping */
+  display: block; /* Ensure each option is on a new line */
+  border-bottom: 1px solid #e0e0e0; /* Add thin separating line */
+  padding-left: 40px; /* Adjust padding to make room for the icon */
+}
+
+.option-label:last-child {
+  border-bottom: none; /* Remove the line from the last item */
+}
+
+.option-label:hover {
+  background-color: #f0f0f0;
+  color: #20E4AC;
+}
+.option-label.selected::before {
+  content: "";
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background-image: url('../assets/checkmark.png');
+  background-size: cover;
+  z-index: 1003;
+}
+
+
+.form-group {
+  position: relative;
+}
+.form-group input {
+  padding: 8px 10px;
+  font-size: 12px;
+  font-family: 'Poppins';
+  background-color: transparent;
+  color: #000000;
+  transition: 0.15s all ease;
+  width: 500px; /* Adjust the width to your desired value */
+}
+
+.form-group input:focus {
+  border-color: #000000;
+}
+.form-group input::placeholder {
+  color: transparent;
+}
+.form-group .form-label {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  font-size: 12px;
+  font-family: 'Poppins';
+  padding: 0 10px;
+  color: rgb(85, 85, 85);
+  pointer-events: none;
+  transition: 0.15s all ease;
+}
+.form-group input:focus + .form-label,
+.form-group input:not(:placeholder-shown) + .form-label {
+  transform: translate(5px, -22px);
+  background-color: #ffffff;
+  font-size: 12px;
+  color: rgb(85, 85, 85);
+}

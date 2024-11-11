@@ -1,0 +1,752 @@
+/* GENERAL */
+
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap");
+
+@keyframes twinkling {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: -10000px 5000px;
+  }
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-10px) rotate(1deg);
+  }
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  overflow-x: hidden;
+  cursor: default;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+p {
+  color: rgb(85, 85, 85);
+}
+
+/* TRANSITION */
+
+a,
+.btn {
+  transition: all 300ms ease;
+}
+
+/* DESKTOP NAV */
+
+nav,
+.nav-links {
+  display: flex;
+}
+
+nav {
+  justify-content: space-around;
+  align-items: center;
+  height: 17vh;
+}
+
+.nav-links {
+  gap: 3rem;
+  list-style: none;
+  font-size: 20px;
+}
+
+a {
+  color: black;
+  text-decoration: none;
+  text-decoration-color: white;
+}
+
+a:hover {
+  color: grey;
+  text-underline-offset: 1rem;
+  text-decoration-color: rgb(181, 181, 181);
+}
+
+/* SECTIONS */
+
+section {
+  padding-top: 4vh;
+  height: 10vh;
+  margin: 0 10rem;
+  box-sizing: border-box;
+  min-height: fit-content;
+}
+
+.title {
+  font-size: 3rem;
+  text-align: center;
+  background: linear-gradient(90deg, #20E4AC, #0AB5E3);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.title1 {
+  margin-top: 5px;
+  font-size: 3rem;
+  text-align: center;
+  background: linear-gradient(90deg, #20E4AC, #0AB5E3);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: float 5s ease-in-out infinite;
+}
+
+.tools-img {
+  align-items: center;
+  width: auto;
+  height: 350px;
+  display: relative;
+  margin-left: 390px;
+  animation: float 5s ease-in-out infinite;
+}
+
+.contact-img {
+  margin-top: 50px;
+  width: 400px;
+  height: auto;
+  animation: float 5s ease-in-out infinite;
+  margin-left: 80px;
+}
+
+.logo-lg {
+  width: 50px;
+  height: auto;
+  margin-right: 0;
+}
+
+.logo1 {
+  font-size: 2rem;
+  margin-left: -1000px;
+}
+
+nav,
+.nav-links1 {
+  display: flex;
+  gap: 30rem;
+}
+
+nav {
+  justify-content: space-around;
+  align-items: center;
+  height: 17vh;
+}
+
+#detect {
+  position: relative;
+  margin-bottom: -10px;
+}
+
+.group-child9 {
+  position: absolute;
+  top: 120px;
+  left: 0;
+  border-radius: 2rem;
+  background: linear-gradient(90deg, #19d6bd 23%, #0bb8e0);
+  width: 184.8px;
+  height: 55.9px;
+}
+
+.group-child10 {
+  position: absolute;
+  top: 125px;
+  left: 0;
+  border-radius: 2rem;
+  background: linear-gradient(90deg, #ffffff 23%, #ffffff);
+  width: 124.8px;
+  height: 45.9px;
+  border: 2px solid #000000; /* Add border property */
+}
+
+
+.submit1 {
+  position: absolute;
+  top: 137px;
+  left: 50.5px;
+  letter-spacing: 0.05em;
+  line-height: 22.54px;
+  font-weight: 500;
+  display: inline-block;
+  width: 82.1px;
+  height: 29.8px;
+  color: white;
+  z-index: 2000;
+}
+
+.submit2 {
+  position: absolute;
+  top: 137px;
+  left: 21.5px;
+  letter-spacing: 0.05em;
+  line-height: 22.54px;
+  font-weight: 500;
+  display: inline-block;
+  width: 82.1px;
+  height: 29.8px;
+  color: rgb(0, 0, 0);
+  z-index: 2000;
+}
+
+.rectangle-parent2 {
+  position: absolute;
+  top: 300px;
+  left: 0px;
+  width: 184.8px;
+  height: 55.9px;
+  cursor: pointer;
+}
+
+.rectangle-parent3 {
+  position: absolute;
+  top: 300px;
+  left: 200px;
+  width: 184.8px;
+  height: 55.9px;
+  cursor: pointer;
+}
+.rectangle-parent4 {
+  position: relative;
+  top: 0px;
+  left: -60px;
+  width: 184.8px;
+  height: 55.9px;
+  cursor: pointer;
+}
+
+.icon6 {
+  position: absolute;
+  top: 14px;
+  left: 19px;
+  width: 20px;
+  height: 20px;
+  object-fit: cover;
+}
+
+.insert-text-here {
+  position: absolute;
+  top: 20px;
+  left: 57px;
+  letter-spacing: 0.05em;
+  line-height: 11.28px;
+  font-weight: 500;
+  display: inline-block;
+  width: 500px;
+  opacity: 0.5;
+  font-size: 14px;
+}
+
+.filename-placeholder {
+  position: absolute;
+  top: 20px;
+  left: 57px;
+  letter-spacing: 0.05em;
+  line-height: 11.28px;
+  font-weight: 500;
+  display: inline-block;
+  width: 500px;
+  opacity: 0.5;
+  font-size: 14px;
+}
+
+.rectangle-parent6 {
+  position: absolute;
+  top: 285px;
+  left: 0;
+  width: 929px;
+  height: 56px;
+  text-align: left;
+  z-index: 1010;
+}
+
+.group-child13 {
+  position: relative; /* Change to relative to ensure correct positioning */
+  top: -35px;
+  left: 0;
+  border-radius: 2rem;
+  background-color: var(--color-white);
+  border: 1px solid black;
+  box-sizing: border-box;
+  width: 429px;
+  height: 56px;
+  cursor: pointer; /* Make the whole container clickable */
+  display: flex;
+  align-items: center; /* Center content vertically */
+}
+
+#submissionButton {
+  font-size: 16px;
+  color: rgb(85, 85, 85);
+  cursor: pointer;
+  border: none;
+  font-family: 'Poppins';
+  background-color: transparent;
+  left: -70px;
+  border-radius: 5px;
+  display: inline-block; /* Ensure it behaves like a button */
+  width: calc(100% - 40px); /* Adjust to fit the container, considering padding/margin */
+  z-index: 20;
+}
+
+.options-containerPhishingDetector {
+  position: absolute;
+  top: calc(100% + 5px);
+  left: 20px;
+  background-color: #ffffff;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  padding: 5px 0;
+  display: block;
+  z-index: 1010;
+  transition: all 0.3s ease;
+  min-width: 400px;
+  max-width: 900px;
+  width: auto;
+}
+
+.option-labelPhishingDetector {
+  padding: 10px 20px;
+  cursor: pointer;
+  font-family: 'Poppins';
+  color: #333;
+  z-index: 1002;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  position: relative;
+  white-space: nowrap;
+  display: block;
+  border-bottom: 1px solid #e0e0e0;
+  padding-left: 40px;
+  z-index: 1010;
+}
+
+.option-labelPhishingDetector:last-child {
+  border-bottom: none;
+  z-index: 1010;
+}
+
+.option-labelPhishingDetector:hover {
+  background-color: #f0f0f0;
+  color: #20e4ac;
+  z-index: 1010;
+}
+
+.option-labelPhishingDetector.selected::before {
+  content: "";
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background-image: url('../assets/checkmark.png');
+  background-size: cover;
+  z-index: 1010;
+}
+
+.PhishingMethod-icon {
+  width: 26.1px;
+  height: 26.1px;
+  position: relative;
+  top: 2px;
+  left:370px;
+}
+
+
+.serviceslogo-1-icon {
+  position: absolute;
+  top: 15px;
+  left: 19px;
+  width: 20px;
+  height: 20px;
+  object-fit: cover;
+}
+
+.insert-link-here1 {
+  padding: 10px;
+  margin-left: 63px;
+  font-size: 16px;
+  outline: none;
+  width: 300px;
+}
+
+
+.insert-link-here {
+  flex: 1;
+  padding: 10px;
+  margin-left: 10px;
+  font-size: 16px;
+  border: none;
+  outline: none;
+  /* Adjust width as needed */
+  width: 300px; /* or any desired width */
+}
+
+.PasteURL-Group {
+  position: absolute;
+  top: 217px;
+  left: 0px;
+  width: 475px;
+  height: 51px;
+}
+
+#urlInput {
+    padding: 10px;
+    margin-left: 45px;
+    margin-top: 2.5px;
+    font-size: 16px;
+    font-family: 'Poppins';
+    outline: none;
+    width: 390px;
+    z-index: 1000; /* Ensure it is above other elements */
+    position: relative; /* Make sure it stays within its container */
+  }
+
+.PasteURL-Box-and-Text {
+    top: 0;
+    border-radius: 1rem;
+    background-color: var(--color-white);
+    border: 1px solid black;
+    box-sizing: border-box;
+    position: absolute;
+    left: 0;
+    width: 475px;
+    height: 51px;
+    z-index: 1000;
+  }
+
+.PasteURL-BoxOnly {
+    border-radius: 2rem;
+    background-color: var(--color-white);
+    border: 1px solid black;
+    box-sizing: border-box;
+    width: 440px;
+    height: 121px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 475px;
+    height: 51px;
+    z-index: 1000;
+}
+
+.ScreenshotGroup {
+    position: absolute;
+    top: 217px;
+    left: 0px;
+    width: 475px;
+    height: 51px;
+    z-index: 1000;
+  }
+
+.Screenshot-box {
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 2rem;
+  background-color: var(--color-white);
+  border: 1px solid black;
+  box-sizing: border-box;
+  width: 475px;
+  height: 51px;
+}
+
+.MessageGroup {
+    position: absolute;
+    top: 215px;
+    left: 0px;
+    width: 440px;
+    height: 121px;
+    text-align: center;
+    font-size: 4.4px;
+    z-index: 500;
+  }
+
+#msgInput {
+    padding: 10px;
+    margin-left: 45px;
+    margin-top: 2px;
+    font-size: 16px;
+    font-family: 'Poppins';
+    outline: none;
+    width: 380px;
+    z-index: 500; /* Ensure it is above other elements */
+    position: relative; /* Make sure it stays within its container */
+    border: none;
+}
+
+.Message-Box-and-Text {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 440px;
+  height: 121px;
+  z-index: 500;
+}
+
+.Message-BoxOnly {
+    border-radius: 2rem;
+    background-color: var(--color-white);
+    border: 1px solid black;
+    box-sizing: border-box;
+    width: 440px;
+    height: 121px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 475px;
+    height: 120px;
+    z-index: 500;
+  }
+
+.msg-1-icon {
+  position: absolute;
+  top: 14px;
+  left: 17px;
+  width: 25px;
+  height: 25px;
+  object-fit: cover;
+}
+
+
+
+.section__text__p1 {
+  text-align: center;
+  left: 95px;
+}
+
+.group-parent2 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 929px;
+  height: 121px;
+}
+
+.group-frame {
+  top: 104px;
+  text-align: left;
+  font-size: var(--font-size-6xs-3);
+  position: absolute;
+  left: 0;
+  width: 929px;
+  height: 121px;
+}
+
+.to-submit-a-suspicious-url-and-parent {
+  position: absolute;
+  top: -50px;
+  left: 0;
+  width: 929px;
+  height: 225px;
+}
+
+.choose-how-you {
+  position: absolute;
+  top: 200px;
+  left: -55px;
+  letter-spacing: 0.06em;
+  line-height: 22.54px;
+  font-weight: 400;
+  display: inline-block;
+  width: 615px;
+  color: #292929;
+}
+
+.attach-the-content {
+  position: absolute;
+  top: 390px;
+  left: -125px;
+  letter-spacing: 0.06em;
+  line-height: 22.54px;
+  font-weight: 400;
+  display: inline-block;
+  width: 615px;
+  color: #292929;
+}
+
+
+.insert-text-here1 {
+  position: absolute;
+  top: 15px;
+  left: 57px;
+  letter-spacing: 0.06em;
+  line-height: 22.54px;
+  font-weight: 500;
+  display: inline-block;
+  width: 400px;
+  height: 17px;
+  opacity: 0.5;
+  font-size: 14px;
+}
+
+.choose-how-you-want-to-submit-parent{
+  position: absolute;
+  top: -170px;
+  left: 0;
+  width: 929px;
+  height: 126px;
+}
+
+.group-parent1 {
+  position: absolute;
+  top: 0;
+  left: -60px;
+  width: 929px;
+  height: 410px;
+  color: var(--color-black);
+}
+
+.group-parent {
+  position: absolute;
+  top: 22px;
+  left: 101px;
+  width: 929px;
+  height: 517.9px;
+}
+
+.detect {
+  width: 100%;
+  position: relative;
+  background-color: var(--color-white);
+  height: 1080px;
+  text-align: center;
+  font-size: var(--font-size-smi-6);
+  color: var(--color-white);
+  font-family: var(--font-poppins);
+}
+
+.url {
+  top: -90px;
+  left:40px;
+  font-size: 20px;
+  position: relative;
+  font-weight: bold;
+}
+
+.prediction {
+  font-size: 36px;
+  font-family: 'Poppins';
+  left:-390px;
+  top: 235px;
+  position: relative;
+  font-weight: bold;
+}
+
+.confidence {
+  font-size: 28px;
+  font-family: 'Poppins';
+  left:-60px;
+  top: 180px;
+  position: relative;
+  font-weight: bold;
+}
+
+.ResultAndConfidence {
+  font-family: 'Poppins';
+  left: -50px;
+  top: 20px;
+  position: relative;
+  font-weight: bold;
+}
+
+.PhishingImage {
+  position: relative;
+  /* Add your CSS styles here */
+  width: 500px; /* Example width */
+  top: -140px;
+  left: 390px;
+  margin-bottom: -30px;
+  /* Add more styles as needed */
+}
+
+.BenignImage {
+  position: relative;
+  /* Add your CSS styles here */
+  width: 190px; /* Example width */
+  top: -140px;
+  left: 390px;
+  /* Add more styles as needed */
+}
+
+
+.explanation {
+  left: 100px;
+  position: relative;
+  top: -105px;
+  width: 500px;
+}
+
+.explanation-list {
+  position: relative;
+  left: 600px; /* Adjust as needed */
+  top: -105px;
+  width: 500px;
+  list-style-type: none; /* Remove bullets */
+  padding-left: 0; /* Remove default padding */
+}
+
+.explanation-list ul,
+.explanation-list ol {
+  margin-left: 0;
+  top: -105px;
+  width: 500px;
+  list-style-type: none; /* Remove bullets */
+  padding-left: 0; /* Remove default padding */
+}
+
+.explanation-list li {
+  list-style-position: outside;
+  margin-left: -20px;
+  text-align: left;
+  top: -105px;
+  width: 500px;
+}
+
+.important-features strong {
+  font-size: 1.5em; /* Adjust the size as needed */
+  background: linear-gradient(90deg, #19d6bd 23%, #0bb8e0);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent; /* Ensures compatibility in WebKit browsers */
+  background-clip: text;
+  color: transparent; /* Ensures compatibility in other browsers */
+}
+
+
+
+
+
+.completion {
+  top: -190px;
+  left: 100px;
+  position: relative;
+  font-family: 'Poppins';
+  text-align: justify;
+  line-height: 1.9;
+  color: #000000;
+}
+
+.elvi{
+  position: relative;
+  top:-50px;
+  width: 140px;
+  left: -480px
+}
+

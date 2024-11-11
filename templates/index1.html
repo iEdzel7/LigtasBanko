@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <link rel="shortcut icon" href="../static/assets/logo.png" type="image/x-icon" />
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LigtasBanko</title>
+  <link rel="stylesheet" href="../static/css/index1.css">
+  <link rel="stylesheet" href="../static/css/footer.css">
+</head>
+<body>
+  <nav id="desktop-nav">
+    <img src="../static/assets/logo.png" alt="Logo" class="logo-lg">
+    <div class="logo1"></div>
+    <div>
+        <ul class="nav-links">
+           <li><a href="{{ url_for('index') }}#profile-id">Home</a></li>
+            <li><a href="#detect">Detect</a></li>
+            <li><a href="{{ url_for('index2') }}#profile-id">Report</a></li>
+        </ul>
+    </div>
+  </nav>
+
+  <section id="detect">
+    <p class="section__text__p1">Protect Your Online Security with LigtasBanko's</p>
+    <h1 class="title">Phishing Detection</h1>
+    <br><br>
+    <div class="detect">
+      <div class="group-parent">
+        <div class="rectangle-parent4" id="rectangle-parent4">
+            <div class="rectangle-parent2">
+              <div class="group-child9"></div>
+              <!-- Add this button inside .rectangle-parent2 -->
+              <div class="submit1" id="submitBtn">Submit</div>
+            </div>
+            <div class="rectangle-parent3">
+              <div class="group-child10"></div>
+              <!-- Add this button inside .rectangle-parent2 -->
+              <div class="submit2" id="clearBtn">Clear</div>
+            </div>
+        </div>
+
+        <div id="results" class="results"></div>
+        <div class="group-parent1">
+          <div class="to-submit-a-suspicious-url-and-parent">
+            <div class="group-frame">
+              <div class="group-parent2">
+                <!-- Paste URL -->
+                <div id="PasteURL" class="PasteURL-Group">
+                  <div class="PasteURL-Box"></div>
+                  <div class="PasteURL-BoxOnly"></div>
+                  <img class="serviceslogo-1-icon" alt="" src="../static/assets/link.png" />
+                  <input type="text" id="urlInput" class="insert-link-here" placeholder="Paste URL" />
+                </div>
+
+                <!-- Paste Message -->
+                <div id="Message" class="MessageGroup" style="display: none;">
+                  <div class="Message-Box-and-Text">
+                    <div class="Message-BoxOnly"></div>
+                    <img class="msg-1-icon" alt="" src="../static/assets/message.png" />
+                    <input type="text" id="msgInput" class="insert-link-here1" placeholder="Paste message" />
+                  </div>
+                </div>
+              
+                <!-- Screenshot -->
+                <div class="ScreenshotGroup" id="Screenshot" style="display: none; cursor: pointer;">
+                  <div class="Screenshot-box" id="uploadLabel">
+                    <!-- Input element for uploading a screenshot -->
+                    <form id="uploadForm" action="/upload_file" method="post" enctype="multipart/form-data">
+                      <input type="file" accept="image/jpeg, image/jpg, image/png" name="screenshotUpload" id="screenshotUpload" style="position: absolute; left: -9999px; opacity: 0; ">
+                      <label for="screenshotUpload" style="cursor: pointer;">
+                        <img class="icon6" alt="" src="../static/assets/ss.png" />
+                        <div class="filename-placeholder">Upload Screenshot (jpeg/jpg/png)</div>
+                      </label>
+                      <input type="submit" style="display: none;">
+                    </form>
+                  </div>
+                </div>
+
+
+
+
+
+
+                
+
+                
+
+              </div>
+            </div>
+          </div>
+          <div class="choose-how-you-want-to-submit-parent">
+            <div class="choose-how-you">
+              Choose how you want to submit the suspicious content:
+            </div>
+            <div class="rectangle-parent6">
+              <div class="group-child13" id="submissionContainer">
+                <img class="PhishingMethod-icon" alt="" src="../static/assets/Checkmark2.png" />
+                <div id="submissionButton" class="button-rectangle">Select Submission Method</div>
+                <!-- Dropdown Content -->
+                <div class="options-containerPhishingDetector" style="display: none;">
+                  <label class="option-labelPhishingDetector">URL</label>
+                  <label class="option-labelPhishingDetector">Text Message</label>
+                  <label class="option-labelPhishingDetector">Screenshot</label>
+                </div>
+              </div>
+            </div>
+            <div class="attach-the-content">
+              Attach the content in the provided field:
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="ligtasbanko2">
+      <div class="ligtasbanko3">ligtasbanko</div>
+      <div class="home-services-info-wrapper">
+        <div class="home-services-info-container">
+          <p class="home"><a href="{{ url_for('index') }}#profile-id">Home</a></p>
+          <p class="home"><a href="index.html#services">Services</a></p>
+          <p class="home"><a href="index.html#info">Info</a></p>
+        </div>
+      </div>
+      <div class="tools-report-contact-us-wrapper">
+        <div class="tools-report-contact-container">
+          <p class="home"><a href="index.html#tools">Tools</a></p>
+          <p class="home"><a href="index.html#contact">Contact Us</a></p>
+        </div>
+      </div>
+      <div class="terms-and-conditions-container">
+        <p class="home" onclick="window.open('LigtasBanko-TermsandConditions.pdf')">Terms and Conditions</p>
+        <p class="home" onclick="window.open('LigtasBanko-PrivacyPolicy.pdf')">Privacy Policy</p>
+        <p class="home" onclick="window.open('LigtasBanko-CookiePolicy.pdf')">Cookie Policy</p>
+      </div>
+      <div class="copyright-2024">
+        Copyright © 2024 LigtasBanko. All Rights Reserved.
+      </div>
+      <div class="icons8-facebook-50-2-parent">
+        <img class="icons8-facebook-50-2" alt="" src="../static/assets/fb.png" onclick="window.open('https://www.facebook.com/christinetorres.marasigan')" />
+        <div class="follow-us">Follow us</div>
+        <img class="icons8-instagram-50-1-2" alt="" src="../static/assets/ig.png" onclick="window.open('https://www.instagram.com/iedzel/')" />
+        <img class="linkedin-1-icon" alt="" src="../static/assets/linkedin.png"  />
+        <img class="github-1-icon" alt="" src="../static/assets/github.png" onclick="window.open('https://github.com/Malceid')" />
+      </div>
+    </div>
+  </footer>
+
+  <script src="{{ url_for('static', filename='scripts/main.js') }}"></script>
+  <script>
+  document.getElementById('submitBtn').addEventListener('click', () => {
+    const urlInput = document.getElementById('urlInput').value;
+    const msgInput = document.getElementById('msgInput').value;
+    const ssInput = document.getElementById('screenshotUpload').files[0]; // Accessing the first selected file
+
+    // Determine which input to use
+    const userInput = urlInput || msgInput || ssInput;
+    if (!userInput) {
+      alert('Please enter a URL or message.');
+      return;
+    }
+
+    // Send user input to the server
+    const formData = new FormData();
+    formData.append('user_input', userInput);
+
+    // Append the file input field to the form data if a file is selected
+    if (ssInput) {
+      formData.append('screenshotUpload', ssInput);
+    }
+
+    fetch('/analyze_url', {
+      method: 'POST',
+
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ user_input: userInput })
+    })
+    .then(response => response.json())
+    .then(data => {
+      const resultsContainer = document.getElementById('results');
+      resultsContainer.innerHTML = ''; // Clear previous results
+      data.forEach((result, index) => {
+        const resultDiv = document.createElement('div');
+        resultDiv.classList.add('result-item'); // Add a class to the container div
+
+        // Determine the color based on prediction
+        const confidenceColor = result.prediction === "PHISHING" ? 'red' : 'green';
+
+        // Determine the image source based on prediction
+        const imageSrc = result.prediction === "PHISHING" ? '../static/assets/phish.png' : '../static/assets/SAFE1.png';
+
+        // Determine the image class based on prediction
+        const imageClass = result.prediction === "PHISHING" ? 'PhishingImage' : 'BenignImage';
+
+        resultDiv.innerHTML = `
+            <div class="result-content">
+                <p class="url"><strong>URL:</strong> ${result.url}</p>
+                <div class="ResultAndConfidence" id="ResultAndConfidence">
+                  <p class="prediction" style="color: ${confidenceColor};"> ${result.prediction}</p>
+                  <p class="confidence" style="color: ${confidenceColor};"> ${result.confidence}</p>
+                </div>
+                <img src="${imageSrc}" alt="Image" class="${imageClass}">
+                <ul class="explanation-list">
+                  <li class="important-features"><strong>Most important features:</strong></li>
+                  ${result.explanation.map(explanation => `<li>${explanation}</li>`).join('')}
+                </ul>
+
+                <img src="../static/assets/elvi.png" alt="Image" class="elvi">
+                <p class="completion"><strong></strong> ${result.chat_completion}</p>
+            </div>
+        `;
+
+        resultsContainer.appendChild(resultDiv);
+      });
+
+      // After appending results, adjust the position of ResultAndConfidence
+      const selectedValue = document.getElementById("submissionButton").textContent;
+      if (selectedValue === "Text Message") {
+        const ResultConfidence = document.getElementById('ResultAndConfidence');
+        if (ResultConfidence) {
+          ResultConfidence.style.top = "70px";
+        }
+      }
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
+  });
+  </script>
+</body>
+</html>
