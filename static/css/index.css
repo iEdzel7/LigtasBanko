@@ -182,7 +182,7 @@
   width: 100%;
   position: relative;
   background-color: #fff;
-  height: 1080px;
+  height: 680px;
   overflow: hidden;
   text-align: center;
   font-size: var(--font-size-base);
@@ -278,7 +278,7 @@
   width: 100%;
   position: relative;
   background-color: var(--color-white);
-  height: 1080px;
+  height: 480px;
   overflow: hidden;
   text-align: left;
   font-size: 14.4px;
@@ -369,9 +369,10 @@
 }
 .safe {
   width: 100%;
+  top: -150px;
   position: relative;
   background-color: var(--color-white);
-  height: 1080px;
+  height: 400px;
   overflow: hidden;
   text-align: left;
   font-size: var(--font-size-mini-4);

@@ -1,167 +1,183 @@
+.home {
+  margin: 0;
+  text-align: left;
+}
+
+.home:hover {
+  color: black; /* Change text color to black on hover */
+  cursor: pointer;
+}
+
+.home-services-info-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  letter-spacing: 0.06em;
+  line-height: 35px;
+  font-weight: 500;
+  display: inline-block;
+  width: 115px;
+  height: 0px;
+}
+.home-services-info-wrapper {
+  position: absolute;
+  top: 844px;
+  left: 424px;
+  width: 115px;
+  height: 0px;
+}
+.tools-report-contact-container {
+  position: absolute;
+  top: 0;
+  left: 40px;
+  letter-spacing: 0.06em;
+  line-height: 35px;
+  font-weight: 500;
+  display: inline-block;
+  width: 155px;
+  height: 0px;
+}
+.tools-report-contact-us-wrapper {
+  position: absolute;
+  top: 844px;
+  left: 601px;
+  width: 155px;
+  height: 0px;
+}
+.copyright-2024,
+.terms-and-conditions-container {
+  position: absolute;
+  top: 910px;
+  left: 0;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  line-height: 25px;
+  font-weight: 500;
+  display: inline-block;
+  width: 199px;
+  height: 0px;
+  opacity: 0.8;
+  cursor: default;
+}
+.copyright-2024 {
+  top: 1020px;
+  left: 250px;
+  font-weight: 300;
+  text-align: center;
+  width: 520px;
+  height: 0px;
+  font-size: 10px;
+
+
+}
+.icons8-facebook-50-2 {
+  position: absolute;
+  top: 49px;
+  left: 20px;
+  width: 29px;
+  height: 29px;
+  object-fit: cover;
+  cursor: pointer;
+}
+.follow-us {
+  position: absolute;
+  top: 0;
+  left: 20px;
+  letter-spacing: 0.06em;
+  line-height: 25px;
+  font-weight: 500;
+  display: inline-block;
+  width: 144px;
+  height: 0px;
+  cursor: default;
+}
+.github-1-icon,
+.icons8-instagram-50-1-2,
+.linkedin-1-icon {
+  position: absolute;
+  top: 49px;
+  left: 66px;
+  width: 29px;
+  height: 29px;
+  object-fit: cover;
+  cursor: pointer;
+}
+.github-1-icon,
+.linkedin-1-icon {
+  top: 50px;
+  left: 112px;
+  width: 28px;
+  height: 28px;
+}
+.github-1-icon {
+  top: 49px;
+  left: 157px;
+}
+.icons8-facebook-50-2-parent {
+  position: absolute;
+  top: 844px;
+  left: 881px;
+  width: 165px;
+  height: 78px;
+}
+.ligtasbanko2 {
+  overflow: hidden;
+  top: 100px;
+  width: 100%;
+  position: relative;
+  background-color: var(--color-white);
+  height: 1080px;
+  
+  text-align: left;
+  font-size: var(--font-size-xl);
+  color: var(--color-darkslategray);
+  font-family: var(--font-poppins);
+  margin-left: 200px;
+
+}
+
 .ligtasbanko3 {
-    position: relative;
-    top: 820px;
-    left: -20px;
-    font-size: 32px;
-    letter-spacing: 0.06em;
-    line-height: 25px;
-    font-weight: 500;
-    text-align: center;
-    display: inline-block;
-    width: 254px;
-    height: 40px;
-    cursor: default;
-  }
-  .home {
-    margin: 0;
-    text-align: left;
-  }
+  position: relative;
+  top: 820px;
+  left: -20px;
+  font-size: 32px;
+  letter-spacing: 0.06em;
+  line-height: 25px;
+  font-weight: 500;
+  text-align: center;
+  display: inline-block;
+  width: 254px;
+  height: 0px;
+  cursor: default;
+}
+
+.ligtasbanko7 {
+  overflow: hidden;
+  top: -800px;
+  width: 100%;
+  position: relative;
+  background-color: var(--color-white);
+  height: 1080px;
   
-  .home:hover {
-    color: black; /* Change text color to black on hover */
-    cursor: pointer;
-  }
+  text-align: left;
+  font-size: var(--font-size-xl);
+  color: var(--color-darkslategray);
+  font-family: var(--font-poppins);
+  margin-left: 200px;
+
+}
+
+.ligtasbanko5 {
+  overflow: hidden;
+  top: -1080px;
+  width: 100%;
+  position: relative;
+  background-color: var(--color-white);
+  height: 1080px;
   
-  .home-services-info-container {
-    position: absolute;
-    top: 0;
-    left: 0;
-    letter-spacing: 0.06em;
-    line-height: 35px;
-    font-weight: 500;
-    display: inline-block;
-    width: 115px;
-    height: 98px;
-  }
-  .home-services-info-wrapper {
-    position: absolute;
-    top: 844px;
-    left: 424px;
-    width: 115px;
-    height: 98px;
-  }
-  .tools-report-contact-container {
-    position: absolute;
-    top: 0;
-    left: 40px;
-    letter-spacing: 0.06em;
-    line-height: 35px;
-    font-weight: 500;
-    display: inline-block;
-    width: 155px;
-    height: 98px;
-  }
-  .tools-report-contact-us-wrapper {
-    position: absolute;
-    top: 844px;
-    left: 601px;
-    width: 155px;
-    height: 98px;
-  }
-  .copyright-2024,
-  .terms-and-conditions-container {
-    position: absolute;
-    top: 910px;
-    left: 0;
-    font-size: 12px;
-    letter-spacing: 0.06em;
-    line-height: 25px;
-    font-weight: 500;
-    display: inline-block;
-    width: 199px;
-    height: 84px;
-    opacity: 0.8;
-    cursor: default;
-  }
-  .copyright-2024 {
-    top: 1020px;
-    left: 250px;
-    font-weight: 300;
-    text-align: center;
-    width: 520px;
-    height: 46px;
-    font-size: 10px;
-
-
-  }
-  .icons8-facebook-50-2 {
-    position: absolute;
-    top: 49px;
-    left: 20px;
-    width: 29px;
-    height: 29px;
-    object-fit: cover;
-    cursor: pointer;
-  }
-  .follow-us {
-    position: absolute;
-    top: 0;
-    left: 20px;
-    letter-spacing: 0.06em;
-    line-height: 25px;
-    font-weight: 500;
-    display: inline-block;
-    width: 144px;
-    height: 28px;
-    cursor: default;
-  }
-  .github-1-icon,
-  .icons8-instagram-50-1-2,
-  .linkedin-1-icon {
-    position: absolute;
-    top: 49px;
-    left: 66px;
-    width: 29px;
-    height: 29px;
-    object-fit: cover;
-    cursor: pointer;
-  }
-  .github-1-icon,
-  .linkedin-1-icon {
-    top: 50px;
-    left: 112px;
-    width: 28px;
-    height: 28px;
-  }
-  .github-1-icon {
-    top: 49px;
-    left: 157px;
-  }
-  .icons8-facebook-50-2-parent {
-    position: absolute;
-    top: 844px;
-    left: 881px;
-    width: 165px;
-    height: 78px;
-  }
-  .ligtasbanko2 {
-    overflow: hidden;
-    top: 200px;
-    width: 100%;
-    position: relative;
-    background-color: var(--color-white);
-    height: 1080px;
-    
-    text-align: left;
-    font-size: var(--font-size-xl);
-    color: var(--color-darkslategray);
-    font-family: var(--font-poppins);
-    margin-left: 200px;
-
-  }
-
-  .ligtasbanko5 {
-    overflow: hidden;
-    top: -900px;
-    width: 100%;
-    position: relative;
-    background-color: var(--color-white);
-    height: 1080px;
-    
-    text-align: left;
-    font-size: var(--font-size-xl);
-    color: var(--color-darkslategray);
-    font-family: var(--font-poppins);
-    margin-left: 200px;
-  }
-  
+  text-align: left;
+  font-size: var(--font-size-xl);
+  color: var(--color-darkslategray);
+  font-family: var(--font-poppins);
+  margin-left: 200px;
+}

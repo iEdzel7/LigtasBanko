@@ -305,3 +305,9 @@ function submitForm() {
       submitButton.disabled = false;
     });
 }
+
+document.getElementById('chatbotIcon').addEventListener('click', () => {
+  alert('Chatbot is opening!');
+  // You can replace the alert with your chatbot function
+});
+

@@ -529,7 +529,6 @@ nav {
 
 .section__text__p1 {
   text-align: center;
-  left: 95px;
 }
 
 .group-parent2 {
@@ -626,7 +625,7 @@ nav {
   width: 100%;
   position: relative;
   background-color: var(--color-white);
-  height: 1080px;
+  height: 200px;
   text-align: center;
   font-size: var(--font-size-smi-6);
   color: var(--color-white);
@@ -683,6 +682,15 @@ nav {
   width: 190px; /* Example width */
   top: -140px;
   left: 390px;
+  /* Add more styles as needed */
+}
+
+.UnreachableImage {
+  position: relative;
+  /* Add your CSS styles here */
+  width: 190px; /* Example width */
+  top: -140px;
+  left: 320px;
   /* Add more styles as needed */
 }
 

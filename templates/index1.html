@@ -9,6 +9,7 @@
   <title>LigtasBanko</title>
   <link rel="stylesheet" href="../static/css/index1.css">
   <link rel="stylesheet" href="../static/css/footer.css">
+  <link rel="stylesheet" href="../static/css/style.css">
 </head>
 <body>
   <nav id="desktop-nav">
@@ -68,17 +69,13 @@
                 <div class="ScreenshotGroup" id="Screenshot" style="display: none; cursor: pointer;">
                   <div class="Screenshot-box" id="uploadLabel">
                     <!-- Input element for uploading a screenshot -->
-                    <form id="uploadForm" action="/upload_file" method="post" enctype="multipart/form-data">
-                      <input type="file" accept="image/jpeg, image/jpg, image/png" name="screenshotUpload" id="screenshotUpload" style="position: absolute; left: -9999px; opacity: 0; ">
-                      <label for="screenshotUpload" style="cursor: pointer;">
-                        <img class="icon6" alt="" src="../static/assets/ss.png" />
-                        <div class="filename-placeholder">Upload Screenshot (jpeg/jpg/png)</div>
-                      </label>
-                      <input type="submit" style="display: none;">
-                    </form>
+                    <input type="file" accept="image/jpeg, image/jpg, image/png" name="screenshotUpload" id="screenshotUpload" style="position: absolute; left: -9999px; opacity: 0; ">
+                    <label for="screenshotUpload" style="cursor: pointer;">
+                      <img class="icon6" alt="" src="../static/assets/ss.png" />
+                      <div class="filename-placeholder">Upload Screenshot (jpeg/jpg/png)</div>
+                    </label>
                   </div>
                 </div>
-
 
 
 
@@ -152,86 +149,115 @@
 
   <script src="{{ url_for('static', filename='scripts/main.js') }}"></script>
   <script>
-  document.getElementById('submitBtn').addEventListener('click', () => {
-    const urlInput = document.getElementById('urlInput').value;
-    const msgInput = document.getElementById('msgInput').value;
-    const ssInput = document.getElementById('screenshotUpload').files[0]; // Accessing the first selected file
-
-    // Determine which input to use
-    const userInput = urlInput || msgInput || ssInput;
-    if (!userInput) {
-      alert('Please enter a URL or message.');
-      return;
-    }
-
-    // Send user input to the server
-    const formData = new FormData();
-    formData.append('user_input', userInput);
-
-    // Append the file input field to the form data if a file is selected
-    if (ssInput) {
-      formData.append('screenshotUpload', ssInput);
-    }
-
-    fetch('/analyze_url', {
-      method: 'POST',
-
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ user_input: userInput })
-    })
-    .then(response => response.json())
-    .then(data => {
-      const resultsContainer = document.getElementById('results');
-      resultsContainer.innerHTML = ''; // Clear previous results
-      data.forEach((result, index) => {
-        const resultDiv = document.createElement('div');
-        resultDiv.classList.add('result-item'); // Add a class to the container div
-
-        // Determine the color based on prediction
-        const confidenceColor = result.prediction === "PHISHING" ? 'red' : 'green';
-
-        // Determine the image source based on prediction
-        const imageSrc = result.prediction === "PHISHING" ? '../static/assets/phish.png' : '../static/assets/SAFE1.png';
-
-        // Determine the image class based on prediction
-        const imageClass = result.prediction === "PHISHING" ? 'PhishingImage' : 'BenignImage';
-
-        resultDiv.innerHTML = `
-            <div class="result-content">
-                <p class="url"><strong>URL:</strong> ${result.url}</p>
-                <div class="ResultAndConfidence" id="ResultAndConfidence">
-                  <p class="prediction" style="color: ${confidenceColor};"> ${result.prediction}</p>
-                  <p class="confidence" style="color: ${confidenceColor};"> ${result.confidence}</p>
-                </div>
-                <img src="${imageSrc}" alt="Image" class="${imageClass}">
-                <ul class="explanation-list">
-                  <li class="important-features"><strong>Most important features:</strong></li>
-                  ${result.explanation.map(explanation => `<li>${explanation}</li>`).join('')}
-                </ul>
-
-                <img src="../static/assets/elvi.png" alt="Image" class="elvi">
-                <p class="completion"><strong></strong> ${result.chat_completion}</p>
-            </div>
-        `;
-
-        resultsContainer.appendChild(resultDiv);
-      });
-
-      // After appending results, adjust the position of ResultAndConfidence
-      const selectedValue = document.getElementById("submissionButton").textContent;
-      if (selectedValue === "Text Message") {
-        const ResultConfidence = document.getElementById('ResultAndConfidence');
-        if (ResultConfidence) {
-          ResultConfidence.style.top = "70px";
-        }
+    document.getElementById('submitBtn').addEventListener('click', () => {
+      const urlInput = document.getElementById('urlInput').value;
+      const msgInput = document.getElementById('msgInput').value;
+      const ssInput = document.getElementById('screenshotUpload').files[0]; // Accessing the first selected file
+    
+      // Determine which input to use
+      const userInput = urlInput || msgInput || ssInput;
+      if (!userInput) {
+        alert('Please enter a URL or message.');
+        return;
       }
-    })
-    .catch(error => {
-      console.error('Error:', error);
+    
+      // Send user input to the server
+      const formData = new FormData();
+      formData.append('user_input', userInput);
+    
+      // Append the file input field to the form data if a file is selected
+      if (ssInput) {
+        formData.append('screenshotUpload', ssInput);
+      }
+    
+      fetch('/analyze_url', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ user_input: userInput })
+      })
+      .then(response => response.json())
+      .then(data => {
+        console.log("Response data:", data);  // Debugging log to inspect the response
+        
+        const resultsContainer = document.getElementById('results');
+        resultsContainer.innerHTML = ''; // Clear previous results
+    
+        // Iterate over the results and check for 'UNREACHABLE'
+        data.forEach((result, index) => {
+          const resultDiv = document.createElement('div');
+          resultDiv.classList.add('result-item'); // Add a class to the container div
+    
+          let confidenceColor, imageSrc, imageClass;
+    
+          // Check for prediction and set appropriate values
+          if (result.prediction === "PHISHING") {
+            confidenceColor = 'red';
+            imageSrc = '../static/assets/phish.png';
+            imageClass = 'PhishingImage';
+          } else if (result.prediction === "BENIGN") {
+            confidenceColor = 'green';
+            imageSrc = '../static/assets/SAFE1.png';
+            imageClass = 'BenignImage';
+          } else if (result.prediction === "UNREACHABLE") {
+            console.log('UNREACHABLE detected');
+            confidenceColor = 'gray'; // Set gray for unreachable
+            imageSrc = '../static/assets/Unreachable.png'; // No image for unreachable
+            imageClass = 'UnreachableImage';
+          } else {
+            console.log('Unknown prediction:', result.prediction);
+          }
+  
+          // Ensure result.explanation is an array, else provide a default message
+          const explanationList = Array.isArray(result.explanation) ? 
+            result.explanation.map(explanation => `<li>${explanation}</li>`).join('') :
+            `<li>No explanation available</li>`; // Default message for non-array explanations
+    
+          resultDiv.innerHTML = `
+              <div class="result-content">
+                  <p class="url"><strong>URL:</strong> ${result.url}</p>
+                  <div class="ResultAndConfidence" id="ResultAndConfidence">
+                    <p class="prediction" style="color: ${confidenceColor};"> ${result.prediction}</p>
+                    <p class="confidence" style="color: ${confidenceColor};"> ${result.confidence}</p>
+                  </div>
+                  ${imageSrc ? `<img src="${imageSrc}" alt="Image" class="${imageClass}">` : ''} <!-- Only display image if there's one -->
+                  <ul class="explanation-list">
+                    <li class="important-features"><strong>Most important features:</strong></li>
+                    ${explanationList}
+                  </ul>
+    
+                  <img src="../static/assets/elvi.png" alt="Image" class="elvi">
+                  <p class="completion"><strong></strong> ${result.chat_completion}</p>
+              </div>
+          `;
+    
+          resultsContainer.appendChild(resultDiv);
+        });
+    
+        // After appending results, adjust the position of ResultAndConfidence
+        const selectedValue = document.getElementById("submissionButton").textContent;
+        if (selectedValue === "Text Message") {
+          const ResultConfidence = document.getElementById('ResultAndConfidence');
+          if (ResultConfidence) {
+            ResultConfidence.style.top = "70px";
+          }
+        }
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
     });
-  });
+    document.getElementById('chatbotIcon').addEventListener('click', () => {
+    // Add functionality, e.g., open chatbot
+    alert('Chatbot icon clicked!');
+});
+
   </script>
+  
+
+  <img src="../static/assets/LigtasBanko-Chatbot-Icon.png" alt="Chatbot Icon" id="chatbotIcon" />
+
+  
 </body>
 </html>

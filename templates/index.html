@@ -131,7 +131,7 @@
         </div>
       
       </section>
-      <section id="services">
+      <section id="services2">
         <br>
         <br>
         <br>
@@ -234,47 +234,41 @@
    
 <!-- NEW -->
 
-    <section id="tools">
-   <br>
-      <p class="section__text__p1">Unleash the power of LigtasBanko's</p>
-      <h1 class="title-tools">Tools</h1>
-      <br>
-      <img src="../static/assets/tools.png" alt="Logo" class ="tools-img"/>
-      <br>
-      <br>
-      <br>
-      <p class="section__text__p1">Join the fight against phishing and unleash the power of our tools to protect yourself and <br> your community from these increasingly sophisticated cyber threats.</p>
-      <div class="ligtasbanko4">
-        <div class="rectangle-parent">
+<section id="tools">
+  <br>
+     <p class="section__text__p1">Unleash the power of LigtasBanko's</p>
+     <h1 class="title-tools">Tools</h1>
+     <br>
+     <img src="../static/assets/tools.png" alt="Logo" class ="tools-img"/>
+     <br>
+     <br>
+     <br>
+     <p class="section__text__p1">Join the fight against phishing and unleash the power of our tools to protect yourself and <br> your community from these increasingly sophisticated cyber threats.</p>
+     <div class="ligtasbanko4">
+       <div class="rectangle-parent">
 
-          <a href="{{ url_for('report_phishing') }}">
-          <div class="group-child"></div>
-          <div class="report-phishing">Report Phishing </div> 
-            </a>
+         <a href="{{ url_for('report_phishing') }}">
+         <div class="group-child"></div>
+         <div class="report-phishing">Report Phishing </div> 
+           </a>
 
-            <!-- index.html -->
-          <a href="{{ url_for('detect_phishing') }}">
-            <div class="group-item"></div>
-            <div class="detect-phishing">Detect Phishing</div>
-          </a>
+           <!-- index.html -->
+         <a href="{{ url_for('detect_phishing') }}">
+           <div class="group-item"></div>
+           <div class="detect-phishing">Detect Phishing</div>
+         </a>
 
-            
+           
 
 
-        </div>
-      </div>
-      <br>
-      
-    </section>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
+       </div>
+     </div>
+     <br>
+     
+   </section>
 
-  
+
+ 
     
     <section id="contact">
     
@@ -352,10 +346,12 @@
           </div>
         </div>
         <div class="terms-and-conditions-container">
-          <p class="home" onclick="window.open('LigtasBanko-TermsandConditions.pdf')">Terms and Conditions</p>
-          <p class="home" onclick="window.open('LigtasBanko-PrivacyPolicy.pdf')">Privacy Policy</p>
-          <p class="home" onclick="window.open('LigtasBanko-CookiePolicy.pdf')">Cookie Policy</p>
+          <a class="a2" href="{{ url_for('static', filename='Docs/LigtasBanko-TermsandConditions.pdf') }}" target="_blank">Terms and Conditions</a>
+          <a class="a2" href="{{ url_for('static', filename='Docs/LigtasBanko-PrivacyPolicy.pdf') }}" target="_blank">Privacy Policy</a>
+          <br>
+          <a class="a2" href="{{ url_for('static', filename='Docs/LigtasBanko-CookiePolicy.pdf') }}" target="_blank">Cookie Policy</a>
         </div>
+               
         <div class="copyright-2024">
           Copyright © 2024 LigtasBanko. All Rights Reserved.
         </div>

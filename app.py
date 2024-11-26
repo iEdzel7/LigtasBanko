@@ -15,6 +15,9 @@ from PIL import Image
 from tkinter import Tk
 from tkinter.filedialog import askopenfilename
 import subprocess
+from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
+import requests
 
 
 # Initialize Flask app
@@ -74,10 +77,10 @@ def explain_url(url):
         return url.count('//') - 1
 
     def count_https(url):
-        return url.count('https')
+        return url.count('https:')
 
     def count_http(url):
-        return url.count('http')
+        return url.count('http:')
 
     def shortening_service(url):
         shorteners = ["bit.ly", "tinyurl", "is.gd", "t.co"]
@@ -179,22 +182,22 @@ def explain_url(url):
         extend_feature_values(benign_feature_values, features, 'count_embed_domain', 'count_embed_domain')
 
     # HTTPS count
-    features['count-https'] = count_https(url)
-    if features['count-https'] > 0:
+    features['count-https:'] = count_https(url)
+    if features['count-https:'] > 0:
         benign_explanations.append(f"The URL uses HTTPS, which is common in benign URLs.")
-        extend_feature_values(benign_feature_values, features, 'count-https', 'count-https')
+        extend_feature_values(benign_feature_values, features, 'count-https:', 'count-https:')
     else:
         phishing_explanations.append(f"The absence of HTTPS in the URL may suggest phishing.")
-        extend_feature_values(phishing_feature_values, features, 'count-https', 'count-https')
+        extend_feature_values(phishing_feature_values, features, 'count-https:', 'count-https:')
 
     # HTTP count
-    features['count-http'] = count_http(url)
-    if features['count-http'] > 0:
+    features['count-http:'] = count_http(url)
+    if features['count-http:'] > 0:
         phishing_explanations.append(f"The presence of HTTP in the URL suggests phishing.")
-        extend_feature_values(phishing_feature_values, features, 'count-http', 'count-http')
+        extend_feature_values(phishing_feature_values, features, 'count-http:', 'count-http:')
     else:
         benign_explanations.append(f"The absence of HTTP in the URL is common in benign URLs.")
-        extend_feature_values(benign_feature_values, features, 'count-http', 'count-http')
+        extend_feature_values(benign_feature_values, features, 'count-http:', 'count-http:')
 
     # Shortening service detection
     features['short_url'] = shortening_service(url)
@@ -324,42 +327,69 @@ def explain_url(url):
 
 
 
+    # Set up Chrome options for Selenium WebDriver
+def test_website(url):
+    chrome_options = Options()
+    chrome_options.add_argument("--headless")  # Run in headless mode (no GUI)
+
+    # Initialize the WebDriver (Make sure ChromeDriver is installed and path is correct)
+    driver = webdriver.Chrome(options=chrome_options)
+
+    try:
+        # Check if the website is reachable using requests
+        response = requests.get(url, timeout=10)
+        if response.status_code >= 400:
+            print(f"The website {url} does not exist.")
+            return "Website not reachable"
+        
+        # Interact with the website (for future use)
+        driver.get(url)
+        print(f"Successfully accessed {url}")
+        return "Website is reachable"
+
+    except requests.RequestException:
+        print(f"The website {url} does not exist.")
+        return "Website not reachable"
+    
+    finally:
+        driver.quit()
+        
 # Calculate summary statistics
-feature_columns = ['use_of_ip', 'count@', 'url_length', 'count_embed_domain', 'count-https',
-                   'count-http', 'short_url', 'count.', 'count-www', 'count%', 'count?',
+feature_columns = ['use_of_ip', 'count@', 'url_length', 'count_embed_domain', 'count-https:',
+                   'count-http:', 'short_url', 'count.', 'count-www', 'count%', 'count?',
                    'count-', 'count=', 'count-digits', 'count-letters', 'abnormal_url',
                     'hostname_length', 'fd_length', 'tld_length']
 
 summary_stats = {
         "benign": {
             "use_of_ip": 0.0,
-            "count@": 0.0018253726802555522,
-            "url_length": 59.172041375114084,
-            "count_embed_domain": 0.00836629145117128,
-            "count-https": 0.9694250076057195,
-            "count-http": 0.03240036507453605,
-            "short_url": 0.002890173410404624,
-            "count.": 2.6162153939762702,
-            "count-www": 0.7846060237298449,
-            "count%": 0.12731974444782476,
-            "count?": 0.10739275935503499,
-            "count-": 1.6574383936720414,
-            "count=": 0.1341648919987831,
-            "count-digits": 1.6904472163066626,
-            "count-letters": 46.96394888956495,
-            "abnormal_url": 0.9995436568299361,
+            "count@": 0.001825,
+            "url_length": 59.172041,
+            "count_embed_domain": 0.008366,
+            "count-https:": 0.968360,
+            "count-http:": 0.032400,
+            "short_url": 0.002890,
+            "count.": 2.616215,
+            "count-www": 0.784606,
+            "count%": 0.127319,
+            "count?": 0.107392,
+            "count-": 1.657438,
+            "count=": 0.134164,
+            "count-digits": 1.690447,
+            "count-letters": 46.963948,
+            "abnormal_url": 0.999543,
             "google_index": 1.0,
-            "hostname_length": 16.64876787344083,
-            "fd_length": 8.52585944630362,
-            "tld_length": 4.313203529053848
+            "hostname_length": 16.648767,
+            "fd_length": 8.525859,
+            "tld_length": 4.313203
         },
         "phishing": {
             "use_of_ip": 0.0016,
             "count@": 0.018,
             "url_length": 57.6232,
             "count_embed_domain": 0.001,
-            "count-https": 0.8821,
-            "count-http": 0.1323,
+            "count-https:": 0.8807,
+            "count-http:": 0.1305,
             "short_url": 0.072,
             "count.": 2.1222,
             "count-www": 0.0587,
@@ -445,20 +475,34 @@ def analyze_url():
     url_features_list = []  # Initialize outside the loop
 
     for url in urls:
+         # Check the website status
+        website_status = test_website(url)  # Check if the website is reachable
+        
         processed_url = preprocess_url(url)
         prediction = model.predict(processed_url)[0][0]
         url_features = explain_url(url)
         url_features_list.append(url_features)
 
         features = {}
-        if prediction > 0.5:
+
+
+        if website_status == "Website not reachable":
+            result = {
+                'url': url,
+                'prediction': 'UNREACHABLE',
+                'confidence': 'N/A',
+                'explanation': 'Website is not reachable.',
+                'chat_completion': "This URL '{url}' is not reachable. The website does not exist or is down."
+            }
+            results.append(result)
+        elif website_status == "Website is reachable" and prediction > 0.5:
             features = explain_url(url)
-            content = f"This text message or URL '{user_input}' is predicted to be phishing. Kindly explain why in 1 paragraph: 1. Explain more what that URL or text message all about. 2. And explain why that URL or text message is considered as phishing. 3. talk in 3rd person 4. don't use her/him. 5. And just go straight to the answer"
+            content = f"This text message or URL '{user_input}' is predicted to be phishing. Kindly explain why in 1 paragraph: 1. Explain more what that URL or text message all about. 2. And explain why that URL or text message is considered as phishing. 3. talk in 1st person and act like a bank security expert 4. don't use her/him. 5. And just go straight to the answer"
             chat_completion = client.chat.completions.create(
                 messages=[{
                     "role": "user", 
                     "content": content}],
-                model="llama3-70b-8192",
+                model="llama-3.2-90b-text-preview",
             )
             phishing_combined = []
 
@@ -496,14 +540,15 @@ def analyze_url():
                 'explanation': phishing_combined_output,
                 'chat_completion': chat_completion.choices[0].message.content
             }
-        else:
+            results.append(result)
+        elif website_status == "Website is reachable" and prediction < 0.5:
             features = explain_url(url)
-            content = f"This text message or URL '{user_input}' is predicted to be benign. Kindly explain why in 1 paragraph: 1. Explain more what that URL or text message all about. 2. And explain why that URL or text message is considered as benign. 3. talk in 3rd person 4. don't use her/him. 5. And just go straight to the answer"
+            content = f"This text message or URL '{user_input}' is predicted to be benign. Kindly explain why in 1 paragraph: 1. Explain more what that URL or text message all about. 2. And explain why that URL or text message is considered as benign. 3. talk in 1st person and act like a bank security expert 4. don't use her/him. 5. And just go straight to the answer"
             chat_completion = client.chat.completions.create(
                 messages=[{
                     "role": "user", 
                     "content": content}],
-                model="llama3-70b-8192",
+                model="llama-3.2-90b-text-preview",
             )
 
             benign_combined = []
@@ -541,9 +586,8 @@ def analyze_url():
                 'explanation': benign_combined_output,
                 'chat_completion': chat_completion.choices[0].message.content
             }
-
-        results.append(result)
-
+            results.append(result)
+    print(results)
     return jsonify(results)
 
 from flask import render_template, redirect, url_for
@@ -593,10 +637,6 @@ def upload_file():
     file.save(file_path)
 
     return jsonify({'status': 'success', 'file_path': file_path})
-
-
-
-
 
 if __name__ == '__main__':
     app.run(debug=True)

@@ -71,12 +71,23 @@ a {
   text-decoration-color: white;
 }
 
+.terms-and-conditions-container .a2 {
+  color: grey; /* Example: Change the text color */
+  font-weight: bold; /* Example: Make the text bold */
+  margin-top: 10px; /* Example: Add spacing */
+}
+
+.terms-and-conditions-container .a2:hover {
+  color: black; /* Example: Change the text color */
+  font-weight: bold; /* Example: Make the text bold */
+  margin-top: 10px; /* Example: Add spacing */
+}
+
 a:hover {
   color: grey;
   text-underline-offset: 1rem;
   text-decoration-color: rgb(181, 181, 181);
 }
-
 
 .logo {
   font-size: 2rem;
@@ -213,7 +224,7 @@ section {
 .lg-img {
   max-height: 65px;
   display: center;
-  margin-right: -1320px;
+  margin-right: -1350px;
   margin-bottom: -85px;
   opacity: 0;
   transform: scale(0) translateZ(-500px) rotateX(30deg) rotateY(30deg);
@@ -451,6 +462,11 @@ section {
 
 #services {
   position: relative;
+  top: -130px;
+}
+#services2 {
+  position: relative;
+  top: -150px;
 }
 
 .services-sub-title {
@@ -497,27 +513,11 @@ article .icon {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* INFO SECTION */
 
 #info {
   position: relative;
+  top: -100px;
   
 }
 
@@ -547,7 +547,7 @@ article .icon {
 
 #tools {
   position: relative;
-  top: -200px;
+  top: -500px;
 }
 
 .color-container {
@@ -603,7 +603,7 @@ article .icon {
 
 #contact {
   position: relative;
-  top: -200px;
+  top: -600px;
 
 }
 
@@ -641,7 +641,7 @@ article .icon {
 /* FOOTER SECTION */
 
 footer {
-  height: 26vh;
+  height: 0vh;
   margin: 0 1rem;
 
 }
@@ -665,6 +665,15 @@ footer {
   margin-left: 80px;
 }
 
+
+#chatbotIcon {
+  width: 50px; /* Adjust width */
+  height: auto; /* Maintain aspect ratio */
+  position: fixed; /* Fix it on the screen */
+  bottom: 20px; /* Adjust placement */
+  right: 20px; /* Adjust placement */
+  cursor: pointer; /* Make it clickable if necessary */
+}
 
 
 

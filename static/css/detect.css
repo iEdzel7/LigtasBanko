@@ -357,13 +357,13 @@ border-color: rgb(163, 163, 163);
   top: 22px;
   left: 101px;
   width: 929px;
-  height: 517.9px;
+  height: 207.9px;
 }
 .detect {
   width: 100%;
   position: relative;
   background-color: var(--color-white);
-  height: 1080px;
+  height: 0px;
   overflow: hidden;
   text-align: center;
   font-size: var(--font-size-smi-6);
@@ -427,7 +427,7 @@ color: white;
 .rectangle-parent7 {
 position: absolute;
 top: 480px;
-left: 373px;
+left: 340px;
 width: 184.8px;
 height: 55.9px;
 text-align: center;
@@ -437,7 +437,7 @@ color: var(--color-white);
 .if-you-suspect {
 position: absolute;
 top: 0;
-left: 100px;
+left: 90px;
 font-size: var(--font-size-5xs);
 letter-spacing: 0.06em;
 line-height: 22.54px;
@@ -636,7 +636,7 @@ margin-left: 20px;
 .i-accept-the {
 font-size: 12px;
 margin-top: -5.5px;
-margin-left: 50px;
+margin-left: 30px;
 color: #292929;
 }
 
@@ -686,12 +686,13 @@ height: 698.9px;
 width: 100%;
 position: relative;
 background-color: var(--color-white);
-height: 1080px;
+height: 680px;
 overflow: hidden;
 text-align: left;
 font-size: var(--font-size-5xs);
 color: var(--color-black);
 font-family: var(--font-poppins);
+left: -80px;
 }
 
 
@@ -741,7 +742,7 @@ width: 165px;
 .by-reporting-phishing-attempts-parent,
 .elvi-1-parent {
 position: absolute;
-top: 76px;
+top: 0px;
 left: 540px;
 width: 384px;
 height: 402px;
@@ -754,9 +755,10 @@ height: 486px;
 }
 .report2 {
 width: 100%;
+top: -100px;
 position: relative;
 background-color: var(--color-white);
-height: 1080px;
+height: 680px;
 overflow: hidden;
 text-align: left;
 font-size: var(--font-size-base);
