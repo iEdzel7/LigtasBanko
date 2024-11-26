@@ -10,6 +10,8 @@
   <link rel="stylesheet" href="../static/css/index1.css">
   <link rel="stylesheet" href="../static/css/footer.css">
   <link rel="stylesheet" href="../static/css/style.css">
+  <!-- Add Google Fonts for Poppins -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
 <body>
   <nav id="desktop-nav">
@@ -248,16 +250,55 @@
         console.error('Error:', error);
       });
     });
-    document.getElementById('chatbotIcon').addEventListener('click', () => {
-    // Add functionality, e.g., open chatbot
-    alert('Chatbot icon clicked!');
-});
+
+  
 
   </script>
   
+    <!-- Chatbot Icon that opens the container -->
+    <img src="../static/assets/LigtasBanko-Chatbot-Icon.png" alt="Chatbot Icon" id="chatbotIcon" />
 
-  <img src="../static/assets/LigtasBanko-Chatbot-Icon.png" alt="Chatbot Icon" id="chatbotIcon" />
-
+    <!-- Chatbot container that will be toggled -->
+    <div class="chatbot-container" id="chatbotContainer">
+      <!-- Set the image with the correct path -->
+      <img src="../static/assets/Chatbot-Background.png" alt="Chatbot Background" id="chatbotBackground">
+  
+      <!-- Place the logo inside the chatbot background -->
+      <div class="logo-white">
+        <img src="../static/assets/logo-white.png" alt="LigtasBankoLogo" id="LoGo">
+      </div>
+  
+      <!-- Place the arrow inside the chatbot background -->
+      <div class="arrow">
+        <img src="../static/assets/arrow.png" alt="LigtasBankoArrow" id="Arrow-white">
+      </div>
+  
+      <!-- Add the text below the logo -->
+      <div class="logo-text">
+        Let Elvi work for you
+      </div>
+  
+      <!-- White square inside the chatbot container -->
+      <div class="white-square"></div>
+      
+      <div class="start-now">
+        Start now
+      </div>
+    </div>
+  
+    <script>
+      // Event listener to toggle chatbot visibility
+      document.getElementById('chatbotIcon').addEventListener('click', () => {
+        const chatbotContainer = document.getElementById('chatbotContainer');
+        
+        // Toggle display between block and none
+        if (chatbotContainer.style.display === 'none' || chatbotContainer.style.display === '') {
+          chatbotContainer.style.display = 'block';
+        } else {
+          chatbotContainer.style.display = 'none';
+        }
+      });
+    </script>
   
 </body>
 </html>

@@ -306,8 +306,17 @@ function submitForm() {
     });
 }
 
-document.getElementById('chatbotIcon').addEventListener('click', () => {
-  alert('Chatbot is opening!');
-  // You can replace the alert with your chatbot function
+// Get elements
+const chatbotIcon = document.getElementById('chatbotIcon');
+const chatbotContainer = document.getElementById('chatbotContainer');
+const arrow = document.getElementById('Arrow');
+
+// Show chatbot container when chatbotIcon is clicked
+chatbotIcon.addEventListener('click', () => {
+    chatbotContainer.style.display = 'block';  // Show the chatbot container
 });
 
+// Hide chatbot container when arrow is clicked
+arrow.addEventListener('click', () => {
+    chatbotContainer.style.display = 'none';  // Hide the chatbot container
+});
