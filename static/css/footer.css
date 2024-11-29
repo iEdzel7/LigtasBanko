@@ -181,3 +181,35 @@
   font-family: var(--font-poppins);
   margin-left: 200px;
 }
+
+
+.ligtasbankoemail1 {
+  overflow: hidden;
+  top: -430px;
+  width: 100%;
+  position: relative;
+  background-color: var(--color-white);
+  height: 1080px;
+  
+  text-align: left;
+  font-size: var(--font-size-xl);
+  color: var(--color-darkslategray);
+  font-family: var(--font-poppins);
+  margin-left: 200px;
+}
+
+.ligtasbankoemail2 {
+  overflow: hidden;
+  top: 850px;
+  width: 100%;
+  position: relative;
+  background-color: var(--color-white);
+  height: 1080px;
+  
+  text-align: left;
+  font-size: var(--font-size-xl);
+  color: var(--color-darkslategray);
+  font-family: var(--font-poppins);
+  margin-left: 100px;
+
+}

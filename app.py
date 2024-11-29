@@ -26,6 +26,13 @@ app.secret_key = '123002'
 UPLOAD_FOLDER = 'uploads'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
+# Set your API key here
+API_KEY = "e77731e153294c278b8f8d1f5ee28684"
+HEADERS = {
+    "hibp-api-key": API_KEY,
+    "User-Agent": "Python Script"
+}
+
 if not os.path.exists(UPLOAD_FOLDER):
     os.makedirs(UPLOAD_FOLDER)
 
@@ -36,6 +43,71 @@ client = Groq(api_key=os.environ.get("gsk_hPIv4ldDQ1egVFBSoCULWGdyb3FYZld7Hhm0EV
 model = load_model('trained_modelCNN.h5')
 with open('tokenizer.pkl', 'rb') as tokenizer_file:
     tokenizer = pickle.load(tokenizer_file)
+
+# Define headers for API requests, including the HIBP API key
+HEADERS = {
+    'User-Agent': 'LigtasBankoApp',
+    'hibp-api-key': 'e77731e153294c278b8f8d1f5ee28684'  # Replace with your actual HIBP API key
+}
+
+# Function to check email breaches
+def check_email_breaches(email, truncate_response=True, include_unverified=True, fetch_all_breaches=False):
+    query_params = []
+    
+    # Ensure full breach data is returned by setting truncateResponse to false
+    if not truncate_response:
+        query_params.append("truncateResponse=false")
+    
+    if not include_unverified:
+        query_params.append("IncludeUnverified=false")
+        
+    query_string = f"?{'&'.join(query_params)}" if query_params else ""
+
+    # Use the URL for checking email breaches
+    url = f"https://haveibeenpwned.com/api/v3/breachedaccount/{email}{query_string}"
+
+    # Define headers with your API key (replace YOUR_API_KEY with your actual key)
+    HEADERS = {
+        "hibp-api-key": "e77731e153294c278b8f8d1f5ee28684"
+    }
+
+    try:
+        response = requests.get(url, headers=HEADERS)
+
+        # If fetch_all_breaches is True, call the breaches API endpoint
+        if fetch_all_breaches:
+            all_breaches_url = "https://haveibeenpwned.com/api/v3/breaches"
+            all_breaches_response = requests.get(all_breaches_url, headers=HEADERS)
+            if all_breaches_response.status_code == 200:
+                all_breaches = all_breaches_response.json()
+                return {"message": "All breaches", "data": all_breaches}
+            else:
+                return {"error": f"Error fetching all breaches: {all_breaches_response.status_code} - {all_breaches_response.text}"}
+
+        # If specific email breaches are found
+        if response.status_code == 404:
+            return {"message": f"No breaches found for {email}."}
+        elif response.status_code == 200:
+            breaches = response.json()
+            results = []
+            
+            # Loop through each breach and retrieve complete data
+            for breach in breaches:
+                results.append({
+                    "name": breach.get("Name", "Unknown Name"),
+                    "domain": breach.get("Domain", "Unknown domain"),
+                    "breach_date": breach.get("BreachDate", "Unknown date"),
+                    "description": breach.get("Description", "No description available."),
+                    "logo": breach.get("LogoPath", "")  # Add LogoPath to each breach
+                })
+            return {"message": "Breaches found", "data": results}
+        else:
+            return {"error": f"Error: {response.status_code} - {response.text}"}
+
+    except Exception as e:
+        return {"error": str(e)}
+    
+    
 
 # Function to preprocess input URL
 def preprocess_url(url):
@@ -502,7 +574,7 @@ def analyze_url():
                 messages=[{
                     "role": "user", 
                     "content": content}],
-                model="llama-3.2-90b-text-preview",
+                model="llama-3.1-70b-versatile",
             )
             phishing_combined = []
 
@@ -548,7 +620,7 @@ def analyze_url():
                 messages=[{
                     "role": "user", 
                     "content": content}],
-                model="llama-3.2-90b-text-preview",
+                model="llama-3.1-70b-versatile",
             )
 
             benign_combined = []
@@ -592,13 +664,75 @@ def analyze_url():
 
 from flask import render_template, redirect, url_for
 
+# Model details
+models = {
+    "mixtral-8x7b-32768": {"name": "Mixtral-8x7b-Instruct-v0.1", "tokens": 32768, "developer": "Mistral"}
+}
+
 @app.route('/')
 def index():
     return render_template('index.html')
 
 @app.route('/index1')
 def index1():
-    return render_template('index1.html')
+    # Initialize chat history and selected model in session
+    if "messages" not in session:
+        session["messages"] = []
+    if "selected_model" not in session:
+        session["selected_model"] = "mixtral-8x7b-32768"  # Default model
+
+    # Get the selected model and token limit
+    selected_model = session["selected_model"]
+    max_tokens = models[selected_model]["tokens"]
+
+    return render_template('index1.html', models=models, selected_model=selected_model, max_tokens=max_tokens)
+
+@app.route('/send_message', methods=['POST'])
+def send_message():
+    try:
+        # Ensure session["messages"] is initialized
+        if "messages" not in session:
+            session["messages"] = []
+
+        # Get the user message and max tokens
+        user_message = request.form['message']
+        max_tokens = int(request.form['max_tokens'])
+        selected_model = session.get("selected_model", "mixtral-8x7b-32768")  # Default model if not set
+        
+        # Example of adding a custom prompt before the user's message
+        prompt = "You are a helpful cybersecurity assistant. Please provide detailed and accurate responses. Make your answers very short, and do not talk about anything else but cybersecurity related and phishing related."
+
+        # Append the prompt to the messages
+        session['messages'].append({"role": "system", "content": prompt})
+
+        # Append user message to session
+        session['messages'].append({"role": "user", "content": user_message})
+
+        # Get the response from the API
+        chat_completion = client.chat.completions.create(
+            model=selected_model,
+            messages=[{"role": m["role"], "content": m["content"]} for m in session["messages"]],
+            max_tokens=max_tokens,
+            stream=True
+        )
+
+        response = ''
+        for chunk in chat_completion:
+            if chunk.choices[0].delta.content:
+                response += chunk.choices[0].delta.content
+
+        # Append assistant's response to session
+        session['messages'].append({"role": "assistant", "content": response})
+
+        return jsonify({'response': response})
+
+    except Exception as e:
+        # Log the error
+        app.logger.error(f"Error in send_message: {e}")
+        return jsonify({'error': str(e)}), 500
+
+
+    
 
 @app.route('/index2')
 def index2():
@@ -611,6 +745,18 @@ def detect_phishing():
 @app.route('/report_phishing')
 def report_phishing():
     return render_template('index2.html')
+
+@app.route("/email_pwn", methods=["GET", "POST"])
+def email_pwn():
+    result = None
+    email = None
+    breaches = None
+    if request.method == "POST":
+        email = request.form["email"]
+        result = check_email_breaches(email, truncate_response=False, include_unverified=True)
+        if "data" in result:
+            breaches = result["data"]
+    return render_template("email.html", result=result, breaches=breaches, email=email)
 
 from threading import Thread
 from flask import current_app

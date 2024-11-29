@@ -6,6 +6,181 @@
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    .chat-box {
+        left: 1100px;
+        top: 230px;
+        width: 400px;
+        height: 500px;
+        border: 1px solid gray;
+        border-radius: 35px;
+        position: fixed;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden; /* Prevent overflow outside of this box */
+        background-color: white;
+    }
+
+    .message-container {
+        flex-grow: 1; /* Ensures it occupies the remaining height */
+        overflow-y: auto; /* Allows scrolling when content overflows */
+        max-height: calc(100% - 60px - 40px); /* Adjust for the space occupied by the textarea */
+        padding-right: 10px; /* Optional: Prevent scroll bar overlap with the messages */
+        box-sizing: border-box; /* Ensure padding doesn't affect height calculation */
+        padding-bottom: 60px; /* Ensure space for last message */
+        background-color: white;
+    }
+
+    .message {
+        margin: 10px 0;
+        word-wrap: break-word; /* Break long words if necessary */
+        overflow-wrap: break-word; /* Ensure text fits in smaller spaces */
+        box-sizing: border-box; /* Include padding/border in element size */
+    }
+
+
+    .user {
+        color: white;
+        font-size: 16px;
+        font-weight: 350;
+        text-align: center;
+        font-family: 'Lexend';
+    }
+
+    .assistant {
+        color: black;
+        font-size: 16px;
+        font-weight: 250;
+        text-align: center;
+        font-family: 'Lexend';
+    }
+
+    textarea {
+        width: 335px; /* Make textarea take full width of the form container */
+        padding: 10px; /* Padding inside textarea */
+        border: 1px solid #19D6BD; /* Border with color matching the form container */
+        border-radius: 30px; /* Rounded corners for the textarea */
+        font-size: 16px; /* Set font size for the text inside textarea */
+        font-family: 'Lexend'; /* Same font family for consistency */
+        resize: none; /* Disable resizing of textarea */
+        text-align: left;
+        height: 30px; /* Adjust height of the textarea */
+        margin: 10px auto; /* Center the textarea */
+        position: absolute; /* Fix position at the bottom of the chat-box */
+        bottom: 10px; /* Distance from the bottom edge of the chat-box */
+        left: 20px; /* Align with the container */
+        background-color: white;
+    } 
+
+    .bot-box {
+        position: relative;
+        top: 10px;
+        left: 120px;
+        transform: translateX(-50%);
+        max-width: 200px;
+        width: auto;
+        height: auto;
+        background-color: #E6E6E6;
+        border-radius: 35px;
+        padding: 10px;
+        box-sizing: border-box;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .user-box {
+        position: relative;
+        top: 10px;
+        left: 270px;
+        transform: translateX(-50%);
+        max-width: 200px;
+        width: auto;
+        height: auto;
+        background-color: #19D6BD;
+        border-radius: 35px;
+        padding: 10px;
+        box-sizing: border-box;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .message.assistant,
+    .message.user {
+        margin: 10px 0;
+        position: relative;
+        width: 100%;
+        text-align: justify;
+    }
+
+    .message p {
+        margin: 0;
+        word-wrap: break-word; /* Ensure the text breaks to fit the box */
+    }
+
+    .top-design {
+        height: 80px;
+        background: linear-gradient(to right, #19D6BD, #0BB8E0);
+        width: 100%;
+        border-top-left-radius: 35px;
+        border-top-right-radius: 35px;
+        flex-shrink: 0; /* Prevent shrinking */
+    }
+
+     /* Styling for the logo */
+    #Elvi-Icon {
+        position: absolute; /* Absolutely position the logo inside the container */
+        top: 38px; /* Vertically center the logo */
+        left: 60px; /* Horizontally center the logo */
+        transform: translate(-50%, -50%); /* Offset by 50% of the logo's size to center it exactly */
+        width: 60px;
+        height: 60px;
+        filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+    }
+
+    /* Styling for the text below the logo */
+    .elvi-text1 {
+        position: absolute;
+        top: 16px; /* Position the text below the logo */
+        left: 146px; /* Horizontally center the text */
+        transform: translateX(-50%); /* Offset by 50% of the text's size to center it exactly */
+        color: white; /* White color for the text */
+        font-size: 17px; /* Font size */
+        font-weight: 250; /* Regular weight */
+        font-family: 'Lexend';
+        text-align: center; /* Center-align the text */
+        width: 520px;
+    }
+    
+    /* Styling for the text below the logo */
+    .elvi-text2 {
+        position: absolute;
+        top: 38px; /* Position the text below the logo */
+        left: 189px; /* Horizontally center the text */
+        transform: translateX(-50%); /* Offset by 50% of the text's size to center it exactly */
+        color: white; /* White color for the text */
+        font-size: 19px; /* Font size */
+        font-weight: 350; /* Regular weight */
+        font-family: 'Lexend';
+        text-align: center; /* Center-align the text */
+        width: 520px;
+    }
+
+    /* Styling for the logo */
+    #Arrow-white-2 {
+        position: absolute; /* Absolutely position the logo inside the container */
+        top: 40px; /* Vertically center the logo */
+        left: 350px; /* Horizontally center the logo */
+        transform: translate(-50%, -50%); /* Offset by 50% of the logo's size to center it exactly */
+        width: 50px;
+        height: 50px;
+        filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+        cursor: pointer;
+        z-index: 1004;
+    }
+  </style>
+
   <title>LigtasBanko</title>
   <link rel="stylesheet" href="../static/css/index1.css">
   <link rel="stylesheet" href="../static/css/footer.css">
@@ -114,6 +289,76 @@
       </div>
     </div>
   </section>
+
+  <!-- Chatbot Icon that opens the container -->
+  <img src="../static/assets/LigtasBanko-Chatbot-Icon.png" alt="Chatbot Icon" id="chatbotIcon" />
+
+  <!-- Chatbot container that will be toggled -->
+  <div class="chatbot-container" id="chatbot-Container" style="display: none;">
+    <!-- Set the image with the correct path -->
+    <img src="../static/assets/Chatbot-Background.png" alt="Chatbot Background" id="chatbotBackground">
+
+    <!-- Place the logo inside the chatbot background -->
+    <div class="logo-white">
+      <img src="../static/assets/logo-white.png" alt="LigtasBankoLogo" id="LoGo">
+    </div>
+
+    <!-- Place the arrow inside the chatbot background -->
+    <div class="arrow">
+      <img src="../static/assets/arrow.png" alt="LigtasBankoArrow" id="Arrow-white">
+    </div>
+
+    <!-- Add the text below the logo -->
+    <div class="logo-text">
+      Let Elvi work for you
+    </div>
+
+    <!-- White square inside the chatbot container -->
+    <div class="white-square"></div>
+    
+    <div class="start-now" id="start-now">
+      Start now
+    </div>
+  </div>
+
+  <div class="chat-box" id="chat-box" style="display: none;">
+    <div class="top-design">
+        <div class="Arrow-white">
+            <img src="../static/assets/Elvi-Icon.png" alt="LigtasBankoElvi-Icon" id="Elvi-Icon">
+          </div>
+
+          <!-- Add the text below the logo -->
+        <div class="elvi-text1">
+            Chat with
+        </div>
+    
+        <!-- Add the text below the logo -->
+        <div class="elvi-text2">
+            LigtasBanko's Elvi
+        </div>
+
+        <!-- Place the elvi icon inside the chatbot background -->
+        <div class="Arrow-white-2">
+            <img src="../static/assets/arrow.png" alt="LigtasBankoElvi-Icon" id="Arrow-white-2">
+        </div>
+
+    </div>
+    <div class="message-container" id="message-container">
+      {% for message in session['messages'] %}
+          {% if message.content != 'test' %}
+              <div class="message {{ message.role }}">
+                  <strong>{{ 'User' if message.role == 'user' else 'Assistant' }}:</strong>
+                  <p>{{ message.content }}</p>
+              </div>
+          {% endif %}
+      {% endfor %}
+   </div>
+   
+
+    <div class="textarea-container">
+        <textarea id="user-message" rows="4" cols="50" placeholder="Enter your message..." onkeydown="checkEnter(event)"></textarea>
+    </div>
+</div>
 
   <footer>
     <div class="ligtasbanko2">
@@ -253,52 +498,104 @@
 
   
 
-  </script>
-  
-    <!-- Chatbot Icon that opens the container -->
-    <img src="../static/assets/LigtasBanko-Chatbot-Icon.png" alt="Chatbot Icon" id="chatbotIcon" />
-
-    <!-- Chatbot container that will be toggled -->
-    <div class="chatbot-container" id="chatbotContainer">
-      <!-- Set the image with the correct path -->
-      <img src="../static/assets/Chatbot-Background.png" alt="Chatbot Background" id="chatbotBackground">
-  
-      <!-- Place the logo inside the chatbot background -->
-      <div class="logo-white">
-        <img src="../static/assets/logo-white.png" alt="LigtasBankoLogo" id="LoGo">
-      </div>
-  
-      <!-- Place the arrow inside the chatbot background -->
-      <div class="arrow">
-        <img src="../static/assets/arrow.png" alt="LigtasBankoArrow" id="Arrow-white">
-      </div>
-  
-      <!-- Add the text below the logo -->
-      <div class="logo-text">
-        Let Elvi work for you
-      </div>
-  
-      <!-- White square inside the chatbot container -->
-      <div class="white-square"></div>
-      
-      <div class="start-now">
-        Start now
-      </div>
-    </div>
-  
-    <script>
-      // Event listener to toggle chatbot visibility
-      document.getElementById('chatbotIcon').addEventListener('click', () => {
-        const chatbotContainer = document.getElementById('chatbotContainer');
-        
-        // Toggle display between block and none
-        if (chatbotContainer.style.display === 'none' || chatbotContainer.style.display === '') {
-          chatbotContainer.style.display = 'block';
-        } else {
-          chatbotContainer.style.display = 'none';
+  // Check if Enter key is pressed
+  function checkEnter(event) {
+            if (event.key === 'Enter' && !event.shiftKey) {
+                event.preventDefault();  // Prevent new line insertion
+                sendMessage();
+            }
         }
+
+        // Send message to server and get response
+        function sendMessage() {
+            const userMessage = document.getElementById('user-message').value;
+            const maxTokens = 8192;  // Fixed token limit for the selected model
+
+            // Append user message inside the user-box
+            const messageContainer = document.getElementById('message-container');
+            const userDiv = document.createElement('div');
+            userDiv.classList.add('message', 'user');
+
+            // Create user-box to enclose the user's message
+            const userBox = document.createElement('div');
+            userBox.classList.add('user-box');
+            userBox.innerHTML = `<p>${userMessage}</p>`;
+
+            // Append user box to the user's message
+            userDiv.appendChild(userBox);
+            messageContainer.appendChild(userDiv);
+
+            // Clear the message box
+            document.getElementById('user-message').value = '';
+
+            // Send to server
+            fetch('/send_message', {
+                method: 'POST',
+                body: new URLSearchParams({
+                    'message': userMessage,
+                    'max_tokens': maxTokens
+                }),
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Append assistant's response inside a white square (bot-box)
+                const assistantDiv = document.createElement('div');
+                assistantDiv.classList.add('message', 'assistant');
+                
+                // Create bot-box to enclose the assistant's response
+                const botBox = document.createElement('div');
+                botBox.classList.add('bot-box');
+                botBox.innerHTML = `<p>${data.response}</p>`;
+
+                // Append bot box to the assistant's message
+                assistantDiv.appendChild(botBox);
+                messageContainer.appendChild(assistantDiv);
+
+                // Scroll to the bottom to show the latest message
+                const chatBox = document.getElementById('chat-box');
+                messageContainer.scrollTop = messageContainer.scrollHeight;
+
+            });
+        }
+
+      const chatbotIcon = document.getElementById('chatbotIcon');
+      const chatbotContainer = document.getElementById('chatbot-Container');
+      const arrow = document.getElementById('Arrow-white');
+      const startNow = document.getElementById('start-now');
+      const chatbotContainer2 = document.getElementById('chat-box');
+      const arrow2 = document.getElementById('Arrow-white-2');
+    
+      chatbotIcon.addEventListener('click', () => {
+        console.log('Chatbot icon clicked');
+        chatbotIcon.style.display = 'none'; // Hide the icon
+        chatbotContainer2.style.display = 'none'; // Hide the container2
+        chatbotContainer.style.display = 'block'; // Show the container
+      });
+    
+      arrow.addEventListener('click', () => {
+        console.log('Arrow clicked');
+        chatbotContainer.style.display = 'none'; // Hide the container
+        chatbotContainer2.style.display = 'none'; // Hide the container-2
+        chatbotIcon.style.display = 'block'; // Show the icon
+      });
+
+      startNow.addEventListener('click', () => {
+        console.log('Start Now clicked');
+        chatbotContainer.style.display = 'none'; // Hide the container
+        chatbotIcon.style.display = 'none'; // Hide the icon
+        chatbotContainer2.style.display = 'block'; // Show the chatbotcontainer-2
+      });
+
+      arrow2.addEventListener('click', () => {
+        console.log('Arrow2 clicked');
+        chatbotContainer.style.display = 'none'; // Hide the container
+        chatbotContainer2.style.display = 'none'; // Hide the container-2
+        chatbotIcon.style.display = 'block'; // Show the icon
       });
     </script>
+    
+
   
 </body>
 </html>

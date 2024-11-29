@@ -1,7 +1,7 @@
 .group-child {
   position: absolute;
   top: 0;
-  left: 265px;
+  left: 150px;
   border-radius: 50px;
   background: linear-gradient(90deg, #0AB5E3 23%, #4452B8);
   width: 205px;
@@ -11,7 +11,7 @@
 .report-phishing {
   position: absolute;
   top: 18px;
-  left: 300px;
+  left: 185px;
   letter-spacing: 0.06em;
   line-height: 25px;
   font-weight: 500;
@@ -24,17 +24,41 @@
 .group-item {
   position: absolute;
   top: 1px;
-  left: 0;
+  left: -90px;
   border-radius: 100px;
   background: linear-gradient(90deg, #0AB5E3 23%, #4452B8);
   width: 205px;
   height: 60px;
   cursor: pointer;
 }
+
+.group-email {
+  position: absolute;
+  top: 1px;
+  left: 390px;
+  border-radius: 100px;
+  background: linear-gradient(90deg, #0AB5E3 23%, #4452B8);
+  width: 205px;
+  height: 60px;
+  cursor: pointer;
+}
+.email-checking {
+  position: absolute;
+  top: 19px;
+  left: 410px;
+  letter-spacing: 0.06em;
+  line-height: 25px;
+  font-weight: 500;
+  display: inline-block;
+  width: 173px;
+  height: 33px;
+  color: white;
+  cursor: pointer;
+}
 .detect-phishing {
   position: absolute;
   top: 19px;
-  left: 33px;
+  left: -60px;
   letter-spacing: 0.06em;
   line-height: 25px;
   font-weight: 500;
