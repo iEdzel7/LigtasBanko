@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>LigtasBanko</title>
+  <link rel="stylesheet" href="../static/css/style.css">
+  <link rel="stylesheet" href="../static/css/global.css">
+  <link rel="stylesheet" href="../static/css/index.css">
+  <link rel="stylesheet" href="../static/css/mediaqueries.css">
+  <link rel="stylesheet" href="../static/css/banko-ligtas1.css">
+  <link rel="stylesheet" href="../static/css/footer.css">
+  <link rel="stylesheet" href="../static/css/why-us.css">
+  <link rel="stylesheet" href="../static/css/detect.css">
+</head>
+<body>
+  <nav id="desktop-nav">
+    <div class="logo">LigtasBanko</div>
+    <div>
+      <ul class="nav-links">
+        <li><a href="#profile">Home</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#info">Info</a></li>
+        <li><a href="#tools">Tools</a></li>
+        <li><a href="#contact">Contact Us</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <nav id="hamburger-nav">
+    <div class="logo">LigtasBanko</div>
+    <div class="hamburger-menu">
+      <div class="hamburger-icon" onclick="toggleMenu()">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <div class="menu-links">
+        <li><a href="#profile" onclick="toggleMenu()">Home</a></li>
+        <li><a href="#services" onclick="toggleMenu()">Services</a></li>
+        <li><a href="#info" onclick="toggleMenu()">Info</a></li>
+        <li><a href="#tools" onclick="toggleMenu()">Tools</a></li>
+        <li><a href="#report" onclick="toggleMenu()">Report</a></li>
+        <li><a href="#contact" onclick="toggleMenu()">Contact Us</a></li>
+      </div>
+    </div>
+  </nav>
+  <footer>
+    <div class="ligtasbankoemail1">
+      <div class="ligtasbankoemail2">ligtasbanko</div>
+      <div class="home-services-info-wrapper">
+        <div class="home-services-info-container">
+          <p class="home"><a href="#profile">Home</a></p>
+          <p class="home"><a href="#services">Services</a></p>
+          <p class="home"><a href="#info">Info</a></p>
+        </div>
+      </div>
+      <div class="tools-report-contact-us-wrapper">
+        <div class="tools-report-contact-container">
+          <p class="home"><a href="#tools">Tools</a></p>
+          <p class="home"><a href="#contact">Contact Us</a></p>
+        </div>
+      </div>
+
+      <div class="terms-and-conditions-container">
+        <a class="a2" href="{{ url_for('static', filename='Docs/LigtasBanko-TermsandConditions.pdf') }}" target="_blank">Terms and Conditions</a>
+        <a class="a2" href="{{ url_for('static', filename='Docs/LigtasBanko-PrivacyPolicy.pdf') }}" target="_blank">Privacy Policy</a>
+        <br>
+        <a class="a2" href="{{ url_for('static', filename='Docs/LigtasBanko-CookiePolicy.pdf') }}" target="_blank">Cookie Policy</a>
+      </div>
+             
+      <div class="copyright-2024">
+        Copyright © 2024 LigtasBanko. All Rights Reserved.
+      </div>
+      <div class="icons8-facebook-50-2-parent">
+        <img class="icons8-facebook-50-2" alt="" src="../static/assets/fb.png" onclick="window.open('https://www.facebook.com/LigtasBanko', '_blank')" />
+        <img class="icons8-instagram-50-1" alt="" src="../static/assets/insta.png" onclick="window.open('https://www.instagram.com/LigtasBanko', '_blank')" />
+      </div>
+    </div>
+  </footer>
+  </script>
+</body>
+</html>

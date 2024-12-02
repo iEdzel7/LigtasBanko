@@ -190,7 +190,11 @@
   position: relative;
   background-color: var(--color-white);
   height: 1080px;
+<<<<<<< HEAD
   
+=======
+  pointer-events: none; 
+>>>>>>> 140566f (Added fixes)
   text-align: left;
   font-size: var(--font-size-xl);
   color: var(--color-darkslategray);
@@ -198,6 +202,14 @@
   margin-left: 200px;
 }
 
+<<<<<<< HEAD
+=======
+.ligtasbankoemail1 a,
+.ligtasbankoemail1 button {
+  pointer-events: auto; 
+}
+
+>>>>>>> 140566f (Added fixes)
 .ligtasbankoemail2 {
   overflow: hidden;
   top: 850px;
