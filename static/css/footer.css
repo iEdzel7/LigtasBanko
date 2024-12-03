@@ -21,7 +21,7 @@
 }
 .home-services-info-wrapper {
   position: absolute;
-  top: 844px;
+  top: 144px;
   left: 424px;
   width: 115px;
   height: 0px;
@@ -39,7 +39,7 @@
 }
 .tools-report-contact-us-wrapper {
   position: absolute;
-  top: 844px;
+  top: 144px;
   left: 601px;
   width: 155px;
   height: 0px;
@@ -47,7 +47,7 @@
 .copyright-2024,
 .terms-and-conditions-container {
   position: absolute;
-  top: 910px;
+  top: 225px;
   left: 0;
   font-size: 12px;
   letter-spacing: 0.06em;
@@ -60,7 +60,7 @@
   cursor: default;
 }
 .copyright-2024 {
-  top: 1020px;
+  top: 320px;
   left: 250px;
   font-weight: 300;
   text-align: center;
@@ -115,14 +115,30 @@
 }
 .icons8-facebook-50-2-parent {
   position: absolute;
-  top: 844px;
+  top: 144px;
   left: 881px;
   width: 165px;
   height: 78px;
 }
 .ligtasbanko2 {
   overflow: hidden;
-  top: 100px;
+  margin-top: 200px;
+  width: 1200px;
+  position:absolute;
+  background-color: var(--color-white);
+  height: 380px;
+  
+  text-align: left;
+  font-size: var(--font-size-xl);
+  color: var(--color-darkslategray);
+  font-family: var(--font-poppins);
+  margin-left: 200px;
+
+}
+
+.ligtasbankoemail {
+  overflow: hidden;
+  margin-top: -300px;
   width: 100%;
   position: relative;
   background-color: var(--color-white);
@@ -138,7 +154,7 @@
 
 .ligtasbanko3 {
   position: relative;
-  top: 820px;
+  top: 120px;
   left: -20px;
   font-size: 32px;
   letter-spacing: 0.06em;
@@ -153,11 +169,11 @@
 
 .ligtasbanko7 {
   overflow: hidden;
-  top: -800px;
-  width: 100%;
+  top: -50px;
+  width: 1200px;
   position: relative;
   background-color: var(--color-white);
-  height: 1080px;
+  height: 380px;
   
   text-align: left;
   font-size: var(--font-size-xl);
@@ -167,13 +183,14 @@
 
 }
 
+
 .ligtasbanko5 {
   overflow: hidden;
-  top: -1080px;
-  width: 100%;
+  top: -480px;
+  width: 1200px;
   position: relative;
   background-color: var(--color-white);
-  height: 1080px;
+  height: 380px;
   
   text-align: left;
   font-size: var(--font-size-xl);
@@ -185,11 +202,11 @@
 
 .ligtasbankoemail1 {
   overflow: hidden;
-  top: -430px;
-  width: 100%;
+  top: 200px;
+  width: 1200px;
   position: relative;
   background-color: var(--color-white);
-  height: 1080px;
+  height: 380px;
   pointer-events: none; 
   text-align: left;
   font-size: var(--font-size-xl);
@@ -197,6 +214,25 @@
   font-family: var(--font-poppins);
   margin-left: 200px;
 }
+
+.ligtasbanko2 {
+  overflow: hidden;
+  margin-top: 200px;
+  width: 1200px;
+  position:absolute;
+  background-color: var(--color-white);
+  height: 380px;
+  
+  text-align: left;
+  font-size: var(--font-size-xl);
+  color: var(--color-darkslategray);
+  font-family: var(--font-poppins);
+  margin-left: 200px;
+
+}
+
+
+
 
 .ligtasbankoemail1 a,
 .ligtasbankoemail1 button {

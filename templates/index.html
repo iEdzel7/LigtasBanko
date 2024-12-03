@@ -6,7 +6,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ligtasbanko</title>
+    <title>LigtasBanko</title>
     <link rel="stylesheet" href="../static/css/style.css">
     <link rel="stylesheet" href="../static/css/global.css">
     <link rel="stylesheet" href="../static/css/index.css">
@@ -180,7 +180,6 @@
       
 
     <section id="info">
-      <br>
 
       <p class="section__text__p1">Let's delve into</p>
       <h1 class="title">Phishing Information</h1>
@@ -247,24 +246,21 @@
      <div class="ligtasbanko4">
        <div class="rectangle-parent">
 
-         <a href="{{ url_for('report_phishing') }}">
-         <div class="group-child"></div>
-         <div class="report-phishing">Report Phishing </div> 
-           </a>
-
-           <!-- index.html -->
-         <a href="{{ url_for('detect_phishing') }}">
-           <div class="group-item"></div>
-           <div class="detect-phishing">Detect Phishing</div>
-         </a>
-
-         <!-- index.html -->
+          <!-- email.html -->
          <a href="{{ url_for('email_pwn') }}">
           <div class="group-email"></div>
           <div class="email-checking">Email PwN Checker</div>
         </a>
+          <!-- index1.html -->
+         <a href="{{ url_for('detect_phishing') }}">
+          <div class="group-item"></div>
+          <div class="detect-phishing">Detect Phishing</div>
+        </a>
 
-           
+         <a href="{{ url_for('report_phishing') }}">
+         <div class="group-child"></div>
+         <div class="report-phishing">Report Phishing </div> 
+           </a>
 
 
        </div>
@@ -277,6 +273,8 @@
  
     
     <section id="contact">
+      <br>
+      <br>
     
     <p class="section__text__p1">Get in touch</p>
     <h1 class="title">Contact Us</h1>

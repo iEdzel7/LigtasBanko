@@ -4,10 +4,13 @@
     <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
     <link rel="shortcut icon" href="../static/assets/logo.png" type="image/x-icon" />
     <link rel="stylesheet" href="../static/css/style.css">
+    <link rel="stylesheet" href="../static/css/footer.css">
+    <link rel="stylesheet" href="../static/css/detect.css">
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <style>
+
         .pwnchecker-info {
             text-align: center;
             font-size: 18px;
@@ -76,6 +79,7 @@
                 left: -20px;
                 background-color: #5B0009;
                 color: white;
+                z-index: 1006;
             }
 
             .breach-item {
@@ -111,7 +115,7 @@
 
             .card {
             text-align: center;
-            background: linear-gradient(to bottom, #30cfd0, #0086d6); /* Gradient inside the box */
+            background: linear-gradient(to bottom, #19D6BD, #0BB8E0); /* Gradient inside the box */
             padding: 40px 20px;
             border-radius: 15px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
@@ -165,6 +169,7 @@
               width: 100%; /* Ensures the header takes full width of its parent */
               text-align: center; /* Aligns text inside the header */
               color: white; /* Explicitly set title text to white */
+              z-index: 1006;
 
             }
 
@@ -172,16 +177,19 @@
               margin-top: 20px;
               width: 60px; /* Adjust the size of the image */
               height: 60px;
+              z-index: 1006;
             }
 
             .pwned-header h1 {
               font-size: 2rem;
               margin: 10px 0;
+              z-index: 1006;
             }
 
             .pwned-header p {
               font-size: 1.2rem;
               margin: 0;
+              z-index: 1006;
             }
 
             .pwned-breach-title {
@@ -212,6 +220,7 @@
               box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
               overflow: hidden;
               box-sizing: border-box;
+              z-index: 1006;
             }
 
             .pwned-breach-title {
@@ -358,6 +367,17 @@
         </form>
     </div>
 
+
+    <div class="ellipse-parent-email">
+      <input type="checkbox" id="circle-checkbox" class="ellipse-div">
+
+      <div class="i-accept-the">
+        I accept the <a class="a2"  style="color: #0bb8e0; text-decoration: underline;"  href="{{ url_for('static', filename='Docs/LigtasBanko-TermsandConditions.pdf') }}" target="_blank">Terms and Conditions</a> and <a class="a2" style="color: #0bb8e0; text-decoration: underline;"    href="{{ url_for('static', filename='Docs/LigtasBanko-PrivacyPolicy.pdf') }}" target="_blank">Privacy Policy.</a>
+      </div>
+    </div>
+
+
+
 <div class="pwned-breach-results {% if breaches %}has-breach{% endif %}">
   {% if breaches %}
       <div class="pwned-header">
@@ -387,41 +407,55 @@
           <p>{{ result.message }}</p>
       {% endif %}
   </div>
-  
-
     <footer>
       <div class="ligtasbankoemail1">
-        <div class="ligtasbankoemail2">ligtasbanko</div>
+        <div class="ligtasbanko3">ligtasbanko</div>
         <div class="home-services-info-wrapper">
           <div class="home-services-info-container">
-            <p class="home"><a href="#profile">Home</a></p>
-            <p class="home"><a href="#services">Services</a></p>
-            <p class="home"><a href="#info">Info</a></p>
+            <p class="home"><a href="{{ url_for('index') }}#profile-id">Home</a></p>
+            <p class="home"><a href="{{ url_for('index') }}#services">Services</a></p>
+            <p class="home"><a href="{{ url_for('index') }}#info">Info</a></p>
           </div>
         </div>
         <div class="tools-report-contact-us-wrapper">
           <div class="tools-report-contact-container">
-            <p class="home"><a href="#tools">Tools</a></p>
-            <p class="home"><a href="#contact">Contact Us</a></p>
+            <p class="home"><a href="{{ url_for('index') }}#tools">Tools</a></p>
+            <p class="home"><a href="{{ url_for('index') }}#contact">Contact Us</a></p>
           </div>
         </div>
-
         <div class="terms-and-conditions-container">
           <a class="a2" href="{{ url_for('static', filename='Docs/LigtasBanko-TermsandConditions.pdf') }}" target="_blank">Terms and Conditions</a>
           <a class="a2" href="{{ url_for('static', filename='Docs/LigtasBanko-PrivacyPolicy.pdf') }}" target="_blank">Privacy Policy</a>
           <br>
           <a class="a2" href="{{ url_for('static', filename='Docs/LigtasBanko-CookiePolicy.pdf') }}" target="_blank">Cookie Policy</a>
         </div>
-               
         <div class="copyright-2024">
           Copyright © 2024 LigtasBanko. All Rights Reserved.
         </div>
         <div class="icons8-facebook-50-2-parent">
-          <img class="icons8-facebook-50-2" alt="" src="../static/assets/fb.png" onclick="window.open('https://www.facebook.com/LigtasBanko', '_blank')" />
-          <img class="icons8-instagram-50-1" alt="" src="../static/assets/insta.png" onclick="window.open('https://www.instagram.com/LigtasBanko', '_blank')" />
+          <img
+            class="icons8-facebook-50-2"
+            alt=""
+            src="../static/assets/fb.png"
+            onclick="window.open('https://www.facebook.com/christinetorres.marasigan')"
+          />
+
+          <div class="follow-us">Follow us</div>
+          <img
+            class="icons8-instagram-50-1-2"
+            alt=""
+            src="../static/assets/ig.png"
+            onclick="window.open('https://www.instagram.com/iedzel/')"
+          />
+          <img class="linkedin-1-icon" alt="" src="../static/assets/linkedin.png" onclick="window.open('https://www.linkedin.com/in/christine-marasigan-0907802a8/')"/>
+  
+          <img class="github-1-icon" alt="" src="../static/assets/github.png" onclick="window.open('https://github.com/Malceid')"/>
         </div>
       </div>
     </footer>
-    </script>
+
+
+
+    <script src="{{ url_for('static', filename='scripts/main.js') }}"></script>
   </body>
 </html>

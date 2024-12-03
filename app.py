@@ -776,6 +776,12 @@ def send_message():
         return jsonify({'error': str(e)}), 500
     
 
+@app.route('/clear_messages', methods=['POST'])
+def clear_messages():
+    # Clear the messages in the session
+    session['messages'] = []
+    return jsonify({'status': 'Messages cleared successfully'})
+
 @app.route('/index2')
 def index2():
     return render_template('index2.html')

@@ -414,9 +414,10 @@
         </div>
       </div>
       <div class="terms-and-conditions-container">
-        <p class="home" onclick="window.open('LigtasBanko-TermsandConditions.pdf')">Terms and Conditions</p>
-        <p class="home" onclick="window.open('LigtasBanko-PrivacyPolicy.pdf')">Privacy Policy</p>
-        <p class="home" onclick="window.open('LigtasBanko-CookiePolicy.pdf')">Cookie Policy</p>
+        <a class="a2" href="{{ url_for('static', filename='Docs/LigtasBanko-TermsandConditions.pdf') }}" target="_blank">Terms and Conditions</a>
+        <a class="a2" href="{{ url_for('static', filename='Docs/LigtasBanko-PrivacyPolicy.pdf') }}" target="_blank">Privacy Policy</a>
+        <br>
+        <a class="a2" href="{{ url_for('static', filename='Docs/LigtasBanko-CookiePolicy.pdf') }}" target="_blank">Cookie Policy</a>
       </div>
       <div class="copyright-2024">
         Copyright © 2024 LigtasBanko. All Rights Reserved.

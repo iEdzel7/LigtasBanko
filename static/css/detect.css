@@ -613,8 +613,21 @@ border: 1px solid var(--color-black);
 width: 15px;
 height: 15px;
 margin-top: -4px;
-margin-left: 20px;
+margin-left: 10px;
 }
+
+.ellipse-div-email {
+  top: 0;
+  cursor: pointer;
+  border-radius: 29px;
+  background-color: var(--color-white);
+  border: 1px solid var(--color-black);
+  
+  width: 15px;
+  height: 15px;
+  margin-top: -4px;
+  margin-left: 10px;
+  }
 
 .ellipse-div::after {
   content: '';
@@ -639,6 +652,13 @@ margin-top: -5.5px;
 margin-left: 30px;
 color: #292929;
 }
+.i-accept-the-email {
+  font-size: 12px;
+  margin-top: -5.5px;
+  margin-left: 30px;
+  color: #292929;
+  }
+
 
 .terms-link {
 color: #0bb8e0;;
@@ -668,6 +688,17 @@ width: 579px;
 height: 23px;
 font-size: var(--font-size-smi-6);
 }
+
+.ellipse-parent-email,
+.group-parent5 {
+position: absolute;
+top: 450px;
+left: 565px;
+width: 579px;
+height: 23px;
+font-size: var(--font-size-smi-6);
+}
+
 .group-parent5 {
 top: 0;
 left: 0;
