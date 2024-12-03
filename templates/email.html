@@ -3,6 +3,7 @@
   <head>
     <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
     <link rel="shortcut icon" href="../static/assets/logo.png" type="image/x-icon" />
+    <link rel="stylesheet" href="../static/css/style.css">
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -13,6 +14,7 @@
             font-weight: 400;
             margin: 20px 0;
             color: #333;
+            margin-top:25px;
             }
 
             .email-container {
@@ -223,6 +225,7 @@
 
             .pwned-breach-item {
               display: flex;
+              text-align: justify;
               align-items: flex-start;
               margin-bottom: 20px;
               padding: 15px;
@@ -231,11 +234,13 @@
               color: white; /* Ensure breach item text is white */
               line-height: 1.4;
               overflow: hidden;
+              font-family: 'Lexend';
             }
 
             .pwned-breach-text {
               display: flex;
               flex-direction: column;
+              
               flex: 1;
               overflow-wrap: break-word;
               word-wrap: break-word;
@@ -275,6 +280,25 @@
               margin-right: 15px;
             }
 
+            .logo-lg-email {
+              width: 50px;
+              height: auto;
+              margin-right: 0;
+              margin-left: 58px;
+            }
+
+            .nav-links {
+              gap: 3rem;
+              list-style: none;
+              font-size: 20px;
+              margin-right: 58px;
+            }
+
+            nav,
+            .nav-links {
+              display: flex;
+            }
+
 
     </style>
     <title>LigtasBanko</title>
@@ -289,14 +313,14 @@
   </head>
   <body>
     <nav id="desktop-nav">
-      <div class="logo">LigtasBanko</div>
+      <a href="{{ url_for('index') }}#profile-id">
+        <img src="../static/assets/logo.png" alt="Logo" class="logo-lg-email">
+          </a>
       <div>
         <ul class="nav-links">
-          <li><a href="#profile">Home</a></li>
-          <li><a href="#services">Services</a></li>
-          <li><a href="#info">Info</a></li>
-          <li><a href="#tools">Tools</a></li>
-          <li><a href="#contact">Contact Us</a></li>
+          <li><a href="#check">Check</a></li>
+          <li><a href="{{ url_for('index1') }}#profile-id">Detect</a></li>
+            <li><a href="{{ url_for('index2') }}#profile-id">Report</a></li>
         </ul>
       </div>
     </nav>
@@ -321,19 +345,15 @@
     </nav>
 
     <div class="pwnchecker-info">
-        Stay Ahead of Data Breaches with<br>
-        PWNChecker by Elvi
+      <p class="section__text__p1" style="font-size: 16px; letter-spacing: 0.06em;">Stay Ahead of Data Breaches with</p>
+        <h1 class="title">PWNChecker by Elvi</h1>
         <br>
         <br>
-        <br>
-        <br>
-        <br>
-        See if it's part of a data breach and take steps to secure your account.
+        <p style="color: #292929; letter-spacing: 0.06em; font-weight: 400; font-size: 15px;">See if it's part of a data breach and take steps to secure your account.</p>
     </div>
-
     <div class="email-container">
         <form action="/email_pwn" method="POST" id="pwnchecker-form">
-            <input type="email" class="email-input" name="email" placeholder="Enter your email address..." required>
+            <input type="email" class="email-input" name="email" style="font-family: 'Poppins';" placeholder="Enter your email address..." required>
             <button type="submit" class="submit-button">Submit</button>
         </form>
     </div>
@@ -342,8 +362,8 @@
   {% if breaches %}
       <div class="pwned-header">
         <img src="../static/assets/ResultNOTSafe-Icon.png" alt="Error Icon">
-        <h1>Oh no! Pwned!</h1>
-        <p style="color: white;">Your data was exposed in <strong>{{ total_breaches }} security breaches</strong>.</p>
+        <h1 style="font-family: 'Poppins'; ">Oh no! Pwned!</h1>
+        <p style="color: white; font-family: 'Lexend';">Your data was exposed in <strong>{{ total_breaches }} security breaches</strong>.</p>
       </div>
       {% for breach in breaches %}
       <ul class="pwned-breach-list">

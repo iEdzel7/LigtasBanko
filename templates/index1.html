@@ -179,6 +179,40 @@
         cursor: pointer;
         z-index: 1004;
     }
+    .completion-style {
+        margin-top: -30px;
+        border: 2px solid #19D6BD;
+        padding: 10px;
+        border-radius: 30px;
+        background: transparent; /* Ensure the inside is transparent */
+        display: flex; /* Use flexbox to align items */
+        align-items: center; /* Vertically align items in the center */
+        position: relative; /* To position the logo inside the div */
+    }
+
+    .explanation-logo {
+        position: absolute;
+        top: 25px; /* Adjust the position of the logo */
+        left: 20px; /* Adjust the position of the logo */
+        width: 50px;
+        height: 50px; /* Adjust if needed */
+    }
+
+    .completion-text {
+        margin-top: 20px;
+        margin-left: 80px; /* Space out the text from the logo */
+        margin-right: 30px;
+        margin-bottom: 30px;
+        font-size: 16px; /* Adjust as needed */
+        color: black; /* Ensure text color is visible */
+        font-family: 'Lexend'; /* Set desired font-family */
+        text-align: justify;
+        flex-grow: 3; /* Allow the text to stretch out to fill available space */
+        white-space: normal; /* Ensure the text wraps as needed */
+        max-width: 100%;
+    }
+
+
   </style>
 
   <title>LigtasBanko</title>
@@ -190,11 +224,14 @@
 </head>
 <body>
   <nav id="desktop-nav">
+    <a href="{{ url_for('index') }}#profile-id">
     <img src="../static/assets/logo.png" alt="Logo" class="logo-lg">
+      </a>
+
     <div class="logo1"></div>
     <div>
         <ul class="nav-links">
-           <li><a href="{{ url_for('index') }}#profile-id">Home</a></li>
+            <li><a href="{{ url_for('email_pwn') }}#profile-id">Check</a></li>
             <li><a href="#detect">Detect</a></li>
             <li><a href="{{ url_for('index2') }}#profile-id">Report</a></li>
         </ul>
@@ -440,46 +477,53 @@
     
           // Check for prediction and set appropriate values
           if (result.prediction === "PHISHING") {
-            confidenceColor = 'red';
-            imageSrc = '../static/assets/phish.png';
-            imageClass = 'PhishingImage';
+              confidenceColor = 'red';
+              imageSrc = '../static/assets/phish.png';
+              imageClass = 'PhishingImage';
+              // No need for inline styles here
           } else if (result.prediction === "BENIGN") {
-            confidenceColor = 'green';
-            imageSrc = '../static/assets/SAFE1.png';
-            imageClass = 'BenignImage';
+              confidenceColor = 'green';
+              imageSrc = '../static/assets/SAFE1.png';
+              imageClass = 'BenignImage';
+              // No need for inline styles here
           } else if (result.prediction === "UNREACHABLE") {
-            console.log('UNREACHABLE detected');
-            confidenceColor = 'gray'; // Set gray for unreachable
-            imageSrc = '../static/assets/Unreachable.png'; // No image for unreachable
-            imageClass = 'UnreachableImage';
+              console.log('UNREACHABLE detected');
+              confidenceColor = 'gray'; // Set gray for unreachable
+              imageSrc = '../static/assets/Unreachable.png'; // No image for unreachable
+              imageClass = 'UnreachableImage';
           } else {
-            console.log('Unknown prediction:', result.prediction);
+              console.log('Unknown prediction:', result.prediction);
           }
-  
+
           // Ensure result.explanation is an array, else provide a default message
           const explanationList = Array.isArray(result.explanation) ? 
-            result.explanation.map(explanation => `<li>${explanation}</li>`).join('') :
-            `<li>No explanation available</li>`; // Default message for non-array explanations
-    
+              result.explanation.map(explanation => `<li>${explanation}</li>`).join('') :
+              `<li>No explanation available</li>`; // Default message for non-array explanations
+
           resultDiv.innerHTML = `
               <div class="result-content">
                   <p class="url"><strong>URL:</strong> ${result.url}</p>
                   <div class="ResultAndConfidence" id="ResultAndConfidence">
-                    <p class="prediction" style="color: ${confidenceColor};"> ${result.prediction}</p>
-                    <p class="confidence" style="color: ${confidenceColor};"> ${result.confidence}</p>
+                      <p class="prediction" style="color: ${confidenceColor};"> ${result.prediction}</p>
+                      <p class="confidence" style="color: ${confidenceColor};"> ${result.confidence}</p>
                   </div>
                   ${imageSrc ? `<img src="${imageSrc}" alt="Image" class="${imageClass}">` : ''} <!-- Only display image if there's one -->
                   <ul class="explanation-list">
-                    <li class="important-features"><strong>Most important features:</strong></li>
-                    ${explanationList}
+                      <li class="important-features"><strong>Most important features:</strong></li>
+                      ${explanationList}
                   </ul>
-    
-                  <img src="../static/assets/elvi.png" alt="Image" class="elvi">
-                  <p class="completion"><strong></strong> ${result.chat_completion}</p>
+
+                  <div class="completion-style">
+                      <img src="../static/assets/explanation-logo.png" alt="Image" class="explanation-logo">
+                      <div class="completion-text">
+                          <strong></strong> ${result.chat_completion}
+                      </div>
+                  </div>
               </div>
           `;
-    
+
           resultsContainer.appendChild(resultDiv);
+
         });
     
         // After appending results, adjust the position of ResultAndConfidence

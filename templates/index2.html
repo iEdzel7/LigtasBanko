@@ -21,11 +21,13 @@
   </head>
   <body>
     <nav id="desktop-nav">
-      <img src="../static/assets/logo.png" alt="Logo" class = "logo-lg">
+      <a href="{{ url_for('index') }}#profile-id">
+        <img src="../static/assets/logo.png" alt="Logo" class="logo-lg">
+          </a>
       <div class="logo1"></div>
       <div>
         <ul class="nav-links">
-          <li><a href="{{ url_for('index') }}#profile-id">Home</a></li>
+          <li><a href="{{ url_for('email_pwn') }}#profile-id">Check</a></li>
           <li><a href="{{ url_for('index1') }}#profile-id">Detect</a></li>
           <li><a href="#report1">Report</a></li>  
         </ul>
