@@ -22,11 +22,17 @@ import json
 import datetime
 import csv
 import json
+from werkzeug.utils import secure_filename
+import logging
+from io import BytesIO
 
 # Initialize Flask app
 app = Flask(__name__)
 app.secret_key = '123002'
+
+# Configure the upload folder
 UPLOAD_FOLDER = 'uploads'
+os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 csv_file = 'Reports.csv'
@@ -514,11 +520,14 @@ from tkinter import Tk
 from tkinter.filedialog import askopenfilename
 import subprocess
 
-def extract_text_from_image(image_path):
-    image = Image.open(image_path)
-    text = pytesseract.image_to_string(image)
-    text = ' '.join(text.split())
+# Function to extract text from an image
+def extract_text_from_image(image):
+    # Ensure the image is in a compatible format for OCR
+    image = image.convert('RGB')  # Convert to RGB in case it's in another mode
+    text = pytesseract.image_to_string(image)  # Extract text using pytesseract
+    text = ' '.join(text.split())  # Clean up extra whitespace
     return text
+
 
 # Function to handle image upload and text extraction
 def handle_image_upload():
@@ -533,34 +542,65 @@ def handle_image_upload():
 
 @app.route('/submission_method', methods=['POST'])
 def set_submission_method():
-    data = request.json
-    submission_method = data.get('submission_method', '')
-    session['submission_method'] = submission_method
-    print("Submission Method:", submission_method)
-    return jsonify({'message': 'Received submission method'})
+    submission_method = request.json.get('submission_method', '')
+    if submission_method:
+        session['submission_method'] = submission_method
+        print(f"Submission Method Set: {submission_method}")
+        return jsonify({'message': 'Submission method updated'})
+    else:
+        return jsonify({'error': 'Invalid submission method'}), 400
 
 
-# Route to handle URL analysis
+
 @app.route('/analyze_url', methods=['POST'])
 def analyze_url():
-    data = request.json
-    submission_methodAnalyze = session.get('submission_method')
-    print("Submission method:", submission_methodAnalyze)
+    # Get inputs from the form data
+    url_input = request.form.get('urlInput')
+    msg_input = request.form.get('msgInput')
+    screenshot_data = request.form.get('screenshotData')
+    file = request.files.get('screenshotUpload')  # Access uploaded file
+    print(f"This is request files: {request.files}")
+    
 
-# Function to extract text from image
-    if submission_methodAnalyze == "Screenshot":
-        extracted_text = handle_image_upload()
-        user_input = extracted_text
-        print("YOU ARE IN SS")
-    elif submission_methodAnalyze == 'URL':
-        user_input = data.get('user_input', '')
-        print("YOU ARE IN URL")
-    else:
-        user_input = data.get('user_input', '')
-        print("YOU ARE IN TEXT MESSAGE")
+    
+    # Initialize user_input to None
+    user_input = None
 
-    print("Final User Input (after extraction):", user_input)
+    # Check if screenshot data is present
+    if screenshot_data:
+        print("Received screenshot extracted text:", screenshot_data)
+        user_input = screenshot_data  # Use the extracted text as user input
+    elif file:  # Process the screenshot file if no extracted text is available
+        try:
+            # Read the image from the file in memory
+            image = Image.open(BytesIO(file.read()))
+            
+            # Extract text from the uploaded image
+            user_input = extract_text_from_image(image)
 
+            if user_input:
+                print("User Input (Screenshot):", user_input)
+            else:
+                return jsonify({'error': 'No text found in the image'}), 400
+
+        except Exception as e:
+            return jsonify({'error': f'Error processing the image: {str(e)}'}), 500
+
+    # Handle URL input if it's provided
+    elif url_input:
+        user_input = url_input
+        print("User Input (URL):", user_input)
+
+    # Handle Message input if it's provided
+    elif msg_input:
+        user_input = msg_input
+        print("User Input (Text Message):", user_input)
+
+    # If no valid user input is found, return an error
+    if not user_input:
+        return jsonify({'error': 'Invalid input type'}), 400
+
+    print("Final User Input:", user_input)
 
     # Extract URLs from the user input
     extractor = URLExtract()
@@ -836,19 +876,22 @@ def handle_image_upload_with_thread():
 
 @app.route('/upload_file', methods=['POST'])
 def upload_file():
+    file = request.files.get('screenshotUpload')
+    
+    if file is None:
+        return jsonify({'message': 'No file named screenshotUpload found in the request.'}), 400
     if 'screenshotUpload' not in request.files:
-        return jsonify({'status': 'error', 'message': 'No file part'}), 400
+        return jsonify({'message': 'No file part'}), 400
 
     file = request.files['screenshotUpload']
     if file.filename == '':
-        return jsonify({'status': 'error', 'message': 'No selected file'}), 400
+        return jsonify({'message': 'No selected file'}), 400
 
-    # Save the file
-    filename = file.filename
-    file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-    file.save(file_path)
-
-    return jsonify({'status': 'success', 'file_path': file_path})
+    # Process the file (e.g., save it or analyze it)
+    # Example: Save the file
+    file.save(f"./uploads/{file.filename}")
+    
+    return jsonify({'message': 'File uploaded successfully', 'filename': file.filename}), 200
 
 
 @app.route("/submit-report", methods=["POST"])

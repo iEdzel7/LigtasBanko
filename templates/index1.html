@@ -19,6 +19,7 @@
         flex-direction: column;
         overflow: hidden; /* Prevent overflow outside of this box */
         background-color: white;
+        z-index: 2002;
     }
 
     .message-container {
@@ -179,7 +180,7 @@
         cursor: pointer;
         z-index: 1004;
     }
-    .completion-style {
+    .completionphishing-style {
         margin-top: -30px;
         border: 2px solid #19D6BD;
         padding: 10px;
@@ -190,27 +191,149 @@
         position: relative; /* To position the logo inside the div */
     }
 
-    .explanation-logo {
-        position: absolute;
-        top: 25px; /* Adjust the position of the logo */
-        left: 20px; /* Adjust the position of the logo */
-        width: 50px;
-        height: 50px; /* Adjust if needed */
+    .completionphishing-container {
+      width: 1200px;
+      margin: 0 auto;
+      margin-left: -100px;
+      margin-bottom: 10px;
+      border: 2px solid #AE0F0F;
+      border-radius: 15px;
+      padding: 20px;
+      position: relative;
+      background-color: white;
     }
 
-    .completion-text {
-        margin-top: 20px;
-        margin-left: 80px; /* Space out the text from the logo */
-        margin-right: 30px;
-        margin-bottom: 30px;
-        font-size: 16px; /* Adjust as needed */
-        color: black; /* Ensure text color is visible */
-        font-family: 'Lexend'; /* Set desired font-family */
-        text-align: justify;
-        flex-grow: 3; /* Allow the text to stretch out to fill available space */
-        white-space: normal; /* Ensure the text wraps as needed */
-        max-width: 100%;
+    .completionphishing-header {
+      position: absolute;
+      top: -25px;
+      left: 20px;
+      font-size: 30px;
+      font-weight: bold;
+      background-color: white;
+      color: #AE0F0F;
+      padding: 0 10px;
     }
+
+    .completionphishing-content {
+      margin-top: 20px;
+      display: flex;
+      align-items: flex-start; /* Align image and text to the top */
+      gap: 20px; /* Space between the image and text */
+    }
+
+    .completionbenign-style {
+        margin-top: -30px;
+        border: 2px solid #19D6BD;
+        padding: 10px;
+        border-radius: 30px;
+        background: transparent; /* Ensure the inside is transparent */
+        display: flex; /* Use flexbox to align items */
+        align-items: center; /* Vertically align items in the center */
+        position: relative; /* To position the logo inside the div */
+    }
+
+    .completionbenign-container {
+        width: 1200px;
+        margin: 0 auto;
+        margin-left: -100px;
+        margin-bottom: 10px;
+        border: 2px solid #19D6BD; /* Updated border color */
+        border-radius: 15px;
+        padding: 20px;
+        position: relative;
+        background-color: white;
+    }
+
+    .completionbenign-header {
+      position: absolute;
+      top: -25px;
+      left: 20px;
+      font-size: 30px;
+      font-weight: bold;
+      background-color: white;
+      color: #19D6BD;
+      padding: 0 10px;
+    }
+
+    .completionbenign-content {
+      margin-top: 20px;
+      display: flex;
+      align-items: flex-start; /* Align image and text to the top */
+      gap: 20px; /* Space between the image and text */
+    }
+
+
+    .completionunknown-style {
+        margin-top: -30px;
+        border: 2px solid #000000;
+        padding: 10px;
+        border-radius: 30px;
+        background: transparent; /* Ensure the inside is transparent */
+        display: flex; /* Use flexbox to align items */
+        align-items: center; /* Vertically align items in the center */
+        position: relative; /* To position the logo inside the div */
+    }
+
+    .completionunknown-container {
+        width: 1200px;
+        margin: 110px auto;
+        margin-left: -100px;
+        margin-bottom: 10px;
+        border: 2px solid #000000; /* Updated border color */
+        border-radius: 15px;
+        padding: 20px;
+        position: relative;
+        background-color: white;
+    }
+
+    .completionunknown-header {
+        position: absolute;
+        top: -25px;
+        left: 20px;
+        font-size: 30px;
+        font-weight: bold;
+        background-color: white;
+        color: #000000;
+        padding: 0 10px;
+    }
+
+    .completionunknown-content {
+        margin-top: 20px;
+        display: flex;
+        align-items: flex-start; /* Align image and text to the top */
+        gap: 20px; /* Space between the image and text */
+    }
+
+
+
+    .completionphishing-image {
+      width: 50px;
+      height: 50px;
+      border-radius: 10px;
+    }
+
+    .completionphishing-text {
+      text-align: justify;
+      font-size: 14px;
+      color: #333;
+      line-height: 1.6;
+      flex-grow: 1; /* Allow the text to fill the remaining space */
+      overflow-wrap: break-word; /* Break long words */
+    }
+
+    #dimmer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Dark semi-transparent background */
+    z-index: 0; /* Place it behind the chatbot but in front of the content */
+    display: none; /* Initially hidden */
+    z-index: 2001;
+}
+
+
 
 
   </style>
@@ -327,6 +450,9 @@
     </div>
   </section>
 
+  <div id="dimmer" style="display:none;"></div>
+
+
   <!-- Chatbot Icon that opens the container -->
   <img src="../static/assets/LigtasBanko-Chatbot-Icon.png" alt="Chatbot Icon" id="chatbotIcon" />
 
@@ -434,37 +560,88 @@
 
   <script src="{{ url_for('static', filename='scripts/main.js') }}"></script>
   <script>
-    document.getElementById('submitBtn').addEventListener('click', () => {
-      const urlInput = document.getElementById('urlInput').value;
-      const msgInput = document.getElementById('msgInput').value;
-      const ssInput = document.getElementById('screenshotUpload').files[0]; // Accessing the first selected file
-    
-      // Determine which input to use
-      const userInput = urlInput || msgInput || ssInput;
-      if (!userInput) {
-        alert('Please enter a URL or message.');
+    let screenshotData = null; // Variable to hold the uploaded screenshot data
+    // Automatically upload the screenshot file when selected
+document.getElementById('screenshotUpload').addEventListener('change', (event) => {
+    const fileInput = event.target;
+    const selectedFile = fileInput.files[0]; // Get the selected file
+
+    if (!selectedFile) {
+        alert('No file selected.');
         return;
-      }
-    
-      // Send user input to the server
-      const formData = new FormData();
-      formData.append('user_input', userInput);
-    
-      // Append the file input field to the form data if a file is selected
-      if (ssInput) {
-        formData.append('screenshotUpload', ssInput);
-      }
-    
-      fetch('/analyze_url', {
+    }
+
+    const formData = new FormData();
+    formData.append('screenshotUpload', selectedFile);
+
+    // Log the contents of FormData to ensure the file is appended correctly
+    console.log('FormData contents:', formData);
+    for (let pair of formData.entries()) {
+      console.log(pair[0] + ': ' + (pair[1].name || pair[1]));
+
+    }
+
+    fetch('/analyze_url', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ user_input: userInput })
-      })
-      .then(response => response.json())
-      .then(data => {
-        console.log("Response data:", data);  // Debugging log to inspect the response
+        body: formData,
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('File uploaded successfully:', data);
+        screenshotData = data;
+    })
+    .catch(error => {
+        console.error('Error uploading file:', error);
+    });
+});
+
+
+
+
+document.getElementById('submitBtn').addEventListener('click', () => {
+    const urlInput = document.getElementById('urlInput').value;
+    const msgInput = document.getElementById('msgInput').value;
+
+    // If a screenshot was uploaded and processed, use the extracted text as the input
+    let ssInput = null;
+    if (screenshotData && screenshotData.extracted_text) {
+        console.log("Both screenshotData and extracted_text are valid:");
+        console.log("Extracted Text: " + screenshotData.extracted_text);
+        ssInput = screenshotData.extracted_text; // Use the extracted text from the uploaded file
+    } else {
+        ssInput = document.getElementById('screenshotUpload').files[0]; // If no extracted text, fall back to the file itself
+    }
+    
+    // Determine which input to use
+    const userInput = urlInput || msgInput || ssInput;
+
+    console.log("This is the user input: " + userInput);
+
+    if (!userInput) {
+        alert('Please enter a URL, message, or upload a screenshot.');
+        return;
+    }
+
+    // Send user input to the server
+    const formData = new FormData();
+    formData.append('user_input', userInput);
+
+    // Append the file input field to the form data if a file is selected
+    if (urlInput) formData.append('urlInput', urlInput);
+    if (msgInput) formData.append('msgInput', msgInput);
+    if (ssInput && typeof ssInput === 'string') {  // Check if ssInput contains extracted text
+        formData.append('screenshotData', ssInput);
+    } else if (ssInput instanceof File) {  // Check if ssInput is the file itself
+        formData.append('screenshotUpload', ssInput);
+    }
+
+    fetch('/analyze_url', {
+        method: 'POST',
+        body: formData,
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("Response data:", data);
         
         const resultsContainer = document.getElementById('results');
         resultsContainer.innerHTML = ''; // Clear previous results
@@ -481,17 +658,112 @@
               confidenceColor = 'red';
               imageSrc = '../static/assets/phish.png';
               imageClass = 'PhishingImage';
-              // No need for inline styles here
+
+              const resultDiv = document.createElement('div');
+              resultDiv.classList.add('result-item');
+
+              const explanationList = Array.isArray(result.explanation)
+                  ? result.explanation.map(explanation => `<li>${explanation}</li>`).join('')
+                  : `<li>No explanation available</li>`;
+
+                  resultDiv.innerHTML = `
+                    <div class="result-content">
+                        <p class="url"><strong>URL:</strong> ${result.url}</p>
+                        <div class="ResultAndConfidence">
+                            <p class="prediction" style="color: ${confidenceColor};">${result.prediction}</p>
+                            <p class="confidence" style="color: ${confidenceColor};">${result.confidence}</p>
+                        </div>
+                        <img src="${imageSrc}" alt="Image" class="${imageClass}">
+                        <ul class="explanation-list">
+                            <li class="important-features"><strong>Most important features:</strong></li>
+                            ${explanationList}
+                        </ul>
+                        <div class="completionphishing-container">
+                            <div class="completionphishing-header">WHY IS IT PHISHING?</div>
+                            <div class="completionphishing-content">
+                                <img src="../static/assets/explanation-logo.png" alt="Image" class="completionphishing-image">
+                                <div class="completionphishing-text">
+                                    <strong>${result.chat_completion}</strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                resultsContainer.appendChild(resultDiv);
           } else if (result.prediction === "BENIGN") {
               confidenceColor = 'green';
               imageSrc = '../static/assets/SAFE1.png';
               imageClass = 'BenignImage';
               // No need for inline styles here
+
+              const resultDiv = document.createElement('div');
+              resultDiv.classList.add('result-item');
+
+              const explanationList = Array.isArray(result.explanation)
+                  ? result.explanation.map(explanation => `<li>${explanation}</li>`).join('')
+                  : `<li>No explanation available</li>`;
+
+                  resultDiv.innerHTML = `
+                    <div class="result-content">
+                        <p class="url"><strong>URL:</strong> ${result.url}</p>
+                        <div class="ResultAndConfidence">
+                            <p class="prediction" style="color: ${confidenceColor};">${result.prediction}</p>
+                            <p class="confidence" style="color: ${confidenceColor};">${result.confidence}</p>
+                        </div>
+                        <img src="${imageSrc}" alt="Image" class="${imageClass}">
+                        <ul class="explanation-list">
+                            <li class="important-features"><strong>Most important features:</strong></li>
+                            ${explanationList}
+                        </ul>
+                        <div class="completionbenign-container">
+                            <div class="completionbenign-header">WHY IS IT SAFE?</div>
+                            <div class="completionbenign-content">
+                                <img src="../static/assets/explanation-logo.png" alt="Image" class="completionphishing-image">
+                                <div class="completionphishing-text">
+                                    <strong>${result.chat_completion}</strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                resultsContainer.appendChild(resultDiv);
           } else if (result.prediction === "UNREACHABLE") {
               console.log('UNREACHABLE detected');
               confidenceColor = 'gray'; // Set gray for unreachable
               imageSrc = '../static/assets/Unreachable.png'; // No image for unreachable
               imageClass = 'UnreachableImage';
+
+              const resultDiv = document.createElement('div');
+              resultDiv.classList.add('result-item');
+
+              const explanationList = Array.isArray(result.explanation)
+                  ? result.explanation.map(explanation => `<li>${explanation}</li>`).join('')
+                  : `<li>No explanation available</li>`;
+
+                  resultDiv.innerHTML = `
+                    <div class="result-content">
+                        <p class="url"><strong>URL:</strong> ${result.url}</p>
+                        <div class="ResultAndConfidence">
+                            <p class="prediction" style="color: ${confidenceColor};">${result.prediction}</p>
+                            <p class="confidence" style="color: ${confidenceColor};">${result.confidence}</p>
+                        </div>
+                        <img src="${imageSrc}" alt="Image" class="${imageClass}">
+                        <ul class="explanation-list">
+                            <li class="important-features"><strong>Most important features:</strong></li>
+                            ${explanationList}
+                        </ul>
+                        <div class="completionunknown-container">
+                            <div class="completionunknown-header">Link not found!</div>
+                            <div class="completionunknown-content">
+                                <img src="../static/assets/explanation-logo.png" alt="Image" class="completionphishing-image">
+                                <div class="completionphishing-text">
+                                    <strong>${result.chat_completion}</strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                resultsContainer.appendChild(resultDiv);
           } else {
               console.log('Unknown prediction:', result.prediction);
           }
@@ -500,28 +772,6 @@
           const explanationList = Array.isArray(result.explanation) ? 
               result.explanation.map(explanation => `<li>${explanation}</li>`).join('') :
               `<li>No explanation available</li>`; // Default message for non-array explanations
-
-          resultDiv.innerHTML = `
-              <div class="result-content">
-                  <p class="url"><strong>URL:</strong> ${result.url}</p>
-                  <div class="ResultAndConfidence" id="ResultAndConfidence">
-                      <p class="prediction" style="color: ${confidenceColor};"> ${result.prediction}</p>
-                      <p class="confidence" style="color: ${confidenceColor};"> ${result.confidence}</p>
-                  </div>
-                  ${imageSrc ? `<img src="${imageSrc}" alt="Image" class="${imageClass}">` : ''} <!-- Only display image if there's one -->
-                  <ul class="explanation-list">
-                      <li class="important-features"><strong>Most important features:</strong></li>
-                      ${explanationList}
-                  </ul>
-
-                  <div class="completion-style">
-                      <img src="../static/assets/explanation-logo.png" alt="Image" class="explanation-logo">
-                      <div class="completion-text">
-                          <strong></strong> ${result.chat_completion}
-                      </div>
-                  </div>
-              </div>
-          `;
 
           resultsContainer.appendChild(resultDiv);
 
@@ -610,33 +860,54 @@
       const startNow = document.getElementById('start-now');
       const chatbotContainer2 = document.getElementById('chat-box');
       const arrow2 = document.getElementById('Arrow-white-2');
-    
+      const dimmer = document.getElementById('dimmer'); // Reference to the dimmer element
+
+      // When the chatbot icon is clicked
       chatbotIcon.addEventListener('click', () => {
-        console.log('Chatbot icon clicked');
-        chatbotIcon.style.display = 'none'; // Hide the icon
-        chatbotContainer2.style.display = 'none'; // Hide the container2
-        chatbotContainer.style.display = 'block'; // Show the container
+          console.log('Chatbot icon clicked');
+          chatbotIcon.style.display = 'none'; // Hide the icon
+          chatbotContainer2.style.display = 'none'; // Hide the second container
+          chatbotContainer.style.display = 'block'; // Show the first container
+          dimmer.style.display = 'block'; // Show the dimmer (dim the rest of the page)
       });
-    
+
+      // When the arrow is clicked (to hide the chatbot container)
       arrow.addEventListener('click', () => {
-        console.log('Arrow clicked');
-        chatbotContainer.style.display = 'none'; // Hide the container
-        chatbotContainer2.style.display = 'none'; // Hide the container-2
-        chatbotIcon.style.display = 'block'; // Show the icon
+          console.log('Arrow clicked');
+          chatbotContainer.style.display = 'none'; // Hide the first container
+          chatbotContainer2.style.display = 'none'; // Hide the second container
+          chatbotIcon.style.display = 'block'; // Show the icon
+          dimmer.style.display = 'none'; // Hide the dimmer (restore the page visibility)
       });
 
+      // When the "Start Now" button is clicked
       startNow.addEventListener('click', () => {
-        console.log('Start Now clicked');
-        chatbotContainer.style.display = 'none'; // Hide the container
-        chatbotIcon.style.display = 'none'; // Hide the icon
-        chatbotContainer2.style.display = 'block'; // Show the chatbotcontainer-2
+          console.log('Start Now clicked');
+          chatbotContainer.style.display = 'none'; // Hide the first container
+          chatbotIcon.style.display = 'none'; // Hide the icon
+          chatbotContainer2.style.display = 'block'; // Show the second container
+          dimmer.style.display = 'block'; // Show the dimmer (dim the rest of the page)
       });
 
+      // When the second arrow is clicked (to hide the chatbot container)
       arrow2.addEventListener('click', () => {
-        console.log('Arrow2 clicked');
-        chatbotContainer.style.display = 'none'; // Hide the container
-        chatbotContainer2.style.display = 'none'; // Hide the container-2
-        chatbotIcon.style.display = 'block'; // Show the icon
+          console.log('Arrow2 clicked');
+          chatbotContainer.style.display = 'none'; // Hide the first container
+          chatbotContainer2.style.display = 'none'; // Hide the second container
+          chatbotIcon.style.display = 'block'; // Show the icon
+          dimmer.style.display = 'none'; // Hide the dimmer (restore the page visibility)
+      });
+
+      // When clicking outside the chatbot icon or container, hide the containers, show the icon, and remove the dimmer
+      document.addEventListener('click', (event) => {
+          if (!chatbotContainer.contains(event.target) && 
+              !chatbotContainer2.contains(event.target) && 
+              !chatbotIcon.contains(event.target)) {
+              chatbotContainer.style.display = 'none';
+              chatbotContainer2.style.display = 'none';
+              chatbotIcon.style.display = 'block';
+              dimmer.style.display = 'none'; // Hide the dimmer
+          }
       });
 
 

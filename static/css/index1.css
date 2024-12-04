@@ -776,6 +776,7 @@ nav {
   top: 230px;
   width: 400px;
   height: 500px;
+  z-index: 2002;
 }
 
 /* Background image */
@@ -783,6 +784,7 @@ nav {
   width: 100%;
   height: 100%;
   border-radius: 35px; /* Adjust the value to control the roundness */
+  z-index: 2002;
 }
 
 /* Styling for the logo */
@@ -849,9 +851,8 @@ nav {
   text-align: center; /* Center-align the text */
   width: 120px;
   cursor: pointer;
-  font-family: 'Lexend'
-  
-  
+  font-family: 'Lexend';
+  z-index: 2002;
   
 }
 
@@ -865,6 +866,7 @@ nav {
   /* Add border properties */
   border: 1px solid gray; /* Black solid border with 2px thickness */
   border-radius: 35px; /* Optional: Adds rounded corners to the border */
+  z-index: 2002;
 }
 
 /* White square inside the chatbot container */
@@ -877,6 +879,7 @@ nav {
   height: 400px; /* Size of the square */
   background-color: white;  /* White background color */
   border-radius: 35px;  /* Optional: Rounded corners for the square */
+  z-index: 2002;
 }
 
 /* White square inside the chatbot container */
@@ -888,6 +891,7 @@ nav {
   width: 400px;  /* Size of the square */
   height: 200px; /* Size of the square */
   background-color: white;  /* White background color */
+  z-index: 2002;
   
 }
 
@@ -916,6 +920,7 @@ nav {
   /* Add border properties */
   border: 1px solid #19D6BD; /* Black solid border with 2px thickness */
   border-radius: 35px; /* Optional: Adds rounded corners to the border */
+  z-index: 2002;
   
 }
 
