@@ -638,7 +638,25 @@
         chatbotContainer2.style.display = 'none'; // Hide the container-2
         chatbotIcon.style.display = 'block'; // Show the icon
       });
-    </script>
+
+
+         // Function to clear messages
+      function clearMessages() {
+          fetch('/clear_messages', {
+              method: 'POST'
+          })
+          .then(response => response.json())
+          .then(data => {
+              console.log('Messages cleared successfully');
+          })
+          .catch(error => {
+              console.error('Error clearing messages:', error);
+          });
+      }
+
+      // Call clearMessages when the page loads
+      window.addEventListener('load', clearMessages); 
+      </script>
     
 
   

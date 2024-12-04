@@ -122,7 +122,7 @@
 }
 .ligtasbanko2 {
   overflow: hidden;
-  margin-top: 200px;
+  margin-top: 400px;
   width: 1200px;
   position:absolute;
   background-color: var(--color-white);
@@ -213,22 +213,6 @@
   color: var(--color-darkslategray);
   font-family: var(--font-poppins);
   margin-left: 200px;
-}
-
-.ligtasbanko2 {
-  overflow: hidden;
-  margin-top: 200px;
-  width: 1200px;
-  position:absolute;
-  background-color: var(--color-white);
-  height: 380px;
-  
-  text-align: left;
-  font-size: var(--font-size-xl);
-  color: var(--color-darkslategray);
-  font-family: var(--font-poppins);
-  margin-left: 200px;
-
 }
 
 

@@ -3,82 +3,72 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Styled Border with Header and Image</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: #f9f9f9;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
 
-  <title>LigtasBanko</title>
-  <link rel="stylesheet" href="../static/css/style.css">
-  <link rel="stylesheet" href="../static/css/global.css">
-  <link rel="stylesheet" href="../static/css/index.css">
-  <link rel="stylesheet" href="../static/css/mediaqueries.css">
-  <link rel="stylesheet" href="../static/css/banko-ligtas1.css">
-  <link rel="stylesheet" href="../static/css/footer.css">
-  <link rel="stylesheet" href="../static/css/why-us.css">
-  <link rel="stylesheet" href="../static/css/detect.css">
+    .info-container {
+      max-width: 600px;
+      margin: 0 auto;
+      border: 2px solid #19D6BD;
+      border-radius: 15px;
+      padding: 20px;
+      position: relative;
+      background-color: white;
+    }
+
+    .info-header {
+      position: absolute;
+      top: -19px;
+      left: 20px;
+      font-size: 30px;
+      font-weight: bold;
+      color: #19D6BD;
+      background-color: white;
+      padding: 0 10px;
+    }
+
+    .info-content {
+      display: flex;
+      align-items: flex-start; /* Align image and text to the top */
+      gap: 20px; /* Space between the image and text */
+    }
+
+    .info-image {
+      width: 50px;
+      height: 50px;
+      border-radius: 10px;
+      flex-shrink: 0; /* Prevent the image from shrinking */
+    }
+    
+    .info-text {
+      text-align: justify;
+      font-size: 14px;
+      color: #333;
+      line-height: 1.6;
+      flex-grow: 1; /* Allow the text to fill the remaining space */
+      overflow-wrap: break-word; /* Break long words */
+    }
+  </style>
 </head>
 <body>
-  <nav id="desktop-nav">
-    <div class="logo">LigtasBanko</div>
-    <div>
-      <ul class="nav-links">
-        <li><a href="#profile">Home</a></li>
-        <li><a href="#services">Services</a></li>
-        <li><a href="#info">Info</a></li>
-        <li><a href="#tools">Tools</a></li>
-        <li><a href="#contact">Contact Us</a></li>
-      </ul>
-    </div>
-  </nav>
-
-  <nav id="hamburger-nav">
-    <div class="logo">LigtasBanko</div>
-    <div class="hamburger-menu">
-      <div class="hamburger-icon" onclick="toggleMenu()">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
-      <div class="menu-links">
-        <li><a href="#profile" onclick="toggleMenu()">Home</a></li>
-        <li><a href="#services" onclick="toggleMenu()">Services</a></li>
-        <li><a href="#info" onclick="toggleMenu()">Info</a></li>
-        <li><a href="#tools" onclick="toggleMenu()">Tools</a></li>
-        <li><a href="#report" onclick="toggleMenu()">Report</a></li>
-        <li><a href="#contact" onclick="toggleMenu()">Contact Us</a></li>
+  <div class="info-container">
+    <div class="info-header">WHY IS IT SAFE?</div>
+    <div class="info-content">
+      <img class="info-image" src="https://via.placeholder.com/50" alt="Icon">
+      <div class="info-text">
+        <b>Lorem ipvi. Elvi is here to guide you through the process of detecting and reportingdsadsadsadsad suspicious emails, URLs, and text messagddddddddddddddddddddddddddsafsdhfgbhjsgbkgkdfges. With Elvi’s , you’ll be empowered to take control of your online security and stay ahead of cyber threats. gfdkjgjkdghjkdshgjkfdhgjksdhgfjkdshgjkshgfs dgjfdshgds</b>
       </div>
     </div>
-  </nav>
-  <footer>
-    <div class="ligtasbankoemail1">
-      <div class="ligtasbankoemail2">ligtasbanko</div>
-      <div class="home-services-info-wrapper">
-        <div class="home-services-info-container">
-          <p class="home"><a href="#profile">Home</a></p>
-          <p class="home"><a href="#services">Services</a></p>
-          <p class="home"><a href="#info">Info</a></p>
-        </div>
-      </div>
-      <div class="tools-report-contact-us-wrapper">
-        <div class="tools-report-contact-container">
-          <p class="home"><a href="#tools">Tools</a></p>
-          <p class="home"><a href="#contact">Contact Us</a></p>
-        </div>
-      </div>
-
-      <div class="terms-and-conditions-container">
-        <a class="a2" href="{{ url_for('static', filename='Docs/LigtasBanko-TermsandConditions.pdf') }}" target="_blank">Terms and Conditions</a>
-        <a class="a2" href="{{ url_for('static', filename='Docs/LigtasBanko-PrivacyPolicy.pdf') }}" target="_blank">Privacy Policy</a>
-        <br>
-        <a class="a2" href="{{ url_for('static', filename='Docs/LigtasBanko-CookiePolicy.pdf') }}" target="_blank">Cookie Policy</a>
-      </div>
-             
-      <div class="copyright-2024">
-        Copyright © 2024 LigtasBanko. All Rights Reserved.
-      </div>
-      <div class="icons8-facebook-50-2-parent">
-        <img class="icons8-facebook-50-2" alt="" src="../static/assets/fb.png" onclick="window.open('https://www.facebook.com/LigtasBanko', '_blank')" />
-        <img class="icons8-instagram-50-1" alt="" src="../static/assets/insta.png" onclick="window.open('https://www.instagram.com/LigtasBanko', '_blank')" />
-      </div>
-    </div>
-  </footer>
-  </script>
+  </div>
 </body>
 </html>

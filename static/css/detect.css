@@ -414,15 +414,20 @@ height: 55.9px;
 }
 .submit2 {
 position: absolute;
-top: 17.1px;
+top: 13.1px;
 left: 50.5px;
 letter-spacing: 0.06em;
 line-height: 22.54px;
 font-weight: 500;
+font-size: 16px;
+font-family: 'Poppins';
 display: inline-block;
 width: 82.1px;
 height: 29.8px;
 color: white;
+background: none;  /* Removes background color */
+border: none;      /* Removes border */
+cursor: pointer;
 }
 .rectangle-parent7 {
 position: absolute;
@@ -466,6 +471,41 @@ width: 19px;
 height: 19px;
 object-fit: cover;
 }
+
+  .text-input {
+    width: calc(100% - 60px); /* Adjust width to fit inside the box */
+    height: 100%;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: 14px;
+    font-family: 'Poppins', sans-serif; /* Font for input text */
+    color: #333; /* Text color */
+    margin-left: 18px;
+    margin-top: 0px;
+  }
+
+  .text-input::placeholder {
+    color: rgba(0, 0, 0, 0.5); /* Placeholder text color */
+    font-size: 14px;
+    letter-spacing: 0.06em;
+  }
+
+.rectangle-parent8 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 440px;
+  height: 56px;
+  border: 1px solid #ccc; /* Border for the input box */
+  border-radius: 28px; /* Rounded corners */
+  background-color: #ffffff; /* Light background */
+  display: flex; /* Use flexbox for alignment */
+  align-items: center;
+  padding-left: 50px; /* Space for the icon */
+  box-sizing: border-box; /* Include padding in width calculation */
+}
+
 .email-address,
 .rectangle-parent8 {
 position: absolute;
@@ -600,7 +640,7 @@ height: 51px;
 .ellipse-div,
 .group-parent7 {
 top: 401px;
-height: 114px;
+height: 64px;
 }
 
 .ellipse-div {

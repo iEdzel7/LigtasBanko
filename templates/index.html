@@ -16,6 +16,14 @@
     <link rel="stylesheet" href="../static/css/why-us.css">
     <link rel="stylesheet" href="../static/css/detect.css">
 
+    <style>
+      .response-message-contact{
+        margin-left: 100px;
+        margin-top: 450px;
+      }
+
+    </style>
+
   </head>
   <body>
     <nav id="desktop-nav">
@@ -272,65 +280,71 @@
 
  
     
-    <section id="contact">
-      <br>
-      <br>
-    
+   <section id="contact">
+    <br>
+    <br>
+  
     <p class="section__text__p1">Get in touch</p>
     <h1 class="title">Contact Us</h1>
     <br>
-    <p class="section__text__p1">We value your feedback and are here to assist with any questions or concerns you may have. <br>Your input helps us improve our services and provide you with the best experience possible. </p>
+    <p class style="margin-left: 230px;";=section__text__p1">We value your feedback and are here to assist with any questions or concerns you may have. <br>Your input helps us improve our services and provide you with the best experience possible. </p>
     <br>
-
-    <form id="contact-us" novalidate> 
+    <form action="/submit-contact" method="POST" enctype="multipart/form-data">
       <div class="contact-us1">
-          <div class="rectangle-parent1">
-              <!-- Name Input -->
-              <div class="group-child4">
-                <img class="personcircle-icon" alt="" src="../static/assets/user.png" />
-                <div class="form-group">
-                  <input type="text" id="nameInput" class="input-rectangle" placeholder="Name" required >
+          <!-- Name Input -->
+          <div class="group-child4">
+              <img class="personcircle-icon" alt="" src="../static/assets/user.png" />
+              <div class="form-group">
+                  <input type="text" name="name" class="input-rectangle" placeholder="Name" required>
                   <label class="form-label">Name</label>
-                </div>
-              </div>
-              <!-- Email Input -->
-              <div class="group-child5">
-                <img class="envelopefill-icon" alt="" src="../static/assets/email.png" />
-                <div class="form-group">
-                  <input type="email" id="emailInput" class="input-rectangle" placeholder="Email" required>
-                  <label class="form-label">Email</label>
-                </div>
-              </div>
-              <!-- Subject Button -->
-              <div class="group-child6">
-                <img class="patchquestionfill-icon" alt="" src="../static/assets/subject.png" />
-                <button id="subjectButton" class="button-rectangle">Select a subject</button>
-                <!-- Dropdown Content -->
-                <div class="options-container" style="display: none;">
-                    <label class="option-label">General Inquiry</label>
-                    <label class="option-label">Services</label>
-                    <label class="option-label">Features</label>
-                    <label class="option-label">Phishing Check Tool</label>
-                    <label class="option-label">Phishing Report Tool</label>
-                </div>
-              </div>
-
-
-              <!-- Message Input -->
-              <div class="group-child7">
-                <img class="chatlefttextfill-icon" alt="" src="../static/assets/message.png" />
-                <div class="form-group">
-                <input type="text" id="messageInput" class="input-rectangle" placeholder="Enter your message" required>
-                <label class="form-label">Enter your message</label>
-                </div>
-            </div>
-              <!-- Submit Button -->
-              <div class="group-child8">
-                  <button type="submit" class="submit">Submit</button>
               </div>
           </div>
+  
+          <!-- Email Input -->
+          <div class="group-child5">
+              <img class="envelopefill-icon" alt="" src="../static/assets/email.png" />
+              <div class="form-group">
+                  <input type="email" name="email" class="input-rectangle" placeholder="Email" required>
+                  <label class="form-label">Email</label>
+              </div>
+          </div>
+  
+          <!-- Subject Button -->
+          <div class="group-child6">
+              <img class="patchquestionfill-icon" alt="" src="../static/assets/subject.png" />
+              <button type="button" id="subjectButton" class="button-rectangle">Select a subject</button>
+              <div class="options-container" style="display: none;">
+                  <label class="option-label" onclick="selectSubject('General Inquiry')">General Inquiry</label>
+                  <label class="option-label" onclick="selectSubject('Services')">Services</label>
+                  <label class="option-label" onclick="selectSubject('Features')">Features</label>
+                  <label class="option-label" onclick="selectSubject('Phishing Check Tool')">Phishing Check Tool</label>
+                  <label class="option-label" onclick="selectSubject('Phishing Report Tool')">Phishing Report Tool</label>
+              </div>
+          </div>
+  
+          <!-- Message Input -->
+          <div class="group-child7">
+              <img class="chatlefttextfill-icon" alt="" src="../static/assets/message.png" />
+              <div class="form-group">
+                  <input type="text" name="message" class="input-rectangle-message" placeholder="Enter your message" required>
+                  <label class="form-label">Enter your message</label>
+              </div>
+          </div>
+  
+          <!-- Submit Button -->
+          <div class="group-child8">
+              <button type="submit" class="submit">Submit</button>
+          </div>
+
+          <!-- Message below the submit button -->
+          {% if message %}
+          <div class="response-message-contact" style="color: {% if success %}#19D6BD{% else %}#AE0F0F{% endif %};">
+            {{ message }}
+          </div>
+          {% endif %}
       </div>
-    </form>
+  </form>
+  
     
   </section>
     <footer>
@@ -382,5 +396,34 @@
     
     </footer>
     <script src="{{ url_for('static', filename='scripts/main.js') }}"></script>
+
+    <script>
+      const data = {
+          name: document.querySelector('input[name="name"]').value,
+          email: document.querySelector('input[name="email"]').value,
+          subject: selectedSubject,  // assuming you have a variable to store the selected subject
+          message: document.querySelector('input[name="message"]').value,
+      };
+
+      fetch("/submit-contact", {
+          method: "POST",
+          headers: {
+              "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+      })
+      .then((response) => response.json())  // Ensure to parse the response as JSON
+      .then((data) => {
+          // Handle success or failure based on the response
+          alert(data.message);
+      })
+      .catch((error) => {
+          alert("Error submitting report.");
+          console.error(error);
+      });
+
+
+    </script>
+  
   </body>
 </html>

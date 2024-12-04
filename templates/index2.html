@@ -1,5 +1,3 @@
-<!-- REPORT-->
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -17,6 +15,72 @@
     <link rel="stylesheet" href="../static/css/footer.css">
     <link rel="stylesheet" href="../static/css/why-us.css">
     <link rel="stylesheet" href="../static/css/detect.css">
+
+    <style>
+      .response-message{
+        margin-top: 550px;
+        margin-left:310px;
+      }
+      .input-container {
+        position: relative;
+        width: 300px; /* Adjust the width as needed */
+        height: 50px; /* Height of the input box */
+        margin: 10px 0;
+      }
+
+      .input-background {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-color: #f0f0f0; /* Light gray background */
+        border-radius: 8px; /* Rounded corners */
+        z-index: 1;
+      }
+
+      .text-input {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        padding: 0 10px 0 40px; /* Add padding to account for the icon */
+        font-size: 16px;
+        border: none;
+        outline: none;
+        border-radius: 8px;
+        background: transparent;
+        z-index: 3;
+        font-family: 'Poppins', sans-serif; /* Use the desired font */
+      }
+
+      .text-input::placeholder {
+        color: #aaa; /* Placeholder text color */
+      }
+
+      .input-icon {
+        position: absolute;
+        top: 50%;
+        left: 10px;
+        transform: translateY(-50%);
+        width: 24px; /* Icon width */
+        height: 24px; /* Icon height */
+        z-index: 2;
+      }
+
+      .dropdown {
+        left: -50px;
+        top: -29px;
+        position: relative;
+        width: 440px;
+      }
+
+      .option-label:hover {
+        background-color: #f0f0f0;
+        color: #000;
+      }
+
+
+    </style>
 
   </head>
   <body>
@@ -37,99 +101,110 @@
 
 <!-- REPORT-->
 
-    <section id="report1">
-      <p class="section__text__p1">Protect Yourself from Devastating Attacks</p>
-      <h1 class="title">Phishing Report</h1>
-      <div class="report1">
-        <div class="reporters-information-parent">
-          <div class="reporters-information">Reporter’s Information:</div>
-          <div class="phishing-details">Phishing Details:</div>
-          <div class="phishing-details">Phishing Details:</div>
-          <div class="attach-evidence">Attach Evidence:</div>
-          <div class="group-parent5">
-            <div class="rectangle-parent7">
-              <div class="group-child14"></div>
-              <div class="submit2">Submit</div>
+<section id="report1">
+  <p class="section__text__p1">Protect Yourself from Devastating Attacks</p>
+  <h1 class="title">Phishing Report</h1>
+  <div class="report1">
+    <div class="reporters-information-parent">
+      <form action="/submit-report" method="POST" enctype="multipart/form-data">
+        <div class="reporters-information">Reporter’s Information:</div>
+        <div class="phishing-details">Phishing Details:</div>
+        <div class="phishing-details">Phishing Details:</div>
+        <div class="attach-evidence">Attach Evidence:</div>
+        <div class="group-parent5">
+          <div class="rectangle-parent7">
+            <div class="group-child14"></div>
+            <button type="submit" class="submit2">Submit</button>
+          </div>
+          <!-- Message below the submit button -->
+          {% if message %}
+          <div class="response-message" style="color: {% if success %}#19D6BD{% else %}#AE0F0F{% endif %};">
+            {{ message }}
+          </div>
+          {% endif %}
+          
+
+          <div class="if-you-suspect">
+            If you suspect you have received a phishing email, it's crucial to report it to our security team. To submit a report, please provide the following details:
+          </div>
+          <div class="group-parent6">
+            <div class="rectangle-parent8">
+              <div class="group-child15"></div>
+              <img
+                class="method-1-icon1"
+                alt="User Icon"
+                src="../static/assets/user.png"
+              />
+              <input
+                type="text"
+                class="text-input"
+                name="reporter_name"
+                placeholder="Name"
+                required
+              />
             </div>
-            <div class="if-you-suspect">
-              If you suspect you have received a phishing email, it's crucial to
-              report it to our security team. To submit a report, please provide
-              the following details:
+            <div class="rectangle-parent9">
+              <div class="group-child15"></div>
+              <img
+                class="method-1-icon1"
+                alt=""
+                src="../static/assets/email.png"
+              />
+              <input
+                type="email"
+                class="text-input"
+                name="reporter_email"
+                placeholder="Email address"
+                required
+              />
             </div>
-            <div class="group-parent6">
-              <div class="rectangle-parent8">
-                <div class="group-child15"></div>
-                <div class="email-address">Name</div>
-                <img
-                  class="method-1-icon1"
-                  alt=""
-                  src="../static/assets/user.png"
-                />
-              </div>
-              <div class="rectangle-parent9">
-                <div class="group-child15"></div>
-                <div class="email-address">Email address</div>
-                <img
-                  class="method-1-icon1"
-                  alt=""
-                  src="../static/assets/email.png"
-                />
-              </div>
-            </div>
-            <div class="group-wrapper1">
-              <div class="rectangle-parent8">
-                <div class="group-child15"></div>
-                <div class="email-address">Type of Phishing</div>
-                <div class="options-container" style="display: none;">
-                  <label class="option-label">URL</label>
-                  <label class="option-label">Message</label>
-                  <label class="option-label">Screenshot</label>
-              </div>
-                <img
-                  class="method-1-icon1"
-                  alt=""
-                  src="../static/assets/subject.png"
-                />
-              </div>
-            </div>
-            <div class="group-parent7">
-              <div class="rectangle-parent11">
-                <div class="group-child18"></div>
-                <div class="paste-url">Paste URL</div>
-                <img
-                  class="method-1-icon4"
-                  alt=""
-                  src="../static/assets/link.png"
-                />
-              </div>
-              </div>
-              <div class="ellipse-parent">
-                <input type="checkbox" id="circle-checkbox" class="ellipse-div">
-        
-                <div class="i-accept-the">
-                  I accept the <a class="a2"  style="color: #0bb8e0; text-decoration: underline;"  href="{{ url_for('static', filename='Docs/LigtasBanko-TermsandConditions.pdf') }}" target="_blank">Terms and Conditions</a> and <a class="a2" style="color: #0bb8e0; text-decoration: underline;"    href="{{ url_for('static', filename='Docs/LigtasBanko-PrivacyPolicy.pdf') }}" target="_blank">Privacy Policy.</a>
+          </div>
+          <div class="group-wrapper1">
+            <div class="rectangle-parent8">
+              <div class="dropdown">
+                <div class="group-child15" onclick="toggleDropdown()"></div>
+                <div class="email-address" id="dropdown-selected" onclick="toggleDropdown()">Type of Phishing</div>
+                <div class="options-container" id="dropdown-options" style="display: none;">
+                  <label class="option-label" onclick="selectOption(this)">URL</label>
+                  <label class="option-label" onclick="selectOption(this)">Message</label>
+                  <label class="option-label" onclick="selectOption(this)">Screenshot</label>
                 </div>
               </div>
-
-              
-    </section>
-
-              <!--
-              <div class="group-child19"></div>
-              <div class="paste-message">Paste message</div>
-              <img class="method-1-icon5" alt="" src="assets/message.png" />
-  
-              <div class="rectangle-parent12">
-                <div class="group-child18"></div>
-                <div class="paste-url">Upload Screenshot</div>
-                <img
-                  class="method-1-icon4"
-                  alt=""
-                  src="assets/ss.png"
-                />
-              </div>
+              <img
+                class="method-1-icon1"
+                alt=""
+                src="../static/assets/subject.png"
+              />
             </div>
-            -->
+          </div>
+          <div class="group-parent7">
+            <div class="rectangle-parent11">
+              <div class="group-child18"></div>
+              <img
+                class="method-1-icon4"
+                alt=""
+                src="../static/assets/link.png"
+              />
+              <input
+                type="url"
+                class="text-input"
+                name="phishing_url"
+                placeholder="Paste URL"
+              />
+            </div>
+          </div>
+          <div class="ellipse-parent">
+            <input type="checkbox" id="circle-checkbox" class="ellipse-div" name="accept_terms" required />
+            <div class="i-accept-the">
+              I accept the <a class="a2" style="color: #0bb8e0; text-decoration: underline;" href="{{ url_for('static', filename='Docs/LigtasBanko-TermsandConditions.pdf') }}" target="_blank">Terms and Conditions</a> and <a class="a2" style="color: #0bb8e0; text-decoration: underline;" href="{{ url_for('static', filename='Docs/LigtasBanko-PrivacyPolicy.pdf') }}" target="_blank">Privacy Policy.</a>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
 
 <section id = "report">
 
@@ -163,7 +238,17 @@
   </div>
 </div>
   </section>
-    
+    <!-- Modal Structure -->
+<div id="responseModal" class="modal" style="display:none;">
+  <div class="modal-content">
+      <h4>Response</h4>
+      <p id="modalMessage"></p>
+  </div>
+  <div class="modal-footer">
+      <button class="btn" id="closeModalBtn">Close</button>
+  </div>
+</div>
+
     <footer>
       <div class="ligtasbanko7">
         <div class="ligtasbanko3">ligtasbanko</div>
@@ -212,6 +297,96 @@
     </footer>
     
     <script src="{{ url_for('static', filename='scripts/main.js') }}"></script>
+
+
+    <script>
+      // Toggle Dropdown Visibility
+      function toggleDropdown() {
+        const optionsContainer = document.getElementById("dropdown-options");
+        optionsContainer.style.display =
+          optionsContainer.style.display === "none" ? "block" : "none";
+      }
+    
+      // Select Dropdown Option
+      function selectOption(label) {
+        const dropdownSelected = document.getElementById("dropdown-selected");
+        dropdownSelected.innerText = label.innerText; // Set the selected option
+        toggleDropdown(); // Hide dropdown after selection
+      }
+    
+      // Optional: Close dropdown if clicked outside
+      document.addEventListener('click', function (e) {
+        const dropdown = document.querySelector('.dropdown');
+        const optionsContainer = document.getElementById('dropdown-options');
+        if (!dropdown.contains(e.target)) {
+          optionsContainer.style.display = 'none';
+        }
+      });
+    
+      // Submit Form
+        function submitForm(event) {
+          event.preventDefault(); // Prevent the default form submission behavior (page reload)
+
+          const name = document.getElementById("name").value;
+          const email = document.getElementById("email").value;
+          const phishingType = document.getElementById("dropdown-selected").innerText;
+          const url = document.getElementById("url").value;
+          const termsAccepted = document.getElementById("circle-checkbox").checked;
+
+          // Validate Input
+          if (!name || !email || phishingType === "Type of Phishing" || !url || !termsAccepted) {
+            alert("Please fill all fields and accept the terms.");
+            return;
+          }
+
+          // Prepare Data for Submission
+          const data = {
+            name,
+            email,
+            phishingType,
+            url,
+          };
+
+          // Send Data to Backend
+          fetch("/submit-report", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data),
+          })
+            .then((response) => response.text())  // Change to text to receive HTML
+            .then((htmlContent) => {
+              // Insert the modal HTML into the document
+              document.body.insertAdjacentHTML('beforeend', htmlContent);
+              
+              // Open the modal using Bootstrap's modal method
+              $('#responseModal').modal('show');
+
+              // Attach the close modal event
+              document.getElementById('closeModalBtn').addEventListener('click', function() {
+                $('#responseModal').modal('hide');
+              });
+            })
+            .catch((error) => {
+              // Show error modal if something goes wrong
+              alert("Error submitting report.");
+              console.error(error);
+            });
+        }
+    
+      // Open modal function
+      function openModal(message) {
+        document.getElementById('modalMessage').textContent = message;
+        document.getElementById('responseModal').style.display = 'block';
+      }
+    
+      // Close modal function
+      document.getElementById('closeModalBtn').addEventListener('click', function() {
+        document.getElementById('responseModal').style.display = 'none';
+      });
+</script>
+
+    
   </body>
 </html>
-

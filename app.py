@@ -19,13 +19,19 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 import requests
 import json
-
+import datetime
+import csv
+import json
 
 # Initialize Flask app
 app = Flask(__name__)
 app.secret_key = '123002'
 UPLOAD_FOLDER = 'uploads'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
+csv_file = 'Reports.csv'
+
+csv_file = "Contact.csv"
 
 # Set your API key here
 API_KEY = "e77731e153294c278b8f8d1f5ee28684"
@@ -523,6 +529,7 @@ def handle_image_upload():
         return extracted_text
     else:
         return None
+    
 
 @app.route('/submission_method', methods=['POST'])
 def set_submission_method():
@@ -842,6 +849,69 @@ def upload_file():
     file.save(file_path)
 
     return jsonify({'status': 'success', 'file_path': file_path})
+
+
+@app.route("/submit-report", methods=["POST"])
+def submit_report():
+    # Get the data from the form
+    name = request.form.get("reporter_name")
+    email = request.form.get("reporter_email")
+    phishing_type = request.form.get("phishing_type")
+    url = request.form.get("phishing_url")
+
+    # Validate input data
+    if not name or not email or phishing_type == "Type of Phishing" or not url:
+        return render_template("index2.html", message="Report not submitted. Missing or invalid required fields.", success=False)
+
+    # Prepare data to write to CSV
+    report = {
+        "name": name,
+        "email": email,
+        "phishingType": phishing_type,
+        "url": url,
+    }
+
+    # Append data to the CSV file
+    try:
+        with open(csv_file, mode='a', newline='') as file:
+            writer = csv.DictWriter(file, fieldnames=["name", "email", "phishingType", "url"])
+            writer.writerow(report)
+        return render_template("index2.html", message="Report submitted successfully!", success=True)
+    except Exception as e:
+        print(f"Error saving the report: {e}")
+        return render_template("index2.html", message="Error saving the report.", success=False)
+
+@app.route("/submit-contact", methods=["POST"])
+def submit_contact():
+    # Get the data from the form submission
+    name = request.form.get("name")
+    email = request.form.get("email")
+    subject = request.form.get("subject")
+    message = request.form.get("message")
+
+    # Validate input data
+    if not name or not email or subject == "Select a subject" or not message:
+        return render_template("index.html", message="Submission not successful. Missing or invalid required fields.", success=False)
+
+    # Prepare data to write to CSV
+    contact_data = {
+        "name": name,
+        "email": email,
+        "subject": subject,
+        "message": message,
+    }
+
+    # Append data to the CSV file
+    try:
+        with open(csv_file, mode='a', newline='') as file:
+            writer = csv.DictWriter(file, fieldnames=["name", "email", "subject", "message"])
+            writer.writerow(contact_data)
+        return render_template("index.html", message="Your message has been submitted successfully!", success=True)
+    except Exception as e:
+        print(f"Error saving the contact data: {e}")
+        return render_template("index.html", message="Error saving the message.", success=False)
+
+
 
 if __name__ == '__main__':
     app.run(debug=True)

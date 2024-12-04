@@ -1,10 +1,11 @@
 Flask==3.0.0
 tensorflow==2.16.1
 tld==0.13
-groq==0.8.0
+groq==0.13.0
 urlextract==1.9.0
 numpy==1.26.1
 pytesseract==0.3.10
 pillow==10.2.0
 selenium==4.23.1
 requests==2.31.0
+webdriver-manager==4.0.2

@@ -106,14 +106,15 @@
 /* Center the form on the page */
 .contact-us1 {
   width: 100%;
-  position: relative;
+  position: absolute;
   background-color: var(--color-white);
+  
   height: 0px;
   text-align: left;
   font-size: var(--font-size-4xs-8);
   color: var(--color-gray);
   font-family: var(--font-poppins);
-  margin-left: -35px;
+  margin-left: 300px;
   margin-bottom: 20px;
 }
 
@@ -261,7 +262,17 @@
   width: 100px;
 }
 
-
+/* Input and textarea styles */
+.input-rectangle-message {
+  flex: 1;
+  padding: 10px;
+  margin-left: 10px;
+  margin-bottom: 65px;
+  font-size: 16px;
+  border: none;
+  outline: none;
+  width: 100px;
+}
 .submit {
   font-size: 16px;
   color: white;
