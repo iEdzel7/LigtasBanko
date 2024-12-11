@@ -44,7 +44,7 @@
         color: white;
         font-size: 16px;
         font-weight: 350;
-        text-align: center;
+        text-align: left;
         font-family: 'Lexend';
     }
 
@@ -93,26 +93,27 @@
     .user-box {
         position: relative;
         top: 10px;
-        left: 270px;
-        transform: translateX(-50%);
-        max-width: 200px;
-        width: auto;
-        height: auto;
+        left: 320px; /* Center align horizontally (adjusted for responsiveness) */
+        transform: translateX(-50%); /* Center adjust */
+        max-width: 80%; /* Allow dynamic resizing with a sensible max-width */
+        width: auto; /* Let width adjust to content */
+        height: auto; /* Let height adjust to content */
         background-color: #19D6BD;
-        border-radius: 35px;
-        padding: 10px;
+        border-radius: 20px; /* Adjusted for a more balanced look */
+        padding: 10px 15px; /* Increased horizontal padding for better readability */
         box-sizing: border-box;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        display: inline-block; /* Ensure the box wraps tightly around content */
+        text-align: right; /* Align text to the right */
+        word-wrap: break-word; /* Break long words or URLs */
     }
+
 
     .message.assistant,
     .message.user {
         margin: 10px 0;
         position: relative;
         width: 100%;
-        text-align: justify;
+        text-align: left;
     }
 
     .message p {
@@ -919,6 +920,7 @@ style.innerHTML = `
             // Append user box to the user's message
             userDiv.appendChild(userBox);
             messageContainer.appendChild(userDiv);
+
 
             // Clear the message box
             document.getElementById('user-message').value = '';
