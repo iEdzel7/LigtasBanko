@@ -178,7 +178,6 @@ border-color: rgb(163, 163, 163);
   font-weight: 500;
   display: inline-block;
   width: 500px;
-  opacity: 0.5;
   font-size: 14px;
 }
 .group-child11,
@@ -737,6 +736,7 @@ left: 565px;
 width: 579px;
 height: 23px;
 font-size: var(--font-size-smi-6);
+z-index: 1005;
 }
 
 .group-parent5 {

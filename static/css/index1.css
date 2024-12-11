@@ -395,9 +395,37 @@ nav {
   font-size: 16px;
   border: none;
   outline: none;
-  /* Adjust width as needed */
-  width: 300px; /* or any desired width */
+  width: 300px;
+  position: relative; /* Needed for pseudo-element positioning */
+  background-color: white; /* Ensure the background is initially white */
+  z-index: 1; /* Text stays above the dimming layer */
 }
+
+.insert-link-here.dimmed {
+  background-color: rgba(255, 255, 255, 0.2); /* Lightly dim the input field background */
+}
+
+.insert-link-here.dimmed::before {
+  content: ''; /* Empty content for the pseudo-element */
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent overlay for the dim effect */
+  z-index: 2; /* Place the dimming layer above the text */
+  pointer-events: none; /* Prevent the overlay from interfering with text input */
+}
+
+.insert-link-here::placeholder {
+  color: #aaa; /* Optional: style the placeholder */
+}
+
+.insert-link-here.dimmed::placeholder {
+  color: #aaa; /* Placeholder color stays the same */
+}
+
+
 
 .PasteURL-Group {
   position: absolute;
@@ -479,17 +507,23 @@ nav {
     z-index: 500;
   }
 
+
 #msgInput {
-    padding: 10px;
-    margin-left: 45px;
-    margin-top: 2px;
-    font-size: 16px;
-    font-family: 'Poppins';
-    outline: none;
-    width: 380px;
-    z-index: 500; /* Ensure it is above other elements */
-    position: relative; /* Make sure it stays within its container */
-    border: none;
+  padding: 10px;
+  margin-left: 2px;
+  margin-top: 13px;
+  font-size: 16px;
+  font-family: 'Poppins';
+  outline: none;
+  width: 380px; /* Initial width */
+  height: auto; /* Adjust height automatically */
+  min-height: 90px; /* Ensure a minimum height */
+  max-height: 300px; /* Optional, restrict maximum height */
+  position: relative; /* Keep within its container */
+  border: none;
+  overflow: auto; /* Add scrollbars if needed */
+  resize: none; /* Prevent manual resizing (optional) */
+  z-index: 500;
 }
 
 .Message-Box-and-Text {
@@ -690,7 +724,7 @@ nav {
   /* Add your CSS styles here */
   width: 190px; /* Example width */
   top: -140px;
-  left: 320px;
+  left: 700px;
   /* Add more styles as needed */
 }
 

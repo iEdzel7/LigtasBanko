@@ -398,7 +398,8 @@
                   <div class="Message-Box-and-Text">
                     <div class="Message-BoxOnly"></div>
                     <img class="msg-1-icon" alt="" src="../static/assets/message.png" />
-                    <input type="text" id="msgInput" class="insert-link-here1" placeholder="Paste message" />
+                    <textarea id="msgInput" class="insert-link-here1" placeholder="Paste message"></textarea>
+
                   </div>
                 </div>
               
@@ -599,6 +600,8 @@ document.getElementById('screenshotUpload').addEventListener('change', (event) =
 
 
 document.getElementById('submitBtn').addEventListener('click', () => {
+  event.preventDefault()
+
     const urlInput = document.getElementById('urlInput').value;
     const msgInput = document.getElementById('msgInput').value;
 
@@ -644,9 +647,81 @@ document.getElementById('submitBtn').addEventListener('click', () => {
         console.log("Response data:", data);
         
         const resultsContainer = document.getElementById('results');
-        resultsContainer.innerHTML = ''; // Clear previous results
     
-        // Iterate over the results and check for 'UNREACHABLE'
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
+
+      // Create the overlay
+  const overlay = document.createElement('div');
+  overlay.id = 'overlay';
+  overlay.style.position = 'fixed';
+  overlay.style.top = '0';
+  overlay.style.left = '0';
+  overlay.style.width = '100%';
+  overlay.style.height = '100%';
+  overlay.style.backgroundColor = 'rgba(0, 0, 0, 0.1)'; // Reduce opacity
+  overlay.style.zIndex = '999'; // Behind the loader
+  document.body.appendChild(overlay);
+
+  // Create the loader
+  const loader = document.createElement('div');
+  loader.id = 'loader';
+  loader.innerHTML = '<div class="spinner"></div>';
+  loader.style.position = 'fixed';
+  loader.style.top = '50%';
+  loader.style.left = '50%';
+  loader.style.transform = 'translate(-50%, -50%)';
+  loader.style.zIndex = '1000'; // Above the overlay
+
+  // Add the spinning PNG
+const spinner = document.createElement('img');
+spinner.src = '../static/assets/logo-loading.png'; // Replace with the path to your PNG file
+spinner.style.width = '120px'; // Adjust size as needed
+spinner.style.height = '120px'; // Adjust size as needed
+spinner.style.animation = 'spin 2s linear infinite'; // Spinning animation
+loader.appendChild(spinner);
+
+// Add styles for the spinning animation
+const style = document.createElement('style');
+style.innerHTML = `
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  img {
+    display: block;
+  }
+`;
+
+  document.querySelectorAll('.insert-link-here').forEach(element => {
+        element.classList.add('dimmed');
+    });
+
+  // Append the spinner and styles to the document
+  document.head.appendChild(style);
+  document.body.appendChild(loader);
+
+  fetch('/analyze_url', {
+    method: 'POST',
+    body: formData,
+})
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log("Response data:", data);
+
+        // Process your results here, as per your existing logic
+        const resultsContainer = document.getElementById('results');
+        resultsContainer.innerHTML = ''; // Clear previous results
+
+        data.forEach((result) => {
+             // Iterate over the results and check for 'UNREACHABLE'
         data.forEach((result, index) => {
           const resultDiv = document.createElement('div');
           resultDiv.classList.add('result-item'); // Add a class to the container div
@@ -764,6 +839,13 @@ document.getElementById('submitBtn').addEventListener('click', () => {
                     </div>
                 `;
                 resultsContainer.appendChild(resultDiv);
+                
+                const ResultConfidence = resultDiv.querySelector('.ResultAndConfidence');
+                if (ResultConfidence) {
+                    ResultConfidence.style.left = "10px"; // Adjust the position as needed
+                }
+
+                
           } else {
               console.log('Unknown prediction:', result.prediction);
           }
@@ -775,20 +857,38 @@ document.getElementById('submitBtn').addEventListener('click', () => {
 
           resultsContainer.appendChild(resultDiv);
 
-        });
-    
-        // After appending results, adjust the position of ResultAndConfidence
-        const selectedValue = document.getElementById("submissionButton").textContent;
-        if (selectedValue === "Text Message") {
-          const ResultConfidence = document.getElementById('ResultAndConfidence');
-          if (ResultConfidence) {
-            ResultConfidence.style.top = "70px";
+          // After appending results, adjust the position of ResultAndConfidence
+          const selectedValue = document.getElementById("submissionButton").textContent;
+          if (selectedValue === "Text Message") {
+              const ResultConfidence = document.querySelector('.ResultAndConfidence'); // Use querySelector to target the .prediction element
+              if (ResultConfidence) {
+                  ResultConfidence.style.top = "80px"; // Move the prediction down (adjust the value as needed)
+              }
           }
-        }
-      })
-      .catch(error => {
+
+          if (selectedValue === "Text Message") {
+              const ResultConfidence = document.querySelector('.completionunknown-container'); // Use querySelector to target the .prediction element
+              if (ResultConfidence) {
+                  ResultConfidence.style.top = "70px"; // Move the prediction down (adjust the value as needed)
+              }
+          }
+        
+
+        });
+        });
+
+    })
+    .catch(error => {
         console.error('Error:', error);
-      });
+        alert('An error occurred while analyzing. Please try again.');
+    })
+    .finally(() => {
+        // Remove the loader and overlay after processing is complete
+        document.body.removeChild(loader);
+        document.body.removeChild(overlay);
+    });
+
+
     });
 
   

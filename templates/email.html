@@ -79,7 +79,7 @@
                 left: -20px;
                 background-color: #5B0009;
                 color: white;
-                z-index: 1006;
+                z-index: 1200;
             }
 
             .breach-item {
@@ -361,20 +361,20 @@
         <p style="color: #292929; letter-spacing: 0.06em; font-weight: 400; font-size: 15px;">See if it's part of a data breach and take steps to secure your account.</p>
     </div>
     <div class="email-container">
-        <form action="/email_pwn" method="POST" id="pwnchecker-form">
-            <input type="email" class="email-input" name="email" style="font-family: 'Poppins';" placeholder="Enter your email address..." required>
-            <button type="submit" class="submit-button">Submit</button>
-        </form>
-    </div>
-
-
-    <div class="ellipse-parent-email">
+      <form action="/email_pwn" method="POST" id="pwnchecker-form">
+          <input type="email" class="email-input" name="email" style="font-family: 'Poppins';" placeholder="Enter your email address..." required>
+          <button type="submit" class="submit-button" id="submit-button">Submit</button>
+      </form>
+  </div>
+  
+  <div class="ellipse-parent-email">
       <input type="checkbox" id="circle-checkbox" class="ellipse-div">
-
       <div class="i-accept-the-email">
-        I accept the <a class="a2"  style="color: #0bb8e0; text-decoration: underline;"  href="{{ url_for('static', filename='Docs/LigtasBanko-TermsandConditions.pdf') }}" target="_blank">Terms and Conditions</a> and <a class="a2" style="color: #0bb8e0; text-decoration: underline;"    href="{{ url_for('static', filename='Docs/LigtasBanko-PrivacyPolicy.pdf') }}" target="_blank">Privacy Policy.</a>
+          I accept the <a class="a2" style="color: #0bb8e0; text-decoration: underline;" href="{{ url_for('static', filename='Docs/LigtasBanko-TermsandConditions.pdf') }}" target="_blank">Terms and Conditions</a> and 
+          <a class="a2" style="color: #0bb8e0; text-decoration: underline;" href="{{ url_for('static', filename='Docs/LigtasBanko-PrivacyPolicy.pdf') }}" target="_blank">Privacy Policy.</a>
       </div>
-    </div>
+  </div>
+  
 
 
 
@@ -398,7 +398,7 @@
           {% endfor %}
       </ul>
       {% elif result.status_code == 404 %}
-          <div class="card">
+          <div class="card" id="no-breach-card">
             <img src="../static/assets/ResultSafe-Icon.png" alt="Check Icon" class="nobreach-img" />
             <p class="title">Great news! No pwnage found!</p>
             <p class="subtitle">Your accounts are safe, and no data leaks were found.</p>
@@ -453,7 +453,42 @@
         </div>
       </div>
     </footer>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+    const breachResults = document.querySelector(".pwned-breach-results");
+    const ellipseParentEmail = document.querySelector(".ellipse-parent-email");
 
+    // Check if the breach results element has the 'has-breach' class
+    if (breachResults.classList.contains("has-breach")) {
+        ellipseParentEmail.style.display = "none"; // Hide the element
+    }
+});
+    document.addEventListener("DOMContentLoaded", () => {
+      const noBreachCard = document.getElementById("no-breach-card");
+      const acceptEmailDiv = document.querySelector(".ellipse-parent-email");
+
+      if (noBreachCard) {
+        acceptEmailDiv.style.display = "none";
+      }
+    });
+
+    document.addEventListener("DOMContentLoaded", () => {
+    const form = document.getElementById("pwnchecker-form");
+    const checkbox = document.getElementById("circle-checkbox");
+    const submitButton = document.getElementById("submit-button");
+
+    // Prevent form submission if the checkbox is not checked
+    form.addEventListener("submit", (event) => {
+        if (!checkbox.checked) {
+            event.preventDefault(); // Prevent form submission
+            alert("Please accept the Terms and Conditions and Privacy Policy before submitting.");
+        }
+    });
+});
+
+
+
+    </script>
 
 
     <script src="{{ url_for('static', filename='scripts/main.js') }}"></script>

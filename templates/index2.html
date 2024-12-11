@@ -74,9 +74,32 @@
         width: 440px;
       }
 
+      .email-address {
+        padding: 10px;
+        background: white;
+        left: 45px;
+        top: 8px;
+        cursor: pointer;
+        color: gray; /* Initial text color */
+        transition: color 0.2s;
+      }
+
+      .options-container {
+        position: absolute;
+        background: white;
+        border: 1px solid #ccc;
+        width: 100%;
+      }
+
+      .option-label {
+        display: block;
+        padding: 10px;
+        cursor: pointer;
+        transition: background 0.2s;
+      }
+
       .option-label:hover {
-        background-color: #f0f0f0;
-        color: #000;
+        background: #f0f0f0;
       }
 
 
@@ -300,18 +323,21 @@
 
 
     <script>
-      // Toggle Dropdown Visibility
-      function toggleDropdown() {
-        const optionsContainer = document.getElementById("dropdown-options");
-        optionsContainer.style.display =
-          optionsContainer.style.display === "none" ? "block" : "none";
+
+    function toggleDropdown() {
+        const dropdownOptions = document.getElementById('dropdown-options');
+        const isDisplayed = dropdownOptions.style.display === 'block';
+        dropdownOptions.style.display = isDisplayed ? 'none' : 'block';
       }
-    
-      // Select Dropdown Option
-      function selectOption(label) {
-        const dropdownSelected = document.getElementById("dropdown-selected");
-        dropdownSelected.innerText = label.innerText; // Set the selected option
-        toggleDropdown(); // Hide dropdown after selection
+
+      function selectOption(option) {
+        // Update the dropdown-selected text and style
+        const dropdownSelected = document.getElementById('dropdown-selected');
+        dropdownSelected.textContent = option.textContent;
+        dropdownSelected.style.color = 'black'; // Change text color to black
+
+        // Hide the dropdown
+        toggleDropdown();
       }
     
       // Optional: Close dropdown if clicked outside
