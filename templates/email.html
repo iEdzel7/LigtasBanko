@@ -378,35 +378,41 @@
 
 
 
-<div class="pwned-breach-results {% if breaches %}has-breach{% endif %}">
-  {% if breaches %}
-      <div class="pwned-header">
-        <img src="../static/assets/ResultNOTSafe-Icon.png" alt="Error Icon">
-        <h1 style="font-family: 'Poppins'; ">Oh no! Pwned!</h1>
-        <p style="color: white; font-family: 'Lexend';">Your data was exposed in <strong>{{ total_breaches }} security breaches</strong>.</p>
-      </div>
-      {% for breach in breaches %}
-      <ul class="pwned-breach-list">
-              <li class="pwned-breach-item">
-                  <img class="pwned-breach-logo" src="{{ breach.logo }}" alt="Logo for {{ breach.name }}" />
-                  <div class="pwned-breach-text">
-                      <strong class="pwned-breach-name">{{ breach.name }}</strong>
-                      <p class="pwned-breach-description">{{ breach.description | safe }}</p>
-                      <small class="pwned-breach-data">Breached Data: {{ breach | join(', ') }}</small>
-                  </div>
-              </li>
-          {% endfor %}
-      </ul>
-      {% elif result.status_code == 404 %}
-          <div class="card" id="no-breach-card">
-            <img src="../static/assets/ResultSafe-Icon.png" alt="Check Icon" class="nobreach-img" />
-            <p class="title">Great news! No pwnage found!</p>
-            <p class="subtitle">Your accounts are safe, and no data leaks were found.</p>
+  <div class="pwned-breach-results {% if breaches %}has-breach{% endif %}" id="breach-results">
+    {% if breaches %}
+        <div class="pwned-header">
+          <img src="../static/assets/ResultNOTSafe-Icon.png" alt="Error Icon">
+          <h1 style="font-family: 'Poppins'; ">Oh no! Pwned!</h1>
+          <p style="color: white; font-family: 'Lexend';">Your data was exposed in <strong>{{ total_breaches }} security breaches</strong>.</p>
         </div>
-      {% else %}
-          <p>{{ result.message }}</p>
-      {% endif %}
-  </div>
+        {% for breach in breaches %}
+        <ul class="pwned-breach-list">
+                <li class="pwned-breach-item">
+                    <img class="pwned-breach-logo" src="{{ breach.logo }}" alt="Logo for {{ breach.name }}" />
+                    <div class="pwned-breach-text">
+                        <strong class="pwned-breach-name">{{ breach.name }}</strong>
+                        <p class="pwned-breach-description">{{ breach.description | safe }}</p>
+                        <!-- Properly displaying compromised data -->
+                        <small class="pwned-breach-data">Breached Data: 
+                          {% for data_class in breach.compromised_data %}
+                            {{ data_class }}{% if not loop.last %}, {% endif %}
+                          {% endfor %}
+                        </small>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    {% elif result.status_code == 404 %}
+        <div class="card" id="no-breach-card">
+          <img src="../static/assets/ResultSafe-Icon.png" alt="Check Icon" class="nobreach-img" />
+          <p class="title">Great news! No pwnage found!</p>
+          <p class="subtitle">Your accounts are safe, and no data leaks were found.</p>
+      </div>
+    {% else %}
+        <p>{{ result.message }}</p>
+    {% endif %}
+</div>
+  
     <footer>
       <div class="ligtasbankoemail1">
         <div class="ligtasbanko3">ligtasbanko</div>
@@ -454,6 +460,18 @@
       </div>
     </footer>
     <script>
+
+      // This function will clear the results when the page is refreshed.
+  window.onload = function() {
+    // Reset breach result display on page load
+    const breachResults = document.querySelector('.breach-results');
+    if (breachResults) {
+      breachResults.classList.remove('has-breach');  // Hides breach results
+    }
+    // Optionally, clear any stored values (like email input) after refresh
+    document.getElementById('pwnchecker-form').reset();
+  };
+
       document.addEventListener("DOMContentLoaded", function () {
     const breachResults = document.querySelector(".pwned-breach-results");
     const ellipseParentEmail = document.querySelector(".ellipse-parent-email");
@@ -486,9 +504,8 @@
     });
 });
 
-
-
     </script>
+    
 
 
     <script src="{{ url_for('static', filename='scripts/main.js') }}"></script>

@@ -383,6 +383,8 @@ position: absolute;
 top: 118px;
 left: 0;
 letter-spacing: 0.06em;
+outline: none;
+border: none;
 line-height: 22.54px;
 font-weight: 500;
 display: inline-block;
@@ -408,6 +410,8 @@ top: 0;
 left: 0;
 border-radius: 90.17px;
 background: linear-gradient(90deg, #19d6bd 23%, #0bb8e0);
+outline: none;
+border: none;
 width: 184.8px;
 height: 55.9px;
 }
@@ -425,6 +429,7 @@ width: 82.1px;
 height: 29.8px;
 color: white;
 background: none;  /* Removes background color */
+outline: none;
 border: none;      /* Removes border */
 cursor: pointer;
 }
@@ -435,6 +440,8 @@ left: 340px;
 width: 184.8px;
 height: 55.9px;
 text-align: center;
+outline: none;
+border: none;
 font-size: var(--font-size-smi-6);
 color: var(--color-white);
 }
@@ -456,7 +463,6 @@ position: absolute;
 top: 0;
 left: 0;
 border-radius: 45.08px;
-background-color: var(--color-white);
 border: 1px solid var(--color-black);
 box-sizing: border-box;
 width: 440px;
@@ -496,9 +502,8 @@ object-fit: cover;
   left: 0;
   width: 440px;
   height: 56px;
-  border: 1px solid #ccc; /* Border for the input box */
-  border-radius: 28px; /* Rounded corners */
-  background-color: #ffffff; /* Light background */
+  outline: none;
+  border: none;
   display: flex; /* Use flexbox for alignment */
   align-items: center;
   padding-left: 50px; /* Space for the icon */

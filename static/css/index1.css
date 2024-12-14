@@ -223,7 +223,7 @@ nav {
   cursor: pointer;
 }
 .rectangle-parent4 {
-  position: relative;
+  position: absolute;
   top: 0px;
   left: -60px;
   width: 184.8px;
@@ -667,7 +667,7 @@ nav {
 }
 
 .url {
-  top: -90px;
+  top: -120px;
   left:40px;
   font-size: 20px;
   position: relative;
@@ -694,36 +694,36 @@ nav {
 
 .ResultAndConfidence {
   font-family: 'Poppins';
-  left: -50px;
-  top: 20px;
-  position: relative;
+  margin-left: 330px;
+  top: 100px;
+  position: absolute;
   font-weight: bold;
 }
 
 .PhishingImage {
-  position: relative;
+  position: absolute;
   /* Add your CSS styles here */
-  width: 500px; /* Example width */
-  top: -140px;
-  left: 390px;
+  width: 600px; /* Example width */
+  top: -85px;
+  left: 525px;
   margin-bottom: -30px;
   /* Add more styles as needed */
 }
 
 .BenignImage {
-  position: relative;
+  position: absolute;
   /* Add your CSS styles here */
   width: 190px; /* Example width */
-  top: -140px;
-  left: 390px;
+  top: -35px;
+  left: 720px;
   /* Add more styles as needed */
 }
 
 .UnreachableImage {
-  position: relative;
+  position: absolute;
   /* Add your CSS styles here */
   width: 190px; /* Example width */
-  top: -140px;
+  top: -25px;
   left: 700px;
   /* Add more styles as needed */
 }
@@ -731,15 +731,15 @@ nav {
 
 .explanation {
   left: 100px;
-  position: relative;
+  position: absolute;
   top: -105px;
   width: 500px;
 }
 
 .explanation-list {
-  position: relative;
+  position: absolute;
   left: 600px; /* Adjust as needed */
-  top: -105px;
+  top: 170px;
   width: 500px;
   list-style-type: none; /* Remove bullets */
   padding-left: 0; /* Remove default padding */

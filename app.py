@@ -25,6 +25,12 @@ import json
 from werkzeug.utils import secure_filename
 import logging
 from io import BytesIO
+import smtplib
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
+from flask import make_response
+from email.mime.base import MIMEBase
+from email import encoders
 
 # Initialize Flask app
 app = Flask(__name__)
@@ -35,9 +41,9 @@ UPLOAD_FOLDER = 'uploads'
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
-csv_file = 'Reports.csv'
+csv_file_reports = 'Reports.csv'
 
-csv_file = "Contact.csv"
+csv_file_contact = "Contact.csv"
 
 # Set your API key here
 API_KEY = "e77731e153294c278b8f8d1f5ee28684"
@@ -46,8 +52,16 @@ HEADERS = {
     "User-Agent": "Python Script"
 }
 
-if not os.path.exists(UPLOAD_FOLDER):
-    os.makedirs(UPLOAD_FOLDER)
+# Gmail SMTP server
+SMTP_SERVER = "smtp.gmail.com"
+SMTP_PORT = 587
+GMAIL_USER = "ligtasbanko@gmail.com"
+GMAIL_PASSWORD = "atsb vwiv kgom fsbu"
+
+# Email content
+email_subject = "Thank you for contacting us!"
+
+attachment_path = "../LigtasBanko/static/assets/ligtasbanko-header.png"
 
 # Initialize Groq client with the API key
 client = Groq(api_key=os.environ.get("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"))
@@ -98,43 +112,50 @@ def check_email_breaches(email, truncate_response=True, include_unverified=True,
 
         # If fetch_all_breaches is True, call the breaches API endpoint
         if fetch_all_breaches:
-            all_breaches_url = "https://haveibeenpwned.com/api/v3/breaches"
+            all_breaches_url = "https://haveibeenpwned.com/api/v3/dataclasses"
             all_breaches_response = requests.get(all_breaches_url, headers=HEADERS)
             if all_breaches_response.status_code == 200:
-                all_breaches = all_breaches_response.json()
-                return {"message": "All breaches", "data": all_breaches}
+                # Print and parse the response to check for all data classes
+                data_classes = all_breaches_response.json()
+                print("Data Classes:", data_classes)
+                return {"data_classes": data_classes, "status_code": 200}
             else:
-                return {"error": f"Error fetching all breaches: {all_breaches_response.status_code} - {all_breaches_response.text}"}
+                return {"error": f"Error fetching data classes: {all_breaches_response.status_code} - {all_breaches_response.text}"}
 
         # If specific email breaches are found
         if response.status_code == 404:
             print("NO BREACH FOUND")
-            return {"message": f"No breaches found for {email}.", "status_code":404}
+            return {"message": f"No breaches found for {email}.", "status_code": 404}
         
         if response.status_code == 200:
             breaches = response.json()
             results = []
-            
 
             # Loop through each breach and retrieve complete data
             for breach in breaches:
+                # Ensure DataClasses is returned as a list (it may sometimes be None)
+                compromised_data = breach.get("DataClasses", [])
+                if not compromised_data:
+                    compromised_data = ["No compromised data"]
+
+                # Collect breach information
                 results.append({
                     "name": breach.get("Name", "Unknown Name"),
                     "domain": breach.get("Domain", "Unknown domain"),
                     "description": breach.get("Description", "No description available."),
-                    "logo": breach.get("LogoPath", ""),  # Add LogoPath to each breach
-                    "compromised_data": breach.get("DataClasses", []),
+                    "logo": breach.get("LogoPath", ""),
+                    "compromised_data": compromised_data,  # DataClasses
                 })
 
             total_breaches = len(breaches)
                 
-            return {"message": "Breaches found", "data": results, "total_breaches": total_breaches, "status_code":200}
+            return {"message": "Breaches found", "data": results, "total_breaches": total_breaches, "status_code": 200}
         else:
             return {"error": f"Error: {response.status_code} - {response.text}"}
 
     except Exception as e:
         return {"error": str(e)}
-    
+
     
     
 
@@ -430,28 +451,28 @@ def explain_url(url):
 
     # Set up Chrome options for Selenium WebDriver
 def test_website(url):
-    chrome_options = Options()
-    chrome_options.add_argument("--headless")  # Run in headless mode (no GUI)
+    # Set up Chrome options
+    options = Options()
+    options.add_argument("--headless")  # Run in headless mode
+    options.add_argument('--disable-gpu')  # Disable GPU for headless mode (optional)
+    
+    # Set custom headers by adding a User-Agent string
+    options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36")
 
-    # Initialize the WebDriver (Make sure ChromeDriver is installed and path is correct)
-    driver = webdriver.Chrome(options=chrome_options)
+    # Initialize WebDriver with the options
+    driver = webdriver.Chrome(options=options)
 
     try:
-        # Check if the website is reachable using requests
-        response = requests.get(url, timeout=10)
-        if response.status_code >= 400:
-            print(f"The website {url} does not exist.")
-            return "Website not reachable"
-        
-        # Interact with the website (for future use)
         driver.get(url)
-        print(f"Successfully accessed {url}")
+        # You can add more specific checks here, like:
+        # - Checking for specific elements on the page
+        # - Interacting with elements (e.g., clicking buttons, filling forms)
+        # - Capturing screenshots or taking other actions
+        print(f"The website {url} is accessible.")
         return "Website is reachable"
-
-    except requests.RequestException:
-        print(f"The website {url} does not exist.")
+    except Exception as e:
+        print(f"Error accessing the website {url}: {e}")
         return "Website not reachable"
-    
     finally:
         driver.quit()
         
@@ -747,6 +768,10 @@ def analyze_url():
                 'chat_completion': chat_completion.choices[0].message.content
             }
             results.append(result)
+            # Store the results in session or return them for use in the send_message route
+        session['analysis_results'] = results  # Store the analysis results in the session
+        print("Analysis results in session:", session.get('analysis_results'))
+
     print(results)
     return jsonify(results)
 
@@ -757,10 +782,12 @@ models = {
     "mixtral-8x7b-32768": {"name": "Mixtral-8x7b-Instruct-v0.1", "tokens": 32768, "developer": "Mistral"}
 }
 
-@app.route('/')
+@app.route('/index1')
 def index():
-    return render_template('index.html')
-
+    # Clear session and 'analysis_results' to reset on refresh
+    session.clear()  # Clear the entire session to ensure all data is removed
+    print("Session cleared on index route.")
+    return render_template('index1.html')
 @app.route('/index1')
 def index1():
     # Initialize chat history and selected model in session
@@ -778,11 +805,9 @@ def index1():
 
 @app.route('/send_message', methods=['POST'])
 def send_message():
-    session.clear()
     try:
         # Ensure session["messages"] is initialized
         if "messages" not in session:
-            session.clear()
             session["messages"] = []
 
         # Get the user message and max tokens
@@ -790,9 +815,22 @@ def send_message():
         max_tokens = int(request.form['max_tokens'])
         selected_model = session.get("selected_model", "mixtral-8x7b-32768")  # Default model if not set
         
-        # Example of adding a custom prompt before the user's message
-        prompt = "You are a helpful cybersecurity assistant. Please provide detailed and accurate responses. Make your answers very short and not exceed 60 words, and do not talk about anything else but cybersecurity related and phishing related."
+        # Get the analysis results from the session
+        analysis_results = session.get('analysis_results')  # Get the analysis results
+        print("Analysis results are:", analysis_results)
 
+        if analysis_results:
+            # Extract details from the analysis results
+            user_input = analysis_results[0]['url']  # Example: use the first URL
+            prediction = analysis_results[0]['prediction']  # BENIGN or PHISHING
+            explanation = analysis_results[0]['explanation']  # Explanation of prediction
+
+            # Update the prompt to include the prediction and explanation
+            prompt = f"You are a helpful cybersecurity assistant. Please provide detailed and accurate responses regarding phishing and cybersecurity. Also understand that '{user_input}' is '{prediction}' because '{explanation}'. Limit your words in less than 30 words."
+            print("Prompt:", prompt)
+        else:
+            prompt = f"You are a helpful cybersecurity assistant. Please provide detailed and accurate responses regarding phishing and cybersecurity. Limit your word to less than 30 words."
+            print("Prompt:", prompt)
         # Append the prompt to the messages
         session['messages'].append({"role": "system", "content": prompt})
 
@@ -815,12 +853,15 @@ def send_message():
         # Append bot response to session
         session['messages'].append({"role": "assistant", "content": response})
 
+        session.pop('analysis_results', None)
+
         return jsonify({'response': response})
 
     except Exception as e:
         # Log the error
         app.logger.error(f"Error in send_message: {e}")
         return jsonify({'error': str(e)}), 500
+
     
 
 @app.route('/clear_messages', methods=['POST'])
@@ -896,15 +937,16 @@ def upload_file():
 
 @app.route("/submit-report", methods=["POST"])
 def submit_report():
-    # Get the data from the form
+    # Get the data from the form (using .get() to handle missing fields gracefully)
     name = request.form.get("reporter_name")
     email = request.form.get("reporter_email")
-    phishing_type = request.form.get("phishing_type")
+    phishing_type = request.form.get("phishing_type")  # Get phishing type from form
     url = request.form.get("phishing_url")
+    accept_terms = request.form.get("accept_terms")  # Ensure terms acceptance is checked
 
-    # Validate input data
-    if not name or not email or phishing_type == "Type of Phishing" or not url:
+    if not name or not email or phishing_type == "Type of Phishing" or not url or not accept_terms:
         return render_template("index2.html", message="Report not submitted. Missing or invalid required fields.", success=False)
+
 
     # Prepare data to write to CSV
     report = {
@@ -916,43 +958,167 @@ def submit_report():
 
     # Append data to the CSV file
     try:
-        with open(csv_file, mode='a', newline='') as file:
+        with open('reports.csv', mode='a', newline='') as file:
             writer = csv.DictWriter(file, fieldnames=["name", "email", "phishingType", "url"])
             writer.writerow(report)
-        return render_template("index2.html", message="Report submitted successfully!", success=True)
+        return render_template("index2.html", success=True)
     except Exception as e:
         print(f"Error saving the report: {e}")
         return render_template("index2.html", message="Error saving the report.", success=False)
 
+
+
 @app.route("/submit-contact", methods=["POST"])
 def submit_contact():
-    # Get the data from the form submission
-    name = request.form.get("name")
-    email = request.form.get("email")
-    subject = request.form.get("subject")
-    message = request.form.get("message")
-
-    # Validate input data
-    if not name or not email or subject == "Select a subject" or not message:
-        return render_template("index.html", message="Submission not successful. Missing or invalid required fields.", success=False)
-
-    # Prepare data to write to CSV
-    contact_data = {
-        "name": name,
-        "email": email,
-        "subject": subject,
-        "message": message,
-    }
-
-    # Append data to the CSV file
     try:
-        with open(csv_file, mode='a', newline='') as file:
+        # Get the JSON data from the request
+        data = request.get_json()
+
+        # Extract the necessary fields
+        name = data.get("name")
+        email = data.get("email")
+        subject = data.get("subject")
+        message = data.get("message")
+
+        # Validate input data
+        if not name or not email or subject == "Select a subject" or not message:
+            return make_response('', 400)  # Empty response with a 400 status code
+
+        # Prepare email body dynamically
+        body = f"""\
+        <p>Dear {name},</p>
+
+        <p>Thank you for taking the time to share your concerns/inquiries about our system. 
+        We truly value your feedback as it helps us improve and provide you with a better experience.</p>
+
+        <p>Please rest assured that we are actively looking into the issue you raised. 
+        Our team is committed to resolving it as quickly as possible and ensuring that your experience with us remains positive.</p>
+
+        <p>Should you have any additional information or questions, please don’t hesitate to contact us again. 
+        Your input is always appreciated!</p>
+
+        <p>Thank you once again for reaching out to us.</p>
+
+        <p>Best regards,<br>
+        """
+
+        # Path to the image to embed
+        inline_image_path = "../LigtasBanko/static/assets/ligtasbanko-header.png"
+
+        # Send email
+        if not send_email(email, email_subject, body, inline_image_path):
+            return make_response('Failed to send email', 500)
+
+        # Prepare data to write to CSV
+        contact_data = {
+            "name": name,
+            "email": email,
+            "subject": subject,
+            "message": message,
+        }
+
+        # Append data to the CSV file
+        with open(csv_file_contact, mode='a', newline='') as file:
             writer = csv.DictWriter(file, fieldnames=["name", "email", "subject", "message"])
             writer.writerow(contact_data)
-        return render_template("index.html", message="Your message has been submitted successfully!", success=True)
+
+        return make_response('', 200)
+
     except Exception as e:
-        print(f"Error saving the contact data: {e}")
-        return render_template("index.html", message="Error saving the message.", success=False)
+        print(f"Error: {e}")  # Log error
+        return make_response('', 500)  # Empty response with a 500 status code
+
+
+def send_email(to_email, subject, body, inline_image_path=None):
+    from email.mime.image import MIMEImage
+
+    msg = MIMEMultipart('related')
+    msg['From'] = GMAIL_USER
+    msg['To'] = to_email
+    msg['Subject'] = subject
+
+    # Create the alternative MIME part for plain text and HTML
+    msg_alternative = MIMEMultipart('alternative')
+    msg.attach(msg_alternative)
+
+    # Add the HTML body with a placeholder for the inline image
+    html_body = f"""\
+    <html>
+    <body>
+        <p>Dear Valued Bank Customer,</p>
+
+        <p>Thank you for taking the time to share your concerns/inquiries about our system. 
+        We truly value your feedback as it helps us improve and provide you with a better experience.</p>
+
+        <p>Please rest assured that we are actively looking into the issue you raised. 
+        Our team is committed to resolving it as quickly as possible and ensuring that your experience with us remains positive.</p>
+
+        <p>Should you have any additional information or questions, please don’t hesitate to contact us again. 
+        Your input is always appreciated!</p>
+
+        <p>Thank you once again for reaching out to us.</p>
+
+        <p>Best regards,<br>
+        {f'<img src="cid:inline_image" alt="LigtasBanko Header" width="134" height="43">' if inline_image_path else ''}
+    </body>
+    </html>
+    """
+    msg_alternative.attach(MIMEText(html_body, 'html'))
+
+    # Embed the image if the path is provided
+    if inline_image_path:
+        try:
+            print(f"Embedding image from path: {inline_image_path}")
+            with open(inline_image_path, 'rb') as img_file:
+                img = MIMEImage(img_file.read())
+                img.add_header('Content-ID', '<inline_image>')
+                img.add_header("Content-Disposition", "inline", filename="header.png")
+                msg.attach(img)
+            print("Image embedded successfully.")
+        except FileNotFoundError:
+            print(f"Image file not found: {inline_image_path}")
+            return False
+        except Exception as e:
+            print(f"Error embedding image: {e}")
+            return False
+
+    try:
+        print("Attempting to connect to SMTP server...")
+        # Connect to the Gmail SMTP server
+        server = smtplib.SMTP(SMTP_SERVER, SMTP_PORT)
+        server.set_debuglevel(1)  # Set debug level for detailed SMTP communication
+        server.starttls()  # Secure the connection
+        print("Connection to SMTP server established.")
+
+        print("Logging into Gmail server...")
+        server.login(GMAIL_USER, GMAIL_PASSWORD)
+        print("Login successful.")
+
+        # Send the email
+        print(f"Sending email to {to_email}...")
+        server.sendmail(GMAIL_USER, to_email, msg.as_string())
+        print(f"Email sent successfully to {to_email}")
+
+        # Disconnect from the server
+        server.quit()
+        print("Disconnected from SMTP server.")
+
+    except smtplib.SMTPAuthenticationError as auth_error:
+        print(f"SMTP Authentication error: {auth_error}")
+        return False
+    except smtplib.SMTPException as smtp_error:
+        print(f"SMTP error occurred: {smtp_error}")
+        return False
+    except Exception as e:
+        print(f"Unexpected error occurred: {e}")
+        return False
+
+    return True
+
+
+
+
+
 
 
 

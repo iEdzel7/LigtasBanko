@@ -17,6 +17,96 @@
     <link rel="stylesheet" href="../static/css/detect.css">
 
     <style>
+      .submitted {
+            position: absolute;
+            top: 380px;
+            left: 530px;
+            width: 435px;
+            height: 271px;
+            background: #FFFFFF;
+            border-radius: 50px;
+            z-index: 5000;
+        }
+        .dimmed {
+            opacity: 0.3; /* Adjust opacity for dimming */
+            pointer-events: none; /* Disable interaction */
+        }
+
+        /* Optional: Overlay background when popup is visible */
+        body.popup-visible::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+
+        /* This rule is for inputs inside the popup */
+        body.popup-visible .submitted .text-input:focus {
+            outline: none; /* Remove the default outline */
+            box-shadow: none; /* Remove the box-shadow */
+        }
+
+
+        .submitted .group-66 {
+            position: absolute;
+            width: 435px;
+            height: 271px;
+            background: linear-gradient(180deg, #19D6BD 0%, #0BB8E0 100%);
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+            border-radius: 50px;
+        }
+
+        .submitted .reportlogo {
+            position: absolute;
+            width: 42px;
+            height: 42px;
+            left: 44px;
+            top: 39px;
+        }
+
+        .submitted .x-white {
+            position: absolute;
+            width: 32px;
+            height: 32px;
+            left: 364px;
+            top: 35px;
+            cursor: pointer;
+        }
+
+        .submitted .thank-you {
+            position: absolute;
+            width: 261px;
+            height: 30px;
+            left: 48px;
+            top: 109px;
+            font-style: normal;
+            font-weight: 500;
+            font-size: 24px;
+            line-height: 30px;
+            text-align: justify;
+            letter-spacing: 0.02em;
+            color: #FFFFFF;
+        }
+
+        .submitted .report-message {
+            position: absolute;
+            width: 348px;
+            height: 69px;
+            left: 48px;
+            top: 155px;
+            font-style: normal;
+            font-weight: 500;
+            font-size: 18px;
+            line-height: 30px;
+            letter-spacing: 0.02em;
+            color: #FFFFFF;
+        }
+
+
       .response-message{
         margin-top: 550px;
         margin-left:310px;
@@ -38,20 +128,34 @@
       }
 
       .text-input {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        padding: 0 10px 0 40px; /* Add padding to account for the icon */
-        font-size: 16px;
-        border: none;
-        outline: none;
-        border-radius: 8px;
-        background: transparent;
-        z-index: 3;
-        font-family: 'Poppins', sans-serif; /* Use the desired font */
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          padding: 0 10px 0 40px; /* Add padding to account for the icon */
+          font-size: 16px;
+          border: none;
+          outline: none;
+          border-radius: 8px;
+          z-index: 1;
+          font-family: 'Poppins', sans-serif; /* Use the desired font */
       }
+
+
+      /* Remove autofill background color */
+        .text-input:-webkit-autofill {
+            background-color: transparent !important; /* Remove autofill background */
+            transition: background-color 5000s ease-in-out 0s; /* Prevent the autofill background from changing */
+        }
+      /* Remove the focus highlight color */
+      .text-input:focus {
+          background-color: transparent; /* Remove background highlight */
+          outline: none; /* Remove outline that appears on focus */
+          box-shadow: none; /* Remove any shadow applied on focus */
+      }
+
+
 
       .text-input::placeholder {
         color: #aaa; /* Placeholder text color */
@@ -76,11 +180,11 @@
 
       .email-address {
         padding: 10px;
-        background: white;
         left: 45px;
         top: 8px;
         cursor: pointer;
-        color: gray; /* Initial text color */
+        outline: none;
+        border: none;
         transition: color 0.2s;
       }
 
@@ -129,59 +233,38 @@
   <h1 class="title">Phishing Report</h1>
   <div class="report1">
     <div class="reporters-information-parent">
-      <form action="/submit-report" method="POST" enctype="multipart/form-data">
+
+
+
+      <form action="/submit-report" method="POST" enctype="multipart/form-data" autocomplete="off">
         <div class="reporters-information">Reporter’s Information:</div>
-        <div class="phishing-details">Phishing Details:</div>
         <div class="phishing-details">Phishing Details:</div>
         <div class="attach-evidence">Attach Evidence:</div>
         <div class="group-parent5">
           <div class="rectangle-parent7">
-            <div class="group-child14"></div>
-            <button type="submit" class="submit2">Submit</button>
+            <div class="group-child14">
+              <button type="submit" class="submit2">Submit</button>
+            </div>
+            
           </div>
-          <!-- Message below the submit button -->
-          {% if message %}
-          <div class="response-message" style="color: {% if success %}#19D6BD{% else %}#AE0F0F{% endif %};">
-            {{ message }}
-          </div>
-          {% endif %}
-          
 
           <div class="if-you-suspect">
             If you suspect you have received a phishing email, it's crucial to report it to our security team. To submit a report, please provide the following details:
           </div>
+
           <div class="group-parent6">
             <div class="rectangle-parent8">
               <div class="group-child15"></div>
-              <img
-                class="method-1-icon1"
-                alt="User Icon"
-                src="../static/assets/user.png"
-              />
-              <input
-                type="text"
-                class="text-input"
-                name="reporter_name"
-                placeholder="Name"
-                required
-              />
+              <img class="method-1-icon1" alt="User Icon" src="../static/assets/user.png" />
+              <input type="text" class="text-input" name="reporter_name" placeholder="Name" required />
             </div>
             <div class="rectangle-parent9">
               <div class="group-child15"></div>
-              <img
-                class="method-1-icon1"
-                alt=""
-                src="../static/assets/email.png"
-              />
-              <input
-                type="email"
-                class="text-input"
-                name="reporter_email"
-                placeholder="Email address"
-                required
-              />
+              <img class="method-1-icon1" alt="" src="../static/assets/email.png" />
+              <input type="email" class="text-input" name="reporter_email" placeholder="Email address" required />
             </div>
           </div>
+
           <div class="group-wrapper1">
             <div class="rectangle-parent8">
               <div class="dropdown">
@@ -193,29 +276,19 @@
                   <label class="option-label" onclick="selectOption(this)">Screenshot</label>
                 </div>
               </div>
-              <img
-                class="method-1-icon1"
-                alt=""
-                src="../static/assets/subject.png"
-              />
+              <img class="method-1-icon1" alt="" src="../static/assets/subject.png" />
+              <input type="hidden" id="phishing_type" name="phishing_type" />
             </div>
           </div>
+
           <div class="group-parent7">
             <div class="rectangle-parent11">
               <div class="group-child18"></div>
-              <img
-                class="method-1-icon4"
-                alt=""
-                src="../static/assets/link.png"
-              />
-              <input
-                type="url"
-                class="text-input"
-                name="phishing_url"
-                placeholder="Paste URL"
-              />
+              <img class="method-1-icon4" alt="" src="../static/assets/link.png" />
+              <input type="url" class="text-input" name="phishing_url" placeholder="Paste URL" />
             </div>
           </div>
+
           <div class="ellipse-parent">
             <input type="checkbox" id="circle-checkbox" class="ellipse-div" name="accept_terms" required />
             <div class="i-accept-the">
@@ -224,9 +297,20 @@
           </div>
         </div>
       </form>
+
+
+
+
     </div>
   </div>
 </section>
+<div id="submitted-popup" class="submitted" style="display: none;">
+  <div class="group-66"></div>
+  <img src="../static/assets/LigtasBanko-Logo-White.png" alt="LigtasBanko Logo" class="reportlogo">
+  <img src="../static/assets/x-white.png" alt="Close" class="x-white" onclick="closePopup()">
+  <div class="thank-you">Thank you!</div>
+  <div class="report-message">Your report has been submitted successfully.</div>
+</div>
 
 
 <section id = "report">
@@ -323,24 +407,50 @@
 
 
     <script>
-
-    function toggleDropdown() {
-        const dropdownOptions = document.getElementById('dropdown-options');
-        const isDisplayed = dropdownOptions.style.display === 'block';
-        dropdownOptions.style.display = isDisplayed ? 'none' : 'block';
-      }
-
-      function selectOption(option) {
-        // Update the dropdown-selected text and style
-        const dropdownSelected = document.getElementById('dropdown-selected');
-        dropdownSelected.textContent = option.textContent;
-        dropdownSelected.style.color = 'black'; // Change text color to black
-
-        // Hide the dropdown
-        toggleDropdown();
+      // JavaScript to clear input fields on page refresh
+      window.addEventListener('load', () => {
+          // Select all input elements
+          const inputs = document.querySelectorAll('input');
+          const textareas = document.querySelectorAll('textarea');
+          const selects = document.querySelectorAll('select');
+    
+          // Clear all input values
+          inputs.forEach(input => {
+              if (input.type === 'checkbox' || input.type === 'radio') {
+                  input.checked = false; // Uncheck checkboxes and radio buttons
+              } else {
+                  input.value = ''; // Clear text-based input fields
+              }
+          });
+    
+          // Clear all textareas
+          textareas.forEach(textarea => {
+              textarea.value = '';
+          });
+    
+          // Reset all select elements to their default state
+          selects.forEach(select => {
+              select.selectedIndex = 0; // Reset to the first option
+          });
+    
+          console.log("All input fields have been cleared.");
+      });
+    
+      // Toggle dropdown visibility
+      function toggleDropdown() {
+        const optionsContainer = document.getElementById("dropdown-options");
+        optionsContainer.style.display = optionsContainer.style.display === "none" ? "block" : "none";
       }
     
-      // Optional: Close dropdown if clicked outside
+      // Select a dropdown option
+      function selectOption(optionElement) {
+        const selectedOption = optionElement.textContent;
+        document.getElementById("dropdown-selected").textContent = selectedOption;
+        document.getElementById("phishing_type").value = selectedOption;
+        document.getElementById("dropdown-options").style.display = "none";
+      }
+    
+      // Close dropdown if clicked outside
       document.addEventListener('click', function (e) {
         const dropdown = document.querySelector('.dropdown');
         const optionsContainer = document.getElementById('dropdown-options');
@@ -349,69 +459,96 @@
         }
       });
     
-      // Submit Form
-        function submitForm(event) {
-          event.preventDefault(); // Prevent the default form submission behavior (page reload)
+      // Fixing the form submission handling
+      document.querySelector('form').addEventListener('submit', function(event) {
+          event.preventDefault(); // Prevent default form submission
+          submitForm(event);
+      });
+    
+      // Function to handle form submission
+      function submitForm(event) {
+          const popup = document.getElementById('submitted-popup');
+          popup.style.display = 'block';
+          document.body.classList.add('popup-visible');
+          const groupChild14 = document.querySelector('.group-child14');
+            if (groupChild14) {
+                groupChild14.classList.add('dimmed');
+            }
 
-          const name = document.getElementById("name").value;
-          const email = document.getElementById("email").value;
-          const phishingType = document.getElementById("dropdown-selected").innerText;
-          const url = document.getElementById("url").value;
-          const termsAccepted = document.getElementById("circle-checkbox").checked;
-
-          // Validate Input
-          if (!name || !email || phishingType === "Type of Phishing" || !url || !termsAccepted) {
-            alert("Please fill all fields and accept the terms.");
-            return;
+          // Remove dimming effect from .group-child14
+          const iAccept = document.querySelector('.i-accept-the');
+          if (iAccept) {
+            iAccept.classList.add('dimmed');
           }
 
-          // Prepare Data for Submission
-          const data = {
-            name,
-            email,
-            phishingType,
-            url,
-          };
-
-          // Send Data to Backend
-          fetch("/submit-report", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(data),
-          })
-            .then((response) => response.text())  // Change to text to receive HTML
-            .then((htmlContent) => {
-              // Insert the modal HTML into the document
-              document.body.insertAdjacentHTML('beforeend', htmlContent);
-              
-              // Open the modal using Bootstrap's modal method
-              $('#responseModal').modal('show');
-
-              // Attach the close modal event
-              document.getElementById('closeModalBtn').addEventListener('click', function() {
-                $('#responseModal').modal('hide');
-              });
-            })
-            .catch((error) => {
-              // Show error modal if something goes wrong
-              alert("Error submitting report.");
-              console.error(error);
-            });
-        }
+          // Remove dimming effect from .group-child14
+          const check = document.querySelector('.ellipse-div');
+          if (check) {
+            check.classList.add('dimmed');
+          }
+          
+          const form = event.target; // Get the form element
+          const formData = new FormData(form); // Create FormData from the form
     
-      // Open modal function
-      function openModal(message) {
-        document.getElementById('modalMessage').textContent = message;
-        document.getElementById('responseModal').style.display = 'block';
+          // Collecting the selected phishing type
+          const phishingType = document.getElementById("phishing_type").value;
+          if (phishingType) {
+              formData.append('phishing_type', phishingType); // Append phishing type to FormData
+          }
+    
+          // Sending the form data via fetch
+          fetch(form.action, {
+              method: 'POST',
+              body: formData, // Send the FormData directly
+          })
+          .then((response) => response.text()) // Assuming the server returns text
+          .then((htmlContent) => {
+              document.body.insertAdjacentHTML('beforeend', htmlContent);
+              $('#responseModal').modal('show'); // Show the modal if you want
+          })
+          .catch((error) => {
+              console.error(error); // Only log the error without alerting
+          });
       }
     
-      // Close modal function
-      document.getElementById('closeModalBtn').addEventListener('click', function() {
-        document.getElementById('responseModal').style.display = 'none';
-      });
-</script>
+      // Function to show the popup
+      function showPopup() {
+          const popup = document.getElementById('submitted-popup');
+          popup.style.display = 'block';
+          document.body.classList.add('popup-visible');
+          // Blur all text input fields to prevent them from being highlighted
+          document.querySelectorAll('.text-input').forEach(input => input.blur());
+      }
+    
+      // Function to close the popup and reset the form
+      function closePopup() {
+          const popup = document.getElementById('submitted-popup');
+          popup.style.display = 'none';
+          document.body.classList.remove('popup-visible');
+    
+          // Reset all form fields when the popup is closed
+          const form = document.querySelector('form'); // Get the form element
+          form.reset(); // Reset the form to its initial state
+
+          // Remove dimming effect from .group-child14
+          const groupChild14 = document.querySelector('.group-child14');
+          if (groupChild14) {
+              groupChild14.classList.remove('dimmed');
+          }
+
+          // Remove dimming effect from .group-child14
+          const iAccept = document.querySelector('.i-accept-the');
+          if (iAccept) {
+            iAccept.classList.remove('dimmed');
+          }
+    
+          // Also reset the dropdown and checkbox manually, as form.reset() won't reset those
+          document.getElementById("dropdown-selected").textContent = "Type of Phishing"; // Reset dropdown text
+          document.getElementById("phishing_type").value = ""; // Clear phishing type hidden input
+          document.getElementById("circle-checkbox").checked = false; // Uncheck the checkbox
+      }
+    </script>
+    
 
     
   </body>

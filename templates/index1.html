@@ -50,8 +50,9 @@
 
     .assistant {
         color: black;
-        font-size: 16px;
-        font-weight: 250;
+        font-size: 14px;
+        font-weight: 350;
+        margin-left: 99px;
         text-align: center;
         font-family: 'Lexend';
     }
@@ -90,16 +91,23 @@
         justify-content: center;
     }
 
+    .bot-box p {
+    margin: 0; /* remove default margin from <p> */
+    word-wrap: break-word; /* ensures text breaks inside <p> */
+    overflow-wrap: break-word; /* ensures long words wrap in <p> */
+}
+
     .user-box {
         position: relative;
         top: 10px;
         left: 320px; /* Center align horizontally (adjusted for responsiveness) */
         transform: translateX(-50%); /* Center adjust */
-        max-width: 80%; /* Allow dynamic resizing with a sensible max-width */
+        max-width: 100%; /* Allow dynamic resizing with a sensible max-width */
         width: auto; /* Let width adjust to content */
         height: auto; /* Let height adjust to content */
         background-color: #19D6BD;
         border-radius: 20px; /* Adjusted for a more balanced look */
+        margin-right: 50px;
         padding: 10px 15px; /* Increased horizontal padding for better readability */
         box-sizing: border-box;
         display: inline-block; /* Ensure the box wraps tightly around content */
@@ -112,7 +120,7 @@
     .message.user {
         margin: 10px 0;
         position: relative;
-        width: 100%;
+        width: 200px;
         text-align: left;
     }
 
@@ -192,29 +200,6 @@
         position: relative; /* To position the logo inside the div */
     }
 
-    .completionphishing-container {
-      width: 1200px;
-      margin: 0 auto;
-      margin-left: -100px;
-      margin-bottom: 10px;
-      border: 2px solid #AE0F0F;
-      border-radius: 15px;
-      padding: 20px;
-      position: relative;
-      background-color: white;
-    }
-
-    .completionphishing-header {
-      position: absolute;
-      top: -25px;
-      left: 20px;
-      font-size: 30px;
-      font-weight: bold;
-      background-color: white;
-      color: #AE0F0F;
-      padding: 0 10px;
-    }
-
     .completionphishing-content {
       margin-top: 20px;
       display: flex;
@@ -237,11 +222,38 @@
         width: 1200px;
         margin: 0 auto;
         margin-left: -100px;
+        margin-top: 440px;
         margin-bottom: 10px;
         border: 2px solid #19D6BD; /* Updated border color */
         border-radius: 15px;
         padding: 20px;
-        position: relative;
+        position: absolute;
+        background-color: white;
+    }
+
+    .completionphishing-container {
+      width: 1200px;
+      margin: 0 auto;
+      margin-left: -100px;
+      margin-top: 440px;
+      margin-bottom: 10px;
+      border: 2px solid #AE0F0F;
+      border-radius: 15px;
+      padding: 20px;
+      position: absolute;
+      background-color: white;
+    }
+
+    .completionunknown-container {
+        width: 1200px;
+        margin: 110px auto;
+        margin-left: -100px;
+        margin-top: 440px;;
+        margin-bottom: 10px;
+        border: 2px solid #000000; /* Updated border color */
+        border-radius: 15px;
+        padding: 20px;
+        position: absolute;
         background-color: white;
     }
 
@@ -253,6 +265,28 @@
       font-weight: bold;
       background-color: white;
       color: #19D6BD;
+      padding: 0 10px;
+    }
+
+    .completionunknown-header {
+        position: absolute;
+        top: -25px;
+        left: 20px;
+        font-size: 30px;
+        font-weight: bold;
+        background-color: white;
+        color: #000000;
+        padding: 0 10px;
+    }
+
+    .completionphishing-header {
+      position: absolute;
+      top: -25px;
+      left: 20px;
+      font-size: 30px;
+      font-weight: bold;
+      background-color: white;
+      color: #AE0F0F;
       padding: 0 10px;
     }
 
@@ -275,34 +309,26 @@
         position: relative; /* To position the logo inside the div */
     }
 
-    .completionunknown-container {
-        width: 1200px;
-        margin: 110px auto;
-        margin-left: -100px;
-        margin-bottom: 10px;
-        border: 2px solid #000000; /* Updated border color */
-        border-radius: 15px;
-        padding: 20px;
-        position: relative;
-        background-color: white;
-    }
-
-    .completionunknown-header {
-        position: absolute;
-        top: -25px;
-        left: 20px;
-        font-size: 30px;
-        font-weight: bold;
-        background-color: white;
-        color: #000000;
-        padding: 0 10px;
-    }
-
     .completionunknown-content {
         margin-top: 20px;
         display: flex;
         align-items: flex-start; /* Align image and text to the top */
         gap: 20px; /* Space between the image and text */
+    }
+
+    .textarea-container textarea {
+    font-size: 18px;
+    line-height: 1.6;
+    width: 340px;
+    resize: both;
+    padding-top: 12px;  /* Move both placeholder and text down */
+    }
+
+    /* Move only the placeholder text down */
+    .textarea-container textarea::placeholder {
+        color: #888;
+        font-size: 18px;
+        opacity: 1; /* Ensures the placeholder is visible */
     }
 
 
@@ -316,6 +342,9 @@
     .completionphishing-text {
       text-align: justify;
       font-size: 14px;
+      font-family: 'Lexend';
+      top:300px;
+      margin-bottom: 10px;
       color: #333;
       line-height: 1.6;
       flex-grow: 1; /* Allow the text to fill the remaining space */
@@ -679,8 +708,8 @@ document.getElementById('submitBtn').addEventListener('click', () => {
   // Add the spinning PNG
 const spinner = document.createElement('img');
 spinner.src = '../static/assets/logo-loading.png'; // Replace with the path to your PNG file
-spinner.style.width = '120px'; // Adjust size as needed
-spinner.style.height = '120px'; // Adjust size as needed
+spinner.style.width = '90px'; // Adjust size as needed
+spinner.style.height = '90px'; // Adjust size as needed
 spinner.style.animation = 'spin 2s linear infinite'; // Spinning animation
 loader.appendChild(spinner);
 
@@ -759,7 +788,7 @@ style.innerHTML = `
                             <div class="completionphishing-content">
                                 <img src="../static/assets/explanation-logo.png" alt="Image" class="completionphishing-image">
                                 <div class="completionphishing-text">
-                                    <strong>${result.chat_completion}</strong>
+                                    ${result.chat_completion}
                                 </div>
                             </div>
                         </div>
@@ -796,7 +825,7 @@ style.innerHTML = `
                             <div class="completionbenign-content">
                                 <img src="../static/assets/explanation-logo.png" alt="Image" class="completionphishing-image">
                                 <div class="completionphishing-text">
-                                    <strong>${result.chat_completion}</strong>
+                                    ${result.chat_completion}
                                 </div>
                             </div>
                         </div>
@@ -833,19 +862,14 @@ style.innerHTML = `
                             <div class="completionunknown-content">
                                 <img src="../static/assets/explanation-logo.png" alt="Image" class="completionphishing-image">
                                 <div class="completionphishing-text">
-                                    <strong>${result.chat_completion}</strong>
+                                    ${result.chat_completion}
                                 </div>
                             </div>
                         </div>
                     </div>
                 `;
                 resultsContainer.appendChild(resultDiv);
-                
-                const ResultConfidence = resultDiv.querySelector('.ResultAndConfidence');
-                if (ResultConfidence) {
-                    ResultConfidence.style.left = "10px"; // Adjust the position as needed
-                }
-
+              
                 
           } else {
               console.log('Unknown prediction:', result.prediction);
@@ -861,19 +885,53 @@ style.innerHTML = `
           // After appending results, adjust the position of ResultAndConfidence
           const selectedValue = document.getElementById("submissionButton").textContent;
           if (selectedValue === "Text Message") {
-              const ResultConfidence = document.querySelector('.ResultAndConfidence'); // Use querySelector to target the .prediction element
-              if (ResultConfidence) {
-                  ResultConfidence.style.top = "80px"; // Move the prediction down (adjust the value as needed)
+              const BenignContainer = document.querySelector('.completionbenign-container'); // Use querySelector to target the .prediction element
+              if (BenignContainer) {
+                BenignContainer.style.top = "180px"; // Move the prediction down (adjust the value as needed)
               }
+              
           }
 
           if (selectedValue === "Text Message") {
-              const ResultConfidence = document.querySelector('.completionunknown-container'); // Use querySelector to target the .prediction element
-              if (ResultConfidence) {
-                  ResultConfidence.style.top = "70px"; // Move the prediction down (adjust the value as needed)
+              const BenignContainer = document.querySelector('.completionphishing-container'); // Use querySelector to target the .prediction element
+              if (BenignContainer) {
+                BenignContainer.style.top = "180px"; // Move the prediction down (adjust the value as needed)
               }
+              
           }
-        
+
+          if (selectedValue === "Text Message") {
+              const BenignContainer = document.querySelector('.completionunknown-container'); // Use querySelector to target the .prediction element
+              if (BenignContainer) {
+                BenignContainer.style.top = "180px"; // Move the prediction down (adjust the value as needed)
+              }
+              
+          }
+
+          if (selectedValue === "Text Message") {
+              const Prediction = document.querySelector('.prediction');
+              if (Prediction) {
+                Prediction.style.top = "300px";
+              }
+              
+          }
+
+          if (selectedValue === "Text Message") {
+              const Confidence = document.querySelector('.confidence');
+              if (Confidence) {
+                Confidence.style.top = "250px";
+              }
+              
+          }
+
+          if (selectedValue === "Text Message") {
+              const Buttons = document.querySelector('.rectangle-parent4');
+              if (Buttons) {
+                Buttons.style.top = "70px";
+              }
+              
+          }
+
 
         });
         });
@@ -944,6 +1002,9 @@ style.innerHTML = `
                 const botBox = document.createElement('div');
                 botBox.classList.add('bot-box');
                 botBox.innerHTML = `<p>${data.response}</p>`;
+
+                // Apply padding-left to shift text to the right
+                botBox.style.paddingLeft = '20px';  // Adjust the value as needed
 
                 // Append bot box to the assistant's message
                 assistantDiv.appendChild(botBox);

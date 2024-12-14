@@ -262,6 +262,12 @@
   width: 100px;
 }
 
+/* Remove autofill background color */
+.input-rectangle:-webkit-autofill {
+  background-color: transparent !important; /* Remove autofill background */
+  transition: background-color 5000s ease-in-out 0s; /* Prevent the autofill background from changing */
+}
+
 /* Input and textarea styles */
 .input-rectangle-message {
   flex: 1;
@@ -273,6 +279,13 @@
   outline: none;
   width: 100px;
 }
+
+/* Remove autofill background color */
+.input-rectangle-message:-webkit-autofill {
+  background-color: transparent !important; /* Remove autofill background */
+  transition: background-color 5000s ease-in-out 0s; /* Prevent the autofill background from changing */
+}
+
 .submit {
   font-size: 16px;
   color: white;

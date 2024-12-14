@@ -22,6 +22,83 @@
         margin-top: 450px;
       }
 
+      .submitted {
+            position: absolute;
+            top: 300px;
+            left: 380px;
+            width: 435px;
+            height: 271px;
+            background: #FFFFFF;
+            border-radius: 50px;
+            z-index: 5000;
+        }
+
+        /* Optional: Overlay background when popup is visible */
+        body.popup-visible::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+
+        .submitted .group-66 {
+            position: absolute;
+            width: 435px;
+            height: 271px;
+            background: linear-gradient(180deg, #19D6BD 0%, #0BB8E0 100%);
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+            border-radius: 50px;
+        }
+
+        .submitted .reportlogo {
+            position: absolute;
+            width: 42px;
+            height: 42px;
+            left: 44px;
+            top: 39px;
+        }
+
+        .submitted .x-white {
+            position: absolute;
+            width: 32px;
+            height: 32px;
+            left: 364px;
+            top: 35px;
+        }
+
+        .submitted .thank-you {
+            position: absolute;
+            width: 261px;
+            height: 30px;
+            left: 48px;
+            top: 109px;
+            font-style: normal;
+            font-weight: 500;
+            font-size: 24px;
+            line-height: 30px;
+            text-align: justify;
+            letter-spacing: 0.02em;
+            color: #FFFFFF;
+        }
+
+        .submitted .report-message {
+            position: absolute;
+            width: 348px;
+            height: 69px;
+            left: 48px;
+            top: 155px;
+            font-style: normal;
+            font-weight: 500;
+            font-size: 18px;
+            line-height: 30px;
+            letter-spacing: 0.02em;
+            color: #FFFFFF;
+        }
+
     </style>
 
   </head>
@@ -289,7 +366,8 @@
     <br>
     <p class style="margin-left: 230px;";=section__text__p1">We value your feedback and are here to assist with any questions or concerns you may have. <br>Your input helps us improve our services and provide you with the best experience possible. </p>
     <br>
-    <form action="/submit-contact" method="POST" enctype="multipart/form-data">
+    
+    <form id = "Form" action="/submit-contact" method="POST" enctype="multipart/form-data" onsubmit="event.preventDefault(); showPopup();" autocomplete="off">
       <div class="contact-us1">
           <!-- Name Input -->
           <div class="group-child4">
@@ -311,16 +389,19 @@
   
           <!-- Subject Button -->
           <div class="group-child6">
-              <img class="patchquestionfill-icon" alt="" src="../static/assets/subject.png" />
-              <button type="button" id="subjectButton" class="button-rectangle">Select a subject</button>
-              <div class="options-container" style="display: none;">
-                  <label class="option-label" onclick="selectSubject('General Inquiry')">General Inquiry</label>
-                  <label class="option-label" onclick="selectSubject('Services')">Services</label>
-                  <label class="option-label" onclick="selectSubject('Features')">Features</label>
-                  <label class="option-label" onclick="selectSubject('Phishing Check Tool')">Phishing Check Tool</label>
-                  <label class="option-label" onclick="selectSubject('Phishing Report Tool')">Phishing Report Tool</label>
-              </div>
-          </div>
+            <img class="patchquestionfill-icon" alt="" src="../static/assets/subject.png" />
+            <button type="button" id="subjectButton" class="button-rectangle">Select a subject</button>
+            <div class="options-container" style="display: none;">
+                <label class="option-label" onclick="selectSubject('General Inquiry')">General Inquiry</label>
+                <label class="option-label" onclick="selectSubject('Services')">Services</label>
+                <label class="option-label" onclick="selectSubject('Features')">Features</label>
+                <label class="option-label" onclick="selectSubject('Phishing Check Tool')">Phishing Check Tool</label>
+                <label class="option-label" onclick="selectSubject('Phishing Report Tool')">Phishing Report Tool</label>
+            </div>
+        </div>
+
+        <input type="hidden" id="subjectInput" name="subject" value="Select a subject">
+        
   
           <!-- Message Input -->
           <div class="group-child7">
@@ -335,16 +416,15 @@
           <div class="group-child8">
               <button type="submit" class="submit">Submit</button>
           </div>
-
-          <!-- Message below the submit button -->
-          {% if message %}
-          <div class="response-message-contact" style="color: {% if success %}#19D6BD{% else %}#AE0F0F{% endif %};">
-            {{ message }}
-          </div>
-          {% endif %}
       </div>
   </form>
-  
+  <div id="submitted-popup" class="submitted" style="display: none;">
+    <div class="group-66"></div>
+    <img src="../static/assets/LigtasBanko-Logo-White.png" alt="LigtasBanko Logo" class="reportlogo">
+    <img src="../static/assets/x-white.png" alt="Close" class="x-white" onclick="closePopup()">
+    <div class="thank-you">Thank you!</div>
+    <div class="report-message">We appreciate your feedback and are taking action to address it.</div>
+  </div>
     
   </section>
     <footer>
@@ -398,29 +478,141 @@
     <script src="{{ url_for('static', filename='scripts/main.js') }}"></script>
 
     <script>
-      const data = {
-          name: document.querySelector('input[name="name"]').value,
-          email: document.querySelector('input[name="email"]').value,
-          subject: selectedSubject,  // assuming you have a variable to store the selected subject
-          message: document.querySelector('input[name="message"]').value,
+
+      // Function to reset the form
+      function resetForm() {
+        const form = document.getElementById('Form');
+        form.reset();
+      }
+
+      // Reset the form when the page is loaded or refreshed
+      window.onload = function() {
+        resetForm();
       };
 
-      fetch("/submit-contact", {
-          method: "POST",
-          headers: {
-              "Content-Type": "application/json",
-          },
-          body: JSON.stringify(data),
-      })
-      .then((response) => response.json())  // Ensure to parse the response as JSON
-      .then((data) => {
-          // Handle success or failure based on the response
-          alert(data.message);
-      })
-      .catch((error) => {
-          alert("Error submitting report.");
-          console.error(error);
-      });
+    // Function to close the popup
+    function closePopup() {
+        const popup = document.getElementById('submitted-popup');
+        popup.style.display = 'none';
+        document.body.classList.remove('popup-visible');
+    }
+
+    // Function to handle subject selection
+function selectSubject(subject) {
+    // Update the button text to the selected subject
+    document.getElementById("subjectButton").innerText = subject;
+
+    // Update the hidden input field value to the selected subject
+    document.getElementById("subjectInput").value = subject;
+
+    // Hide the options after selection
+    document.querySelector(".options-container").style.display = "none";
+}
+// Function to submit the form
+function showPopup() {
+  const popup = document.getElementById('submitted-popup');
+  popup.style.display = 'block';
+  document.body.classList.add('popup-visible');
+  
+  // Create a new FormData object from the form
+  const form = document.getElementById('Form');
+  const formData = new FormData(form);
+
+  // Convert FormData to a plain object (to send as JSON)
+  const data = {};
+  formData.forEach((value, key) => {
+    data[key] = value;
+  });
+
+  console.log("Data being sent:", data); // Check the data structure
+
+  fetch("/submit-contact", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data), // Send the data as JSON
+  })
+  .then((response) => response.json())
+  .then((data) => {
+    if (data.success) {
+      // Show success message and reset the form
+      alert(data.message);
+      resetForm();  // Reset the form fields after submission
+      closePopup();  // Hide the popup on success
+    } else {
+      // Show error message if submission fails
+      alert(data.message);
+    }
+  })
+  .catch((error) => {
+    // Log the error without showing the alert
+    console.error("Error submitting report:", error);
+  });
+}
+document.addEventListener("DOMContentLoaded", function() {
+    // Get the 'x-white' button and form element
+    const xWhiteButton = document.querySelector('.x-white');
+    const form = document.getElementById('Form');  // Target the form
+    const subjectButton = document.getElementById('subjectButton'); // Target the subject button
+    const subjectInput = document.getElementById('subjectInput'); // Hidden subject input
+    const optionsContainer = document.querySelector('.options-container'); // Options container
+
+    // Function to reset the form and subject dropdown
+    function resetFormAndSubject() {
+        // Reset the form fields
+        if (form) {
+            form.reset();
+        }
+
+        // Reset the subject dropdown button text and hidden input value
+        if (subjectButton && subjectInput) {
+            subjectButton.innerText = 'Select a subject'; // Set the button text to default
+            subjectInput.value = 'Select a subject'; // Reset the hidden input value
+        }
+
+        // Close the dropdown options if open
+        if (optionsContainer) {
+            optionsContainer.style.display = 'none';
+        }
+
+        // Optionally, hide the popup or modal
+        const popup = document.querySelector('.submitted');
+        if (popup) {
+            popup.style.display = 'none'; // Hide the popup
+        }
+
+        // Remove the overlay class if present
+        document.body.classList.remove('popup-visible');
+    }
+
+    // Listen for click event on the 'x-white' button
+    if (xWhiteButton) {
+        xWhiteButton.addEventListener('click', function() {
+            resetFormAndSubject();
+        });
+    }
+
+    // Function to handle subject selection
+    function selectSubject(subject) {
+        // Update the button text to the selected subject
+        subjectButton.innerText = subject;
+
+        // Update the hidden input field value to the selected subject
+        subjectInput.value = subject;
+
+        // Hide the options after selection
+        optionsContainer.style.display = 'none';
+    }
+
+    // Attach subject selection to the labels in the options container
+    const subjectLabels = document.querySelectorAll('.option-label');
+    subjectLabels.forEach(label => {
+        label.addEventListener('click', function() {
+            selectSubject(label.innerText);
+        });
+    });
+});
 
 
     </script>
