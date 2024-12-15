@@ -686,7 +686,7 @@ nav {
 .confidence {
   font-size: 28px;
   font-family: 'Poppins';
-  left:-60px;
+  left:-45px;
   top: 180px;
   position: relative;
   font-weight: bold;
@@ -714,7 +714,7 @@ nav {
   position: absolute;
   /* Add your CSS styles here */
   width: 190px; /* Example width */
-  top: -35px;
+  top: -45px;
   left: 720px;
   /* Add more styles as needed */
 }

@@ -222,7 +222,7 @@
         width: 1200px;
         margin: 0 auto;
         margin-left: -100px;
-        margin-top: 440px;
+        margin-top: 460px;
         margin-bottom: 10px;
         border: 2px solid #19D6BD; /* Updated border color */
         border-radius: 15px;
@@ -235,7 +235,7 @@
       width: 1200px;
       margin: 0 auto;
       margin-left: -100px;
-      margin-top: 440px;
+      margin-top: 460px;
       margin-bottom: 10px;
       border: 2px solid #AE0F0F;
       border-radius: 15px;
@@ -248,7 +248,7 @@
         width: 1200px;
         margin: 110px auto;
         margin-left: -100px;
-        margin-top: 440px;;
+        margin-top: 460px;;
         margin-bottom: 10px;
         border: 2px solid #000000; /* Updated border color */
         border-radius: 15px;
@@ -363,6 +363,166 @@
     z-index: 2001;
 }
 
+.phishing-steps-container {
+      position: relative;
+        display: flex;
+        flex-direction: row; /* Aligns the steps side by side */
+        margin-top: 470px; /* Adjust as needed for spacing */
+      }
+
+.Phishing-Rectangle-Step1 {
+      position: relative;
+      width: 425px;
+      height: 360px;
+      left: -10px;
+      top: 236px;
+      background: linear-gradient(180deg, #AE0F0F 0%, #5B0009 100%);
+      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+      border-radius: 50px;
+    }
+
+    .Phishing-Rectangle-Step2 {
+      position: relative;
+      width: 425px;
+      height: 360px;
+      left: 50px;
+      top: 236px;
+      background: linear-gradient(180deg, #AE0F0F 0%, #5B0009 100%);
+      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+      border-radius: 50px;
+    }
+
+    .Phishing-Rectangle-Step3 {
+      position: relative;
+      width: 425px;
+      height: 360px;
+      left: 110px;
+      top: 236px;
+      background: linear-gradient(180deg, #AE0F0F 0%, #5B0009 100%);
+      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+      border-radius: 50px;
+    }
+
+    .benign-steps-container {
+      position: relative;
+        display: flex;
+        flex-direction: row; /* Aligns the steps side by side */
+        margin-top: 470px; /* Adjust as needed for spacing */
+      }
+
+
+    .Benign-Rectangle-Step1 {
+      position: relative;
+      width: 425px;
+      height: 360px;
+      left: -10px;
+      top: 236px;
+      background: linear-gradient(180deg, #19D6BD 0%, #0BB8E0 100%);
+      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+      border-radius: 50px;
+    }
+
+    .Benign-Rectangle-Step2 {
+      position: relative;
+      width: 425px;
+      height: 360px;
+      left: 50px;
+      top: 236px;
+      background: linear-gradient(180deg, #19D6BD 0%, #0BB8E0 100%);
+      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+      border-radius: 50px;
+    }
+
+    .Benign-Rectangle-Step3 {
+      position: relative;
+      width: 425px;
+      height: 360px;
+      left: 110px;
+      top: 236px;
+      background: linear-gradient(180deg, #19D6BD 0%, #0BB8E0 100%);
+      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+      border-radius: 50px;
+    }
+
+    .block-text-phishing {
+      position: absolute;
+      text-align: left;
+      width: 300px;
+      height: 89px;
+      left: 28px;
+      top: 110px;
+      font-family: 'Poppins', sans-serif;
+      font-style: normal;
+      font-weight: 800;
+      font-size: 18px;
+      line-height: 35px;
+      letter-spacing: 0.03em;
+      color: #FFFFFF;
+    }
+
+    .step-number {
+      position: absolute;
+      width: 90px;
+      height: 60px;
+      left: 5px;
+      top: 40px;
+      font-family: 'Poppins', sans-serif;
+      font-style: normal;
+      font-weight: 700;
+      font-size: 42px;
+      line-height: 40px;
+      letter-spacing: 0.03em;
+      color: #FFFFFF;
+    }
+
+    .description {
+      position: absolute;
+      width: 250px;
+      height: 80px;
+      left: 28px;
+      top: 180px;
+      font-family: 'Lexend', sans-serif;
+      font-style: normal;
+      text-align: left;
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 30px;
+      letter-spacing: 0.06em;
+      color: #FFFFFF;
+    }
+
+    .description-phishing {
+      position: absolute;
+      width: 250px;
+      height: 80px;
+      left: 28px;
+      top: 180px;
+      font-family: 'Lexend', sans-serif;
+      font-style: normal;
+      text-align: left;
+      font-weight: 300;
+      font-size: 14px;
+      line-height: 30px;
+      letter-spacing: 0.06em;
+      color: #FFFFFF;
+    }
+
+    .ligtasbanko2 {
+  overflow: hidden;
+  margin-top: 400px;
+  width: 1200px;
+  position:relative;
+  background-color: var(--color-white);
+  height: 380px;
+  
+  text-align: left;
+  font-size: var(--font-size-xl);
+  color: var(--color-darkslategray);
+  font-family: var(--font-poppins);
+  margin-left: 200px;
+
+}
+
 
 
 
@@ -387,6 +547,7 @@
             <li><a href="{{ url_for('email_pwn') }}#profile-id">Check</a></li>
             <li><a href="#detect">Detect</a></li>
             <li><a href="{{ url_for('index2') }}#profile-id">Report</a></li>
+            <li><a href="{{ url_for('FAQs') }}#profile-id">FAQs</a></li>
         </ul>
     </div>
   </nav>
@@ -409,6 +570,9 @@
               <div class="submit2" id="clearBtn">Clear</div>
             </div>
         </div>
+
+
+
 
         <div id="results" class="results"></div>
         <div class="group-parent1">
@@ -792,9 +956,38 @@ style.innerHTML = `
                                 </div>
                             </div>
                         </div>
+
+                        <div class="benign-steps-container">
+                          <div class="Phishing-Rectangle-Step1">
+                                  <div class="step-number">01</div>
+                                  <div class="block-text-phishing">Block the Number/Email Address:</div>
+                                  <div class="description-phishing">Prevent further interactions with the phishing source.</div>
+                                </div>
+
+                              <div class="Phishing-Rectangle-Step2">
+                              <div class="step-number">02</div>
+                                  <div class="block-text-phishing">Change Your Password/Activate 2FA:</div>
+                                  <div class="description-phishing">Immediately secure your accounts by updating passwords and enabling Two-Factor Authentication.</div>
+                                </div>
+
+
+
+                              <div class="Phishing-Rectangle-Step3">
+                              <div class="step-number">03</div>
+                                  <div class="block-text-phishing">Report to Our Website:</div>
+                                  <div class="description-phishing">Notify us to help improve the detection system and prevent others from falling victim.</div>
+                                </div>
                     </div>
                 `;
                 resultsContainer.appendChild(resultDiv);
+
+                // After adding the result to the DOM, change the margin-top of .ligtasbanko2
+                const ligtasbanko2 = document.querySelector(".ligtasbanko2");
+                    if (ligtasbanko2) {
+                        ligtasbanko2.style.marginTop = "600px";  // Adjust this value as needed
+                    } else {
+                        console.log("Could not find .ligtasbanko2 element");
+                    }
           } else if (result.prediction === "BENIGN") {
               confidenceColor = 'green';
               imageSrc = '../static/assets/SAFE1.png';
@@ -829,9 +1022,40 @@ style.innerHTML = `
                                 </div>
                             </div>
                         </div>
+                        <div class="benign-steps-container">
+                          <div class="Benign-Rectangle-Step1">
+                            <div class="step-number">01</div>
+                                <div class="block-text">Identify Safe Links:</div>
+                                <div class="description">Look for "https" and ensure the URL matches the official website.</div>
+                              </div>
+
+
+                            <div class="Benign-Rectangle-Step2">
+                            <div class="step-number">02</div>
+                                <div class="block-text">Stay Cautious:</div>
+                                <div class="description">Avoid clicking links from unknown sources or responding to urgent requests for personal information.</div>
+                              </div>
+
+
+                            <div class="Benign-Rectangle-Step3">
+                            <div class="step-number">03</div>
+                                <div class="block-text">Practice Good Habits:</div>
+                                <div class="description">Regularly update passwords, enable Two-Factor Authentication, and stay informed about phishing tactics.</div>
+                              </div>
+                              </div>
+
                     </div>
                 `;
                 resultsContainer.appendChild(resultDiv);
+
+                    // After adding the result to the DOM, change the margin-top of .ligtasbanko2
+                    const ligtasbanko2 = document.querySelector(".ligtasbanko2");
+                    if (ligtasbanko2) {
+                        ligtasbanko2.style.marginTop = "600px";  // Adjust this value as needed
+                    } else {
+                        console.log("Could not find .ligtasbanko2 element");
+                    }
+
           } else if (result.prediction === "UNREACHABLE") {
               console.log('UNREACHABLE detected');
               confidenceColor = 'gray'; // Set gray for unreachable
@@ -874,6 +1098,8 @@ style.innerHTML = `
           } else {
               console.log('Unknown prediction:', result.prediction);
           }
+          console.log("Result.prediction is: ", result.prediction);
+
 
           // Ensure result.explanation is an array, else provide a default message
           const explanationList = Array.isArray(result.explanation) ? 
@@ -1090,7 +1316,9 @@ style.innerHTML = `
 
       // Call clearMessages when the page loads
       window.addEventListener('load', clearMessages); 
-      </script>
+      
+</script>
+
     
 
   

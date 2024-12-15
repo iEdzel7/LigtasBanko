@@ -653,6 +653,7 @@ def analyze_url():
             }
             results.append(result)
         elif website_status == "Website is reachable" and prediction > 0.5:
+            print("Prediction value is:", prediction)
             # Add the URL to the blocked websites list
             with open("blocked_websites.json", "r+") as file:
                 try:
@@ -723,6 +724,7 @@ def analyze_url():
             }
             results.append(result)
         elif website_status == "Website is reachable" and prediction < 0.5:
+            print("Prediction value is:", prediction)
             features = explain_url(url)
             content = f"This text message or URL '{user_input}' is predicted to be benign. Kindly explain why in 1 paragraph: 1. Explain more what that URL or text message all about. 2. And explain why that URL or text message is considered as benign. 3. talk in 1st person and act like a bank security expert 4. don't use her/him. 5. And just go straight to the answer"
             chat_completion = client.chat.completions.create(
@@ -881,6 +883,10 @@ def detect_phishing():
 @app.route('/report_phishing')
 def report_phishing():
     return render_template('index2.html')
+
+@app.route('/FAQs')
+def FAQs():
+    return render_template('FAQs.html')
 
 from flask import redirect, url_for
 
