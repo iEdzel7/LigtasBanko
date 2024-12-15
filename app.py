@@ -782,14 +782,14 @@ models = {
     "mixtral-8x7b-32768": {"name": "Mixtral-8x7b-Instruct-v0.1", "tokens": 32768, "developer": "Mistral"}
 }
 
-@app.route('/index1')
+@app.route('/')
 def index():
-    # Clear session and 'analysis_results' to reset on refresh
-    session.clear()  # Clear the entire session to ensure all data is removed
-    print("Session cleared on index route.")
-    return render_template('index1.html')
+    return render_template('index.html')
+
 @app.route('/index1')
 def index1():
+    session.clear()  # Clear the entire session to ensure all data is removed
+    print("Session cleared on index route.")
     # Initialize chat history and selected model in session
     if "messages" not in session:
         session.clear()
@@ -882,12 +882,12 @@ def detect_phishing():
 def report_phishing():
     return render_template('index2.html')
 
+from flask import redirect, url_for
+
 @app.route("/email_pwn", methods=["GET", "POST"])
 def email_pwn():
-    result = None
-    email = None
-    breaches = None
-    total_breaches = 0
+    password_url = "https://myaccount.google.com/intro/signinoptions/password"  # Default to Gmail's password URL
+    twofa_url = "https://myaccount.google.com/signinoptions/two-step-verification"  # Default to Gmail's 2FA URL
 
     if request.method == "POST":
         email = request.form["email"]
@@ -896,14 +896,57 @@ def email_pwn():
 
         breaches = result.get("data", [])
         total_breaches = result.get("total_breaches", "")
+        hide_parent_email2 = bool(breaches) or result.get("status_code") == 404
+
+        # Extract domain from the email
+        domain = email.split('@')[1] if '@' in email else ''
+
+        # Set URLs based on the domain
+        if domain == "gmail.com":
+            password_url = "https://myaccount.google.com/intro/signinoptions/password"
+            twofa_url = "https://myaccount.google.com/signinoptions/two-step-verification"
+        elif domain == "yahoo.com":
+            password_url = "https://login.yahoo.com/myaccount/security/?.lang=en-US&.intl=us&.src=yhelp&.scrumb=WGDrhd8EJT8&anchorId=changePasswordCard"
+            twofa_url = "https://login.yahoo.com/myaccount/security/?.lang=en-US&.intl=us&.src=yhelp&.scrumb=WGDrhd8EJT8&anchorId=changePasswordCard"
+        else:
+            # Default URLs for any other domain
+            password_url = "https://account.live.com/password/Change"
+            twofa_url = "https://account.live.com/proofs/EnableTfa"
+
+        # Store data temporarily in session
+        session["result"] = result
+        session["breaches"] = breaches
+        session["email"] = email
+        session["total_breaches"] = total_breaches
+        session["hide_parent_email2"] = hide_parent_email2
+        session["password_url"] = password_url
+        session["twofa_url"] = twofa_url
+
+        return redirect(url_for("email_pwn"))  # Redirect to avoid resubmission
+
+    # Handle GET request or redirected state
+    result = session.pop("result", None)
+    breaches = session.pop("breaches", None)
+    email = session.pop("email", None)
+    total_breaches = session.pop("total_breaches", 0)
+    hide_parent_email2 = session.pop("hide_parent_email2", False)
+    password_url = session.pop("password_url", "")
+    twofa_url = session.pop("twofa_url", "")
+
+    return render_template(
+        "email.html",
+        result=result,
+        breaches=breaches,
+        email=email,
+        total_breaches=total_breaches,
+        hide_parent_email2=hide_parent_email2,
+        password_url=password_url,
+        twofa_url=twofa_url
+    )
 
 
-        print(f"Breaches count: {len(breaches)}")
 
 
-        if "data" in result:
-            breaches = result["data"]
-    return render_template("email.html", result=result, breaches=breaches, email=email, total_breaches=total_breaches)
 
 from threading import Thread
 from flask import current_app

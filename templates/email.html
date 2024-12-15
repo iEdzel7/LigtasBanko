@@ -11,6 +11,187 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <style>
 
+  .rectangle-parentEmail {
+    position: absolute;
+    top: 25px;
+    left: 300px;
+    width: 184.8px;
+    height: 55.9px;
+    cursor: pointer;
+  }
+  .submitEmail {
+    position: absolute;
+    top: 137px;
+    left: 30px;
+    letter-spacing: 0.05em;
+    line-height: 22.54px;
+    font-weight: 500;
+    display: inline-block;
+    width: 100%;
+    height: 29.8px;
+    color: white;
+    z-index: 2000;
+  }
+
+  .group-childEmail {
+    position: absolute;
+    top: 120px;
+    left: 0;
+    border-radius: 2rem;
+    background: linear-gradient(90deg, #19d6bd 23%, #0bb8e0);
+    width: 224.8px;
+    height: 55.9px;
+  }
+
+  .rectangle-parent2FA {
+    position: absolute;
+    top: 27px;
+    left: 325px;
+    width: 184.8px;
+    height: 55.9px;
+    cursor: pointer;
+  }
+  .submit2FA {
+    position: absolute;
+    top: 137px;
+    left: 40px;
+    letter-spacing: 0.05em;
+    line-height: 22.54px;
+    font-weight: 500;
+    display: inline-block;
+    width: 100%;
+    height: 29.8px;
+    color: white;
+    z-index: 2000;
+  }
+
+  .group-child2FA {
+    position: absolute;
+    top: 120px;
+    left: 0;
+    border-radius: 2rem;
+    background: linear-gradient(90deg, #19d6bd 23%, #0bb8e0);
+    width: 174.8px;
+    height: 55.9px;
+  }
+
+.pwn-container {
+      width: 500px;
+      margin: 0 auto;
+      margin-left: 200px;
+      margin-top: 100px;
+      margin-bottom: 10px;
+      border: 2px solid #000000;
+      border-radius: 15px;
+      padding: 20px;
+      position: absolute;
+      background-color: white;
+    }
+
+    .whatWill-container {
+      width: 500px;
+      margin: 0 auto;
+      margin-left: 200px;
+      margin-top: 300px;
+      margin-bottom: 10px;
+      border: 2px solid #000000;
+      border-radius: 15px;
+      padding: 20px;
+      position: absolute;
+      background-color: white;
+    }
+
+    .password-container {
+      width: 500px;
+      height: 180px;
+      margin: 0 auto;
+      margin-left: 770px;
+      margin-top: 100px;
+      margin-bottom: 10px;
+      border: 2px solid #000000;
+      border-radius: 15px;
+      padding: 20px;
+      position: absolute;
+      background-color: white;
+    }
+
+    .twoFA-container {
+      width: 500px;
+      height: 180px;
+      margin: 0 auto;
+      margin-left: 770px;
+      margin-top: 350px;
+      margin-bottom: 10px;
+      border: 2px solid #000000;
+      border-radius: 15px;
+      padding: 20px;
+      position: absolute;
+      background-color: white;
+    }
+
+
+    .pwn-header {
+      position: absolute;
+      top: -25px;
+      left: 20px;
+      font-size: 30px;
+      font-weight: bold;
+      background-color: white;
+      color: #000000;
+      padding: 0 10px;
+    }
+
+    .pwn-content {
+      margin-top: 20px;
+      display: flex;
+      align-items: flex-start; /* Align image and text to the top */
+      gap: 20px; /* Space between the image and text */
+    }
+
+    .pwn-text {
+      margin-left: 10px;
+      margin-right: 10px;
+      text-align: justify;
+      font-size: 14px;
+      font-family: 'Lexend';
+      top:300px;
+      margin-bottom: 10px;
+      color: #000000;
+      font-weight: 400;
+      line-height: 1.6;
+      flex-grow: 1; /* Allow the text to fill the remaining space */
+      overflow-wrap: break-word; /* Break long words */
+    }
+    .gradient-text {
+        background: linear-gradient(to right, #19D6BD, #0BB8E0); /* Gradient colors */
+        -webkit-background-clip: text; /* Clips the background to the text */
+        -webkit-text-fill-color: transparent; /* Makes the text color transparent to show the gradient */
+      }
+
+
+        .ellipse-parent-email2 {
+          position: absolute;
+          top: 450px;
+          left: 565px;
+          width: 579px;
+          height: 23px;
+          font-size: var(--font-size-smi-6);
+          z-index: 1005;
+          }
+
+          #breach-results.has-breach + #ellipse-parent-email {
+            display: none;
+        }
+
+        .i-accept-the-email {
+            font-size: 12px;
+            margin-top: -5.5px;
+            margin-left: 30px;
+            color: #292929;
+            }
+
+
+
         .pwnchecker-info {
             text-align: center;
             font-size: 18px;
@@ -360,23 +541,25 @@
         <br>
         <p style="color: #292929; letter-spacing: 0.06em; font-weight: 400; font-size: 15px;">See if it's part of a data breach and take steps to secure your account.</p>
     </div>
+
+
     <div class="email-container">
       <form action="/email_pwn" method="POST" id="pwnchecker-form">
-          <input type="email" class="email-input" name="email" style="font-family: 'Poppins';" placeholder="Enter your email address..." required>
-          <button type="submit" class="submit-button" id="submit-button">Submit</button>
+        <input type="email" id="userEmail" class="email-input" name="email" style="font-family: 'Poppins';" placeholder="Enter your email address..." required>
+        <button type="submit" class="submit-button" id="submit-button">Submit</button>
       </form>
-  </div>
-  
-  <div class="ellipse-parent-email">
-      <input type="checkbox" id="circle-checkbox" class="ellipse-div">
-      <div class="i-accept-the-email">
-          I accept the <a class="a2" style="color: #0bb8e0; text-decoration: underline;" href="{{ url_for('static', filename='Docs/LigtasBanko-TermsandConditions.pdf') }}" target="_blank">Terms and Conditions</a> and 
-          <a class="a2" style="color: #0bb8e0; text-decoration: underline;" href="{{ url_for('static', filename='Docs/LigtasBanko-PrivacyPolicy.pdf') }}" target="_blank">Privacy Policy.</a>
-      </div>
-  </div>
-  
-
-
+    </div>
+    
+    <div class="ellipse-parent-email2" id="email-terms-container" style="display: {% if hide_parent_email2 %}none{% else %}block{% endif %};">
+        <input type="checkbox" id="circle-checkbox" class="ellipse-div">
+        <div class="i-accept-the-email">
+            I accept the <a class="a2" style="color: #0bb8e0; text-decoration: underline;" href="{{ url_for('static', filename='Docs/LigtasBanko-TermsandConditions.pdf') }}" target="_blank">Terms and Conditions</a> and 
+            <a class="a2" style="color: #0bb8e0; text-decoration: underline;" href="{{ url_for('static', filename='Docs/LigtasBanko-PrivacyPolicy.pdf') }}" target="_blank">Privacy Policy.</a>
+        </div>
+    </div>
+    
+    
+    
 
   <div class="pwned-breach-results {% if breaches %}has-breach{% endif %}" id="breach-results">
     {% if breaches %}
@@ -412,6 +595,59 @@
         <p>{{ result.message }}</p>
     {% endif %}
 </div>
+
+
+<div class="pwn-container">
+  <div class="pwn-header">What is PwN?</div>
+  <div class="pwn-content">
+      <div class="pwn-text">
+        "PwN" is a slang term meaning that a <strong>person’s data has been compromised or stolen in a breach.</strong> It indicates that sensitive information, like email addresses or passwords, <strong>been exposed or taken by unauthorized parties,</strong> often through hacking.
+      </div>
+  </div>
+</div>
+
+<div class="whatWill-container">
+<div class="pwn-header">What will I do?</div>
+<div class="pwn-content">
+    <div class="pwn-text">
+      If your data has been "pwned," it's important to take action quickly. <strong>hange your affected passwords immediately,</strong> especially for sensitive accounts like email, banking, and social media. <br>
+      <br>
+      Use <span class="gradient-text">strong, unique passwords</span> for each account and consider enabling two-factor authentication (2FA) for added security. <br>
+      <br>
+      Additionally, monitor your accounts for any suspicious activity and alert relevant service providers if necessary.
+    </div>
+</div>
+</div>
+
+<div class="password-container">
+  <div class="pwn-header">Change your password</div>
+  <div class="pwn-content">
+    <div class="pwn-text">
+      <span class="gradient-text">Regularly update your passwords</span> to make it harder for hackers to access your accounts. Use strong, unique passwords that combine uppercase and lowercase letters, numbers, and symbols.
+    </div>
+    <div class="rectangle-parentEmail" id="passwordButton" onclick="window.open('{{ password_url }}')">
+      <div class="group-childEmail"></div>
+      <div class="submitEmail" id="submitPasswordBtn">Change password</div>
+    </div>
+  </div>
+</div>
+
+<div class="twoFA-container">
+  <div class="pwn-header">Enable 2FA</div>
+  <div class="pwn-content">
+    <div class="pwn-text">
+      Activate <span class="gradient-text">two-factor authentication (2FA)</span> for an extra layer of security. This requires a secondary code or device to verify your identity, protecting your account even if your password is compromised.
+    </div>
+    <div class="rectangle-parent2FA" id="twoFAButton" onclick="window.open('{{ twofa_url }}')">
+      <div class="group-child2FA"></div>
+      <div class="submit2FA" id="submit2FABtn">Enable 2FA</div>
+    </div>
+  </div>
+</div>
+
+
+
+
   
     <footer>
       <div class="ligtasbankoemail1">
@@ -460,53 +696,106 @@
       </div>
     </footer>
     <script>
-
-      // This function will clear the results when the page is refreshed.
-  window.onload = function() {
-    // Reset breach result display on page load
-    const breachResults = document.querySelector('.breach-results');
-    if (breachResults) {
-      breachResults.classList.remove('has-breach');  // Hides breach results
-    }
-    // Optionally, clear any stored values (like email input) after refresh
-    document.getElementById('pwnchecker-form').reset();
-  };
-
-      document.addEventListener("DOMContentLoaded", function () {
-    const breachResults = document.querySelector(".pwned-breach-results");
-    const ellipseParentEmail = document.querySelector(".ellipse-parent-email");
-
-    // Check if the breach results element has the 'has-breach' class
-    if (breachResults.classList.contains("has-breach")) {
-        ellipseParentEmail.style.display = "none"; // Hide the element
-    }
-});
+    
     document.addEventListener("DOMContentLoaded", () => {
-      const noBreachCard = document.getElementById("no-breach-card");
-      const acceptEmailDiv = document.querySelector(".ellipse-parent-email");
-
-      if (noBreachCard) {
-        acceptEmailDiv.style.display = "none";
-      }
-    });
-
-    document.addEventListener("DOMContentLoaded", () => {
-    const form = document.getElementById("pwnchecker-form");
     const checkbox = document.getElementById("circle-checkbox");
-    const submitButton = document.getElementById("submit-button");
+    const pwncheckerForm = document.getElementById("pwnchecker-form");
+    const emailTermsContainer = document.getElementById("email-terms-container");
 
-    // Prevent form submission if the checkbox is not checked
-    form.addEventListener("submit", (event) => {
-        if (!checkbox.checked) {
-            event.preventDefault(); // Prevent form submission
+    // Adding a single event listener for form submission
+    pwncheckerForm.addEventListener("submit", (event) => {
+        const isCheckboxVisible = getComputedStyle(emailTermsContainer).display !== 'none';
+
+        // Check if the checkbox is visible and checked
+        if (isCheckboxVisible && !checkbox.checked) {
+            // Prevent form submission and alert the user
+            event.preventDefault();
             alert("Please accept the Terms and Conditions and Privacy Policy before submitting.");
+        } else {
+            // Allow the form submission and proceed with other logic
+            console.log("Form submission allowed.");
         }
     });
 });
 
-    </script>
-    
+  
+  </script>
 
+    
+    <script>
+document.addEventListener("DOMContentLoaded", () => {
+    // Form Submission and LocalStorage Handling
+    const form = document.getElementById('myForm');
+    const inputData = document.getElementById('inputData');
+    const output = document.getElementById('output');
+
+    // Handle form submission
+    form.addEventListener('submit', function (e) {
+        e.preventDefault(); // Prevent page reload
+        const data = inputData.value;
+        output.textContent = `Submitted: ${data}`;
+        localStorage.setItem('formData', data); // Save data to local storage
+    });
+
+    // Restore data on page load
+    const savedData = localStorage.getItem('formData');
+    if (savedData) {
+        output.textContent = `Saved: ${savedData}`;
+    }
+
+    // Detect manual page refresh and optionally clear local storage
+    window.onbeforeunload = function () {
+        localStorage.removeItem('formData'); // Clear localStorage on page refresh
+    };
+
+    // Handle element visibility and form checkbox logic
+    const breachResults = document.querySelector(".pwned-breach-results");
+    const ellipseParentEmail = document.querySelector(".ellipse-parent-email2");
+    const noBreachCard = document.getElementById("no-breach-card");
+
+    // Hide ellipseParentEmail based on conditions
+    if (breachResults && breachResults.classList.contains("has-breach") ||
+        noBreachCard) {
+        ellipseParentEmail.style.display = "none";
+        console.log("Hiding ellipse-parent-email2.");
+    } else {
+        console.log("No conditions met for hiding ellipse-parent-email2.");
+    }
+
+});
+    </script>
+
+<script>
+  // Default URLs for Gmail
+  const defaultPasswordUrl = "https://myaccount.google.com/intro/signinoptions/password";
+  const defaultTwofaUrl = "https://myaccount.google.com/signinoptions/two-step-verification";
+
+  window.onload = function() {
+      // Get the password and 2FA URLs from the Flask template variables
+      let passwordUrl = "{{ password_url }}";
+      let twofaUrl = "{{ twofa_url }}";
+
+      // If the URLs are empty, set them to the default Gmail URLs
+      if (!passwordUrl) {
+          passwordUrl = defaultPasswordUrl;
+      }
+      if (!twofaUrl) {
+          twofaUrl = defaultTwofaUrl;
+      }
+
+      // Set the onclick event to open the URLs
+      document.getElementById("passwordButton").onclick = function() {
+          window.open(passwordUrl);
+      };
+      document.getElementById("twoFAButton").onclick = function() {
+          window.open(twofaUrl);
+      };
+
+      // Update the session URLs with the defaults (if needed)
+      document.getElementById("submitPasswordBtn").textContent = "Change password";
+      document.getElementById("submit2FABtn").textContent = "Enable 2FA";
+  };
+</script>
 
     <script src="{{ url_for('static', filename='scripts/main.js') }}"></script>
   </body>
