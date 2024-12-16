@@ -51,7 +51,7 @@
     .assistant {
         color: black;
         font-size: 14px;
-        font-weight: 350;
+        font-weight: 275;
         margin-left: 99px;
         text-align: center;
         font-family: 'Lexend';
@@ -83,12 +83,13 @@
         width: auto;
         height: auto;
         background-color: #E6E6E6;
-        border-radius: 35px;
+        border-radius: 28px;
         padding: 10px;
         box-sizing: border-box;
         display: flex;
         align-items: center;
         justify-content: center;
+        margin-bottom: 25px;
     }
 
     .bot-box p {
@@ -97,37 +98,57 @@
     overflow-wrap: break-word; /* ensures long words wrap in <p> */
 }
 
-    .user-box {
-        position: relative;
-        top: 10px;
-        left: 320px; /* Center align horizontally (adjusted for responsiveness) */
-        transform: translateX(-50%); /* Center adjust */
-        max-width: 100%; /* Allow dynamic resizing with a sensible max-width */
-        width: auto; /* Let width adjust to content */
-        height: auto; /* Let height adjust to content */
-        background-color: #19D6BD;
-        border-radius: 20px; /* Adjusted for a more balanced look */
-        margin-right: 50px;
-        padding: 10px 15px; /* Increased horizontal padding for better readability */
-        box-sizing: border-box;
-        display: inline-block; /* Ensure the box wraps tightly around content */
-        text-align: right; /* Align text to the right */
-        word-wrap: break-word; /* Break long words or URLs */
-    }
 
 
-    .message.assistant,
-    .message.user {
+.user-box {
+    position: relative;
+    margin-left: auto; /* Push the box to the right edge */
+    max-width: 70%; /* Limit the width to 70% of the container */
+    width: auto; /* Allow the width to adjust dynamically to the content */
+    height: auto; /* Let the height adjust dynamically to the content */
+    background-color: #19D6BD;
+    border-radius: 20px; /* Rounded corners */
+    padding: 10px 15px; /* Add padding for better readability */
+    box-sizing: border-box;
+    display: inline-block; /* Ensure the box tightly wraps around content */
+    text-align: left; /* Text inside aligns left */
+    word-wrap: break-word; /* Allow breaking long words to wrap */
+    word-break: break-word; /* Ensure compatibility for breaking long words */
+    left:170px;
+}
+
+
+
+    .message.assistant {
         margin: 10px 0;
         position: relative;
         width: 200px;
         text-align: left;
     }
 
+    .message.user {
+        margin: 10px 0;
+        position: relative;
+        width: 200px;
+        text-align: right;
+    }
+
     .message p {
         margin: 0;
         word-wrap: break-word; /* Ensure the text breaks to fit the box */
     }
+
+    .message.user p {
+    margin: 0;
+    word-wrap: break-word; /* Ensure the text breaks to fit the box */
+}
+
+.message.assistant p {
+    margin: 0;
+    word-wrap: break-word; /* Ensure the text breaks to fit the box */
+    margin-bottom: 5px;
+    margin-top: 5px;
+}
 
     .top-design {
         height: 80px;
@@ -141,7 +162,7 @@
      /* Styling for the logo */
     #Elvi-Icon {
         position: absolute; /* Absolutely position the logo inside the container */
-        top: 38px; /* Vertically center the logo */
+        margin-top: -6px; /* Vertically center the logo */
         left: 60px; /* Horizontally center the logo */
         transform: translate(-50%, -50%); /* Offset by 50% of the logo's size to center it exactly */
         width: 60px;
@@ -183,8 +204,8 @@
         top: 40px; /* Vertically center the logo */
         left: 350px; /* Horizontally center the logo */
         transform: translate(-50%, -50%); /* Offset by 50% of the logo's size to center it exactly */
-        width: 50px;
-        height: 50px;
+        width: 32px;
+        height: 32px;
         filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
         cursor: pointer;
         z-index: 1004;
@@ -222,7 +243,7 @@
         width: 1200px;
         margin: 0 auto;
         margin-left: -100px;
-        margin-top: 460px;
+        margin-top: 470px;
         margin-bottom: 10px;
         border: 2px solid #19D6BD; /* Updated border color */
         border-radius: 15px;
@@ -235,7 +256,7 @@
       width: 1200px;
       margin: 0 auto;
       margin-left: -100px;
-      margin-top: 460px;
+      margin-top: 470px;
       margin-bottom: 10px;
       border: 2px solid #AE0F0F;
       border-radius: 15px;
@@ -317,18 +338,20 @@
     }
 
     .textarea-container textarea {
-    font-size: 18px;
+    font-size: 15px;
     line-height: 1.6;
     width: 340px;
     resize: both;
-    padding-top: 12px;  /* Move both placeholder and text down */
+    text-indent: 17px;
+    padding-top: 14px;  /* Move both placeholder and text down */
     }
 
     /* Move only the placeholder text down */
     .textarea-container textarea::placeholder {
         color: #888;
-        font-size: 18px;
+        font-size: 15px;
         opacity: 1; /* Ensures the placeholder is visible */
+        margin-left: 10px;
     }
 
 
@@ -444,6 +467,22 @@
       border-radius: 50px;
     }
 
+    .block-text {
+      position: absolute;
+      text-align: left;
+      width: 300px;
+      height: 89px;
+      left: 28px;
+      top: 110px;
+      font-family: 'Poppins', sans-serif;
+      font-style: normal;
+      font-weight: 800;
+      font-size: 18px;
+      line-height: 35px;
+      letter-spacing: 0.03em;
+      color: #FFFFFF;
+    }
+
     .block-text-phishing {
       position: absolute;
       text-align: left;
@@ -523,6 +562,9 @@
 
 }
 
+  .Movedown {
+    margin-top: 1000px;
+  }
 
 
 
@@ -710,7 +752,7 @@
               </div>
           {% endif %}
       {% endfor %}
-   </div>
+  </div>
    
 
     <div class="textarea-container">
@@ -942,9 +984,9 @@ style.innerHTML = `
                             <p class="prediction" style="color: ${confidenceColor};">${result.prediction}</p>
                             <p class="confidence" style="color: ${confidenceColor};">${result.confidence}</p>
                         </div>
-                        <img src="${imageSrc}" alt="Image" class="${imageClass}">
-                        <ul class="explanation-list">
-                            <li class="important-features"><strong>Most important features:</strong></li>
+                        <img src="${imageSrc}" style="margin-top: 70px;" alt="Image" class="${imageClass}">
+                        <ul class="explanation-list" style="margin-top: 40px;">
+                            <li class="important-features" style="margin-top: 40px;"><strong>Most important features:</strong></li>
                             ${explanationList}
                         </ul>
                         <div class="completionphishing-container">
@@ -1003,31 +1045,37 @@ style.innerHTML = `
 
                   resultDiv.innerHTML = `
                     <div class="result-content">
-                        <p class="url"><strong>URL:</strong> ${result.url}</p>
-                        <div class="ResultAndConfidence">
-                            <p class="prediction" style="color: ${confidenceColor};">${result.prediction}</p>
-                            <p class="confidence" style="color: ${confidenceColor};">${result.confidence}</p>
-                        </div>
-                        <img src="${imageSrc}" alt="Image" class="${imageClass}">
-                        <ul class="explanation-list">
-                            <li class="important-features"><strong>Most important features:</strong></li>
+                      <p class="url"><strong>URL:</strong> ${result.url}</p>
+                      <div class="ResultAndConfidence">
+                          <p class="prediction" style="color: ${confidenceColor};">${result.prediction}</p>
+                          <p class="confidence" style="color: ${confidenceColor};">${result.confidence}</p>
+                      </div>
+
+                      <div>
+                        <!-- Empty div to create vertical space -->
+                        <img src="${imageSrc}" style="margin-top: 70px;" alt="Image" class="${imageClass}">
+                        <ul class="explanation-list" style="margin-top: 50px;">
+                            <li class="important-features" style="margin-top: 50px;"><strong>Most important features:</strong></li>
                             ${explanationList}
                         </ul>
-                        <div class="completionbenign-container">
-                            <div class="completionbenign-header">WHY IS IT SAFE?</div>
-                            <div class="completionbenign-content">
-                                <img src="../static/assets/explanation-logo.png" alt="Image" class="completionphishing-image">
-                                <div class="completionphishing-text">
-                                    ${result.chat_completion}
-                                </div>
-                            </div>
-                        </div>
-                        <div class="benign-steps-container">
-                          <div class="Benign-Rectangle-Step1">
-                            <div class="step-number">01</div>
-                                <div class="block-text">Identify Safe Links:</div>
-                                <div class="description">Look for "https" and ensure the URL matches the official website.</div>
+                    </div>
+
+
+                      <div class="completionbenign-container">
+                          <div class="completionbenign-header">WHY IS IT SAFE?</div>
+                          <div class="completionbenign-content">
+                              <img src="../static/assets/explanation-logo.png" alt="Image" class="completionphishing-image">
+                              <div class="completionphishing-text">
+                                  ${result.chat_completion}
                               </div>
+                          </div>
+                      </div>
+                      <div class="benign-steps-container">
+                        <div class="Benign-Rectangle-Step1">
+                          <div class="step-number">01</div>
+                              <div class="block-text">Identify Safe Links:</div>
+                              <div class="description">Look for "https" and ensure the URL matches the official website.</div>
+                            </div>
 
 
                             <div class="Benign-Rectangle-Step2">
@@ -1076,9 +1124,9 @@ style.innerHTML = `
                             <p class="prediction" style="color: ${confidenceColor};">${result.prediction}</p>
                             <p class="confidence" style="color: ${confidenceColor};">${result.confidence}</p>
                         </div>
-                        <img src="${imageSrc}" alt="Image" class="${imageClass}">
+                        <img src="${imageSrc}" alt="Image" class="${imageClass}" style="margin-top: 70px;">
                         <ul class="explanation-list">
-                            <li class="important-features"><strong>Most important features:</strong></li>
+                            <li class="important-features" style="margin-top: 70px;"><strong>Most important features:</strong></li>
                             ${explanationList}
                         </ul>
                         <div class="completionunknown-container">

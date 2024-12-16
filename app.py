@@ -67,7 +67,7 @@ attachment_path = "../LigtasBanko/static/assets/ligtasbanko-header.png"
 client = Groq(api_key=os.environ.get("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"))
 
 # Load the pre-trained model and tokenizer
-model = load_model('trained_modelCNN.h5')
+model = load_model('trained_modelCNNBETTER.h5')
 with open('tokenizer.pkl', 'rb') as tokenizer_file:
     tokenizer = pickle.load(tokenizer_file)
 
@@ -914,6 +914,9 @@ def email_pwn():
         elif domain == "yahoo.com":
             password_url = "https://login.yahoo.com/myaccount/security/?.lang=en-US&.intl=us&.src=yhelp&.scrumb=WGDrhd8EJT8&anchorId=changePasswordCard"
             twofa_url = "https://login.yahoo.com/myaccount/security/?.lang=en-US&.intl=us&.src=yhelp&.scrumb=WGDrhd8EJT8&anchorId=changePasswordCard"
+        elif domain == "icloud.com":
+            password_url = "https://account.apple.com/account/manage"
+            twofa_url = "https://account.apple.com/account/manage"
         else:
             # Default URLs for any other domain
             password_url = "https://account.live.com/password/Change"

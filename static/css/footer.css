@@ -138,7 +138,7 @@
 }
 
 .ligtasbanko3 {
-  position: relative;
+  position: absolute;
   top: 120px;
   left: -20px;
   font-size: 32px;
@@ -171,9 +171,9 @@
 
 .ligtasbanko5 {
   overflow: hidden;
-  top: -480px;
+  top: 5200px;
   width: 1200px;
-  position: relative;
+  position: absolute;
   background-color: var(--color-white);
   height: 380px;
   
