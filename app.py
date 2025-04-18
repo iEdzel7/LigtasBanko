@@ -671,20 +671,13 @@ def analyze_url():
                 file.seek(0)
                 json.dump(blocked_websites, file)
                 file.truncate()
-
-            # Update the system hosts file to block the URL
-            with open(HOSTS_PATH, "r+") as hosts_file:
-                hosts_content = hosts_file.read()
-                if f"{REDIRECT_IP} {url}" not in hosts_content:
-                    hosts_file.write(f"{REDIRECT_IP} {url}\n")
-                    print(f"Blocked {url} by redirecting to {REDIRECT_IP}.")
             features = explain_url(url)
             content = f"This text message or URL '{user_input}' is predicted to be phishing. Kindly explain why in 1 paragraph: 1. Explain more what that URL or text message all about. 2. And explain why that URL or text message is considered as phishing. 3. talk in 1st person and act like a bank security expert 4. don't use her/him. 5. And just go straight to the answer"
             chat_completion = client.chat.completions.create(
                 messages=[{
                     "role": "user", 
                     "content": content}],
-                model="llama-3.1-70b-versatile",
+                model="llama-3.3-70b-versatile",
             )
             phishing_combined = []
 
@@ -731,7 +724,7 @@ def analyze_url():
                 messages=[{
                     "role": "user", 
                     "content": content}],
-                model="llama-3.1-70b-versatile",
+                model="llama-3.3-70b-versatile",
             )
 
             benign_combined = []
